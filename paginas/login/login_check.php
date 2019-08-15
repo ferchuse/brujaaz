@@ -1,0 +1,1 @@
+<?php session_start();$url = "location:../login/form_login.php?retorno=".$_SERVER['PHP_SELF'];if (isset($_SESSION['id_usuarios'])) {}else{	header($url);} ?>

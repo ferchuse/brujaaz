@@ -1,0 +1,11 @@
+[12-Dec-2018 23:50:08 America/Mexico_City] PHP Warning:  basename() expects parameter 2 to be string, object given in /home/brujaaz/public_html/menu.php on line 20
+[12-Dec-2018 23:50:08 America/Mexico_City] PHP Warning:  Missing argument 2 for dame_permiso(), called in /home/brujaaz/public_html/menu.php on line 20 and defined in /home/brujaaz/public_html/funciones/dame_permiso.php on line 4
+[12-Dec-2018 23:50:08 America/Mexico_City] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/brujaaz/public_html/funciones/dame_permiso.php on line 12
+[12-Dec-2018 23:50:08 America/Mexico_City] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, null given in /home/brujaaz/public_html/funciones/dame_permiso.php on line 12
+[12-Dec-2018 23:50:16 America/Mexico_City] PHP Warning:  basename() expects parameter 2 to be string, object given in /home/brujaaz/public_html/menu.php on line 20
+[12-Dec-2018 23:50:16 America/Mexico_City] PHP Warning:  Missing argument 2 for dame_permiso(), called in /home/brujaaz/public_html/menu.php on line 20 and defined in /home/brujaaz/public_html/funciones/dame_permiso.php on line 4
+[12-Dec-2018 23:50:16 America/Mexico_City] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/brujaaz/public_html/funciones/dame_permiso.php on line 12
+[12-Dec-2018 23:50:16 America/Mexico_City] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, null given in /home/brujaaz/public_html/funciones/dame_permiso.php on line 12
+[12-Dec-2018 23:50:49 America/Mexico_City] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/brujaaz/public_html/funciones/dame_permiso.php on line 12
+[12-Dec-2018 23:51:02 America/Mexico_City] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/brujaaz/public_html/funciones/dame_permiso.php on line 12
+[11-Feb-2019 12:20:29 America/Mexico_City] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/brujaaz/public_html/menu.php on line 53
