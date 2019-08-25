@@ -1,94 +1,107 @@
 <?php 
+	session_start();
 	include('../../../conexi.php');
 	$link = Conectarse();
 	
 	$respuesta = array();
 	
-	//inserta rol
-	if($_POST['id_roles'] == ''){
+	$tabla = $_POST["tabla"];
+	$columnas = $_POST["datos"];
+	$str_pairs = "";
+	
+	
+	
+	
+	if(empty($columnas[0]['value'])){  
+		$query ="INSERT INTO $tabla SET ";	
 		
-		$insert_rol ="INSERT INTO roles SET 
-		nombre_roles = '{$_POST['nombre_roles']}' , 
-		numero_roles ='{$_POST['numero_roles']}'";	
-		
-		$result_rol = 	mysqli_query($link,$insert_rol);
-		
-		if($result_rol){
-			$respuesta["estatus"] = "success";
-			$respuesta["mensaje"] = "Agregado";
-			$respuesta["insert_rol"] = $insert_rol;
-			
-			$respuesta["id_rol"] = mysqli_insert_id($link);
-			
-		} 
-		else{
-			
-			$respuesta["estatus"] = "error";
-			$respuesta["mensaje"] = "Error en $insert_rol ".mysqli_error($link);		
+		foreach($columnas as $arr_field_value){
+			$str_pairs.= $arr_field_value["name"]. " = '" . $arr_field_value["value"] . "',";
 		}
+		
+		// $str_pairs  = trim($str_pairs, ",");
+		$query.= $str_pairs;
+		
+		$query.= " id_administrador = {$_SESSION["id_administrador"]} ";
 		
 	}
 	else{
 		
-		//Update
+		//El registro ya existe, actualizarlo
+		//Buscar Registro devolver campos.. 
+		//Por cada Campo comparar valor anterior y valor nuevo
+		//Si son diferentes guardar en la tabla de historial, 
+		//Por cada cambio insertar 
+		$consulta = "SELECT * FROM $tabla WHERE 
+		{$columnas[0]['name']} = '{$columnas[0]['value']}' ";
 		
-		$update_rol ="UPDATE roles SET 
-		nombre_roles = '{$_POST['nombre_roles']}' , 
-		numero_roles ='{$_POST['numero_roles']}'
-		WHERE id_roles ='{$_POST['id_roles']}'";	
+		$respuesta["consulta_anteriores"] = $consulta;
+		$result = mysqli_query($link, $consulta);
 		
-		$result_rol = 	mysqli_query($link,$update_rol);
-		
-		
-		
-		if($result_rol){
-			$respuesta["estatus"] = "success";
-			$respuesta["mensaje"] = "Agregado";
-			$respuesta['id_rol'] = $_POST['id_roles'];
+		while($fila = mysqli_fetch_assoc($result)){
 			
-			$delete_vueltas = "DELETE FROM roles_destinos WHERE id_roles= '{$_POST['id_roles']}'";
-			
-			$respuesta["result_delete_vueltas"] = mysqli_query($link,$delete_vueltas);
-			
-			
-		}
-		else{
-			
-			$respuesta["estatus"] = "error";
-			$respuesta["mensaje"] = "Error en $insert_rol ".mysqli_error($link);		
+			$valor_anterior = $fila;
+			$respuesta["valores_anteriores"] = $fila;
 		}
 		
+		$inserta_historial = "";
+		
+		$query ="UPDATE $tabla SET ";	
+		
+		foreach($columnas as $index => $columna){
+			$str_pairs.= $columna["name"]. " = '" . $columna["value"] . "',";
+			
+			$respuesta["valor_anterior"][]= $valor_anterior[$columna["name"]];
+			$respuesta["valor_nuevo"][]= $columna["value"];
+			if($valor_anterior[$columna["name"]] != $columna["value"]){
+				
+				$cambios[$index] = [
+				"fecha_modificacion" => date("Y-m-d H:i:s"),
+				"campo_modificado" => $columna["name"],
+				"valor_anterior" => $valor_anterior[$columna["name"]],
+				"valor_nuevo" => $columna["value"]
+				
+				
+				];
+				$fecha_modificacion = date("Y-m-d H:i:s");
+				$inserta_historial= "INSERT INTO unidades_historial SET
+				fecha_modificacion = '{$fecha_modificacion}',
+				id_usuarios = '{$_SESSION["id_usuarios"]}',
+				id_unidades = '{$columnas[0]['value']}',
+				campo_modificado = '{$columna["name"]}',
+				valor_anterior = '{$valor_anterior[$columna["name"]]}',
+				valor_nuevo = '{$columna["value"]}'
+				
+				;";
+				
+				$respuesta["inserta_historial"][] = $inserta_historial;
+				$respuesta["result_historial"] = mysqli_query($link,$inserta_historial) ;
+				$respuesta["error_historial"] =  mysqli_error($link);
+				
+			}
+		}
+		
+	
 		
 		
+		$respuesta["cambios"] = $cambios;
+    
+		$str_pairs  = trim($str_pairs, ",");
+		$query.= $str_pairs." WHERE ".$columnas[0]['name']."='".$columnas[0]['value']."'";
+	}	
+	
+	$exec_query = 	mysqli_query($link,$query);
+	
+	if($exec_query){
+		$respuesta["estatus"] = "success";
+		$respuesta["mensaje"] = "Agregado";
+		$respuesta["query"] = $query;
+		
+    }else{
+		
+		$respuesta["estatus"] = "error";
+		$respuesta["mensaje"] = "Error en insert: $query  ".mysqli_error($link);		
 	}
-	
-	
-	
-	
-	//inserta los destinos de cada vuelta 
-	foreach($_POST['id_origen'] as $i=> $id_origen){
-		//borrar destinos anteriores 
-		
-		$insert_rol_destino ="INSERT INTO roles_destinos SET 
-		id_roles = {$respuesta['id_rol']} , 
-		origen = {$_POST['id_origen'][$i]} ,
-		destino = {$_POST['id_destino'][$i]} 
-		";	
-		
-		if(	mysqli_query($link,$insert_rol_destino)){
-			$respuesta["vueltas"]['estatus'] = "success";
-			
-		}
-		else{
-			
-			$respuesta["vueltas"]['estatus'] = "error".mysqli_error($link);
-		}
-		
-		$respuesta["vueltas"][] = $insert_rol_destino;
-	}
-	
-	
-	
 	
 	echo json_encode($respuesta);
 	

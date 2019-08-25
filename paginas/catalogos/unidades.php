@@ -214,7 +214,7 @@
 			icono.toggleClass("fa-save fa-spinner fa-spin");
 			
 			$.ajax({
-				url: 'control/guardar.php',
+				url: 'control/guardar_unidades_historial.php',
 				dataType: 'JSON',
 				method: 'POST',
 				data: {
@@ -235,9 +235,10 @@
 					console.log(respuesta.mensaje);
 				}
 			});
+			
+			
 		}
 		
-		//FUNCION DE ENLISTAR
 		function listarRegistros() {
 			console.log("listarRegistros()");
 			
