@@ -85,23 +85,25 @@
 	
 	function Conectarse()
 	{
-	
-	$host="localhost";
-	
-	if($_SERVER["SERVER_NAME"] == "brujaaz.com"){
-	
-		$db="brujaaz_brujaaz";
-		$usuario="brujaaz_sistemas";
-		$pass="Glifom3dia";
-	}
-	else{
-		$db="brujaaz";
-		$usuario="sistemas";
-		$pass="Glifom3dia";
 		
-	}
-	
-	
+		$host="localhost";
+		
+		if($_SERVER["SERVER_NAME"] == "localhost"){
+			$db="brujaaz";
+			$usuario="sistemas";
+			$pass="Glifom3dia";
+		}
+		else{
+			
+			
+			$db="brujaaz_brujaaz";
+			$usuario="brujaaz_sistemas";
+			$pass="Glifom3dia";
+			
+			
+		}
+		
+		
 		$set_local = "SET time_zone = '-05:00'";
 		$set_names = "SET NAMES 'utf8'";
 		date_default_timezone_set('America/Mexico_City');
