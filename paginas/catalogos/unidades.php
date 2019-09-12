@@ -147,6 +147,7 @@
 	
 	
 	<?php include("forms/form_unidades.php")?>
+	<?php include("forms/modal_historial.php")?>
 	<?php include("../../scripts.php")?>
 	<script>
 		$(document).ready(function(){
@@ -263,6 +264,7 @@
 				// });
 				
 				$('.btn_editar').on('click', cargarRegistro);
+				$('.btn_historial').on('click', mostrarHistorial);
 				
 				}).always(function(){
 				
@@ -300,6 +302,32 @@
 				$("#modal_edicion").modal("show");
 				// $('#lista_registros').html(respuesta);
 				
+			});
+		}
+		
+		function mostrarHistorial() {
+			console.log("mostrarHistorial()");
+			var $boton = $(this);
+			var id_registro= $(this).data("id_registro");
+			
+			$boton.prop("disabled", true);
+			
+			$.ajax({
+				url: 'control/mostrar_historial.php',
+				method: 'GET',
+				data: {
+					id_unidades: id_registro
+				}
+				}).done(function(respuesta){
+				console.log("imprime registros")
+				$boton.prop("disabled", false);
+				
+			
+					$("#modal_historial .modal-body").html(respuesta);
+			
+				
+				$("#modal_historial").modal("show");
+			
 			});
 		}
 		

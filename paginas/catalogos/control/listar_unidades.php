@@ -62,9 +62,10 @@
 						<button class="btn btn-warning btn_editar" data-id_registro="<?php echo $fila["id_unidades"];?>">
 							<i class="fas fa-edit"></i>
 						</button>
-						<a href="unidades_edicion.php?id_unidades=<?php echo $fila["id_unidades"];?>" class="btn btn-info btn_historial" title="Historial" data-id_registro="<?php echo $fila["id_unidades"];?>">
+						<button class="btn btn-info btn_historial" data-id_registro="<?php echo $fila["id_unidades"];?>">
 							<i class="fas fa-clock"></i> 
-						</a>
+						</button>
+					
 					</td>
 				</tr>
 				
