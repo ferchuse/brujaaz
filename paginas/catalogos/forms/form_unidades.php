@@ -11,7 +11,7 @@
 				<div class="modal-body">
 					
 					<input class="d-none" name="id_unidades" id="id_unidades" value="">
-					<input class="d-none" name="fecha_ingreso" id="fecha_ingreso" value="<?php echo date("Y-m-d");?>">
+				
 					<div class="row mb-2">
 						<div class="col-2">
 							<label >Empresa:</label>
@@ -38,6 +38,14 @@
 							<?php
 								echo generar_select($link, "propietarios", "id_propietarios", "nombre_propietarios");
 							?>
+						</div>
+					</div>
+						<div class="row mb-2">
+						<div class="col-2">
+							<label for="nombre_propietario">Fecha de Alta:</label>
+						</div>	
+						<div class="col-5">			
+							<input class="form-control" type="date" name="fecha_ingreso" id="fecha_ingreso" value="<?php echo date("Y-m-d");?>">
 						</div>
 					</div>
 					<div class="row mb-2">
