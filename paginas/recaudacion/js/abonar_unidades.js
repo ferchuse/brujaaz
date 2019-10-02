@@ -34,7 +34,10 @@ $(document).ready(function(){
 	
 	
 	
-	$('#num_eco').on('keyup', function buscarUnidad(event){
+	$('#num_eco').on('keyup',buscarUnidad );
+	$('#num_eco').on('blur',buscarUnidad );
+	
+	function buscarUnidad(event){
 		event.preventDefault();
 		
 		var num_eco = $(this).val();
@@ -44,8 +47,11 @@ $(document).ready(function(){
 		}
 		
 		
-		console.log("Buscar Unidad", event.which )
-		if(event.which == 13){
+		console.log("Buscar code", event.keycode )
+		console.log("Buscar code", event.code )
+		console.log("Buscar which", event.which )
+		console.log("Buscar location", event.location )
+		if(event.which == 13 || event.which == 0){
 			$("#num_eco").addClass("cargando");
 			$.ajax({
 				url: 'control/buscar_unidad.php',
@@ -75,9 +81,7 @@ $(document).ready(function(){
 			});
 			
 		};
-	});
-	
-	
+	}
 	$('#tarjeta').on('keyup',function(event){
 		event.preventDefault();
 		
