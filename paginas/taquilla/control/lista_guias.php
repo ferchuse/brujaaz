@@ -21,10 +21,14 @@
 	FROM origenes ) AS t_destinos 
 	USING(id_destinos)
 	LEFT JOIN usuarios USING(id_usuarios)
-	LEFT JOIN (
-	SELECT id_corridas, 
-	COALESCE(SUM(precio), 0)  AS importe_corridas, 
-	COALESCE(COUNT(id_boletos), 0)  AS boletos_vendidos FROM boletos  ) 
+	LEFT JOIN 
+	(
+		SELECT id_corridas, 
+		COALESCE(SUM(precio_boletos), 0)  AS importe_corridas, 
+		COALESCE(COUNT(id_boletos), 0)  AS boletos_vendidos 
+		FROM boletos  
+		GROUP BY id_corridas
+	) 
 	t_boletos USING(id_corridas)
 	WHERE unidades.id_administrador = {$_SESSION["id_administrador"]}
 	";
