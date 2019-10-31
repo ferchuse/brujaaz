@@ -1,13 +1,15 @@
 $(document).ready(function(){
-	//=================CARGAR LA TABLA AL INICIO===================
-	listar();
-	//===============OPEN MODAL===========
+	
+	$('#form_filtros').on('submit', listarRegistros);
+	
+	
+	
+	
 	$("#btn_modal").on('click',function(){
 		$("#form_modal")[0].reset();
 		$(".modal-title").text("Nuevo Desglose de Dinero");
 		$("#modal_modal").modal("show");
 		
-		// console.log(id_usua);
 		cadena_numeros();
 	});
 	
@@ -15,11 +17,14 @@ $(document).ready(function(){
 	$('#btn_boletos').on('click',function(){
 		$('#datos_boleto').toggle();//Alternar entre ocultar y mostrar para todos los elementos
 	});
+	
+	
 	$('#btn_taquilla').on('click',function(){
 		$('#imp_cadena').toggle();//Alternar entre ocultar y mostrar para todos los elementos
 	});
-	//==========GUARDAR============
+	
 	$('#form_modal').on('submit', guardarRegistro);
+	$('#form_filtros').submit();
 	
 	
 });
@@ -53,8 +58,9 @@ function guardarRegistro(event){
 			if(respuesta.estatus == 'success'){
 				alertify.success('Se ha agregado correctamente');
 				$('#modal_modal').modal('hide');
-				listar();
-				}else{
+				$('#form_filtros').submit();
+			}
+			else{
 				alertify.error('Ocurrio un error');
 			}
 			}).always(function(){ 
@@ -69,96 +75,48 @@ function guardarRegistro(event){
 	}
 }
 
-function listar(){
-	let subconsulta ='LEFT JOIN usuarios USING (id_usuarios)';
-	let fecha_hoy = Date.today();
-	let fecha = fecha_hoy.toString('yyyy-MM-dd');
-	console.log(fecha);
-	return $.ajax({
-		url: '../../funciones/listar.php',
-		method: 'POST',
-		dataType: 'JSON',
-		data: {
-			tabla: 'desglose_dinero',
-			subconsulta: subconsulta,
-			campo: 'fecha_desglose',
-			fecha: fecha
-		}
-		}).done(function(respuesta){
-		resultado(respuesta);
-	});
-}
-//=========CREACION DE td PARA LA TABLA ===========================
-function resultado(respuesta){
-	if(respuesta.estatus == 'success'){
-		let contenedor = '';
-		let totalMonto = 0;
-		if(respuesta.num_rows > 0){
-			$.each(respuesta.mensaje,function(index,element){
-				contenedor += `
-				<tr>
-				<td class="text-center d-print-none">
-				<button class="btn btn-outline-primary imprimir " title="Imprimir" data-id_registro='${element.id_desglose}'>
-					<i class="fas fa-print"></i></button>
-				</td>
-				<td class="text-center">${element.id_desglose}</td>
-				<td class="text-center">${element.nombre_usuarios}</td>
-				<td class="text-center">${element.fecha_desglose}</td>
-				<td class="text-center">${"$"+element.importe_desglose}</td>
-				</tr>
-				`;
-				totalMonto += Number(element.importe_desglose);
-				
-			});
-			let resultado = totalMonto.toFixed(2);
-			$("#total").text("$"+resultado);
-			console.log(resultado);
-			//console.log(totalMonto+" "+"num");
-			//let num = [2,4,6,8,10];
-			//let suma = num.reduce((a,b) => a+b);
-			//console.log(num);
-			
-			}else{
-			contenedor = `
-			<tr>
-			<td colspan="7"><h3 class="text-center">No hay Desglose de Dinero</h3></td>
-			</tr>
-			`;
-			$("#total").text(" ");
-		}
-		$('#tabla_DB').html(contenedor);
+function listarRegistros(ev){
+	ev.preventDefault();
+	console.log("listarRegistros()");
+	
+	$.ajax({
+		url: 'control/lista_desglose_dinero.php',
+		data: $("#form_filtros").serialize()
+		}).done(function termina_listar(respuesta){
 		
+		$('#registros').html(respuesta);
 		
-		//=========IMPRIMIR=========
 		$('.imprimir').click(imprimirTicket);
 		
-	}
-	else{
-		console.log("Error al cargar la tabla");
-	}
+		
+	});
 }
+
+
+
+
 
 function cadena_numeros (){
 	let cantidad = [1000,500,200,100,50,20,10,5,2,1,.5,.2,.1];
 	let contenedor = "";
 	cantidad.forEach(function(index,element){
 		contenedor += `
-	<div class="form-row">
-	<div class="form-group col-md-6">
-	<div class="input-group">
-	<div class="input-group-prepend">
-	<div class="input-group-text"><i class="fas fa-dollar-sign">${index}</i></div>
-	</div>
-	<input type="number" class="form-control cantidad" min="0" name="${index}" data-denomi="${index}" val="">
-	</div>
-	</div>
-	<div class="form-group col-md-6">
-	<div class="input-group">
-	<input type="number" min="0" class="form-control importe" value="0" readOnly>
-	</div>
-	</div>
-	</div>
-	`;
+		<div class="form-row">
+		<div class="form-group col-md-6">
+		<div class="input-group">
+		<div class="input-group-prepend">
+		<div class="input-group-text"><i class="fas fa-dollar-sign">${index}</i></div>
+		</div>
+		<input type="number" class="form-control cantidad" min="0" name="${index}" data-denomi="${index}" val="">
+		</div>
+		</div>
+		<div class="form-group col-md-6">
+		<div class="input-group">
+		<input type="number" min="0" class="form-control importe" value="0" readOnly>
+		</div>
+		</div>
+		</div>
+		`;
 	});
 	$('#imp_cadena').html(contenedor);
 	
@@ -232,4 +190,4 @@ function imprimirTicket(event){
 		icono.toggleClass("fa-print fa-spinner fa-spin");
 		
 	});
-}
+}	

@@ -39,7 +39,7 @@
 						<li class="breadcrumb-item active"><?php echo $nombre_pagina;?></li>
 					</ol>
 					
-					<form class="d-print-none" id="form_buscador">
+					<form class="d-print-none" id="form_filtros">
 						<button type="submit"  title="Buscar" class="btn btn-primary">
 							<i class="fas fa-search"></i> Buscar
 						</button>
@@ -48,7 +48,7 @@
 						<div class="row  m-2">
 							<div class="form-group">
 								<label >Desde:</label>
-								<input type="date" class="form-control" value="<?php echo date("Y-m-d");?>" name="fecha_inicio" id="fecha_inicio">
+								<input type="date" class="form-control" value="<?php echo date("Y-m-d");?>" name="fecha_inicial" id="fecha_inicial">
 							</div>
 							<div class="form-group">
 								<label >Hasta:</label>
@@ -70,7 +70,7 @@
 							<i class="fas fa-table"></i>
 							Lista de <?php echo $nombre_pagina;?>
 						</div>
-						<div class="card-body">
+						<div class="card-body" id="registros">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="tableData" width="100%" cellspacing="0">
 									<thead>
@@ -92,7 +92,7 @@
 											<th class="text-center"></th>
 										</tr>
 									</thead>
-									<tbody id="tabla_DB">
+									<tbody >
 										<tr>
 											<td colspan="5"><h3 class="text-center">Cargando...</h3></td>
 										</tr>

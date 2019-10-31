@@ -75,6 +75,8 @@
 					<?php echo $item["hora_corridas"]?>
 				</div>
 			</div>
+			
+			
 			<div class="form-row mb-2">
 				<div class="col-4">
 					<b >Num Eco :</b>
@@ -116,6 +118,8 @@
 				</div>
 			</div>
 			<hr class="" style="page-break-after:always;">
+			
+			<hr style="page-break-after: always">
 			
 			<h4>Copia Pasajero</h4>
 			<div class="form-row mb-2">
