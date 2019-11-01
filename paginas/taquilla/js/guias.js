@@ -1,15 +1,8 @@
 $(document).ready(function(){
 	
-	listarRegistros();
-
 	
-	$("#btn_modal").on('click',function(){
-		$("#form_modal")[0].reset();
-		$(".modal-title").text("Nuevo Boletaje");
-		$("#modal_modal").modal("show");
-		
-	});
-	
+	$('#form_filtros').on('submit', listarRegistros);
+	$('#form_filtros').submit();
 	
 	$('#form_modal').on('keypress', function (event){
 		if(event.which == 13){
@@ -93,22 +86,6 @@ $(document).ready(function(){
 	
 	
 	
-	//=============BUSCAR DENTRO DE LA TABLA===========================
-	$('#buscar_usuario').on('keyup',function filtro_buscar(){
-		let indice = $(this).data("indice");
-		let valor_filtro = $(this).val();
-		let num_rows = buscar(valor_filtro,'tableData',indice);
-    
-		if(num_rows == 0){
-			$('.mensaje').html(`
-			<div class="alert alert-dark text-center" role="alert">
-			<strong>NO se ha encontrado</strong>
-			</div>
-			`);
-			}else{
-			$('.mensaje').html("");
-		}
-	});
 	
 });
 
@@ -119,13 +96,16 @@ function agregarFila(event){
 }
 
 
-//========funcion de listar============
-function listarRegistros(){
-	console.log("listarRegistros()")
+function listarRegistros(ev){
+	
+	ev.preventDefault();
+	console.log("listarRegistros()");
+	
+	
 	$.ajax({
-		url: 'control/lista_guias.php',
-		method: 'POST',
-		data:{}
+		url: 'control/lista	_guias.php',
+		method: 'GET',
+		data: $("#form_filtros").serialize()
 	}).done(
 	function(respuesta){
 		$("#lista_registros").html(respuesta)

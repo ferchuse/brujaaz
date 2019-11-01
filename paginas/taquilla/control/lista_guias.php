@@ -12,26 +12,40 @@
 	
 	
 	
-	$consulta = "SELECT * FROM corridas 
+	$consulta = "
+	SELECT 
+	* 
+	FROM corridas 
 	LEFT JOIN unidades USING(id_unidades) 
 	LEFT JOIN origenes USING(id_origenes)
-	LEFT JOIN (
-	SELECT id_origenes AS id_destinos, 
-	nombre_origenes AS nombre_destinos 
-	FROM origenes ) AS t_destinos 
-	USING(id_destinos)
+	LEFT JOIN 
+	(
+		SELECT id_origenes AS id_destinos, 
+		nombre_origenes AS nombre_destinos 
+		FROM origenes 
+	) 
+		AS t_destinos USING(id_destinos)
 	LEFT JOIN usuarios USING(id_usuarios)
 	LEFT JOIN 
 	(
-		SELECT id_corridas, 
+		SELECT 
+		id_corridas, 
+		fecha_boletos, 
 		COALESCE(SUM(precio_boletos), 0)  AS importe_corridas, 
 		COALESCE(COUNT(id_boletos), 0)  AS boletos_vendidos 
 		FROM boletos  
 		GROUP BY id_corridas
 	) 
-	t_boletos USING(id_corridas)
+	AS t_boletos USING(id_corridas)
 	WHERE unidades.id_administrador = {$_SESSION["id_administrador"]}
+	AND date(fecha_boletos) BETWEEN '{$_GET["fecha_inicial"]}'
+	AND '{$_GET["fecha_final"]}'
 	";
+	
+	if($_GET["id_corridas"] != ''){
+		
+			$consulta.=" AND id_corridas = '{$_GET["id_corridas"]}'";
+	}
   
 	
 	$result = mysqli_query($link,$consulta);

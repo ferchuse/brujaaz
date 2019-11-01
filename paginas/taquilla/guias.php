@@ -39,25 +39,32 @@
 						<li class="breadcrumb-item active"><?php echo $nombre_pagina;?></li>
 					</ol>
 					
-						<button type="button" hidden id="imprimir_ticket" class="btn btn-outline-success mb-2">
-							<i class="fas fa-print"></i> Imprimir
-						</button>
+					<button type="button" hidden id="imprimir_ticket" class="btn btn-outline-success mb-2">
+						<i class="fas fa-print"></i> Imprimir
+					</button>
 					
-					<form class="form-inline d-print-none" hidden id="form_buscador">
-					
+					<form class="form-inline d-print-none"  id="form_filtros">
+						
 						<div class="form-group mx-sm-3 mb-2">
 							<label for="" class="col-sm col-form-label">Desde:</label>
-							<input type="date" class="form-control" value="<?php echo date("Y-m-d");?>" name="fecha_inicio" id="fecha_inicio">
+							<input type="date" class="form-control" value="<?php echo date("Y-m-d");?>" name="fecha_inicial" id="fecha_inicial">
 						</div>
+						
 						<div class="form-group mx-sm-3 mb-2">
 							<label for="" class="col-sm col-form-label">Hasta:</label>
 							<input type="date" class="form-control" value="<?php echo $date_final;?>" name="fecha_final" id="fecha_final">
-							<button type="button" id="btn_fechas" title="Buscar por Fecha" class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
+							
+							
 						</div>
-						<div class=" col-md-2">
-							<button type="button" id="btn_imprimir" title="Imprimir" class="btn btn-outline-primary mb-2"><i class="fas fa-print"></i></button>
-							<button type="button" id="btn_excel" title="Exportar a Excel" class="btn btn-outline-success mb-2"><i class="far fa-file-excel"></i></button>
+						<div class="form-group mx-sm-3 mb-2">
+							<label for="id_corrida" class="col-sm  col-form-label" >Corrida:</label>
+							<input type="number" class="form-control" name="id_corrida" id="id_corrida" >
+							
+							<button  title="Buscar" class="btn btn-primary">
+								<i class="fas fa-search"></i> Buscar
+							</button>
 						</div>
+						
 					</form>
 					<div class="d-print-block" hidden id="formato_imprimir">
 					</div>
@@ -129,6 +136,6 @@
     <?php include("../../scripts.php")?>
     <?php include("forms/form_taquilla.php");?>
     <script src="js/guias.js"></script>
-   
+		
 	</body>
 </html>

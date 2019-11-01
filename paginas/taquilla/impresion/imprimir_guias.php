@@ -8,7 +8,7 @@
 	
 	
 	
-	$consulta = "SELECT * FROM corridas 
+	$consulta = "SELECT *, SUM(precio_boletos) AS suma_boletos FROM corridas 
 	LEFT JOIN unidades USING(id_unidades) 
 	LEFT JOIN origenes USING(id_origenes)
 	LEFT JOIN (
@@ -18,7 +18,12 @@
 	USING(id_destinos)
 	LEFT JOIN usuarios USING(id_usuarios)
 	LEFT JOIN boletos USING(id_corridas)
-	WHERE corridas.id_corridas = '{$_GET["id_registro"]}'";
+	LEFT JOIN precios_boletos USING(id_precio)
+	
+	WHERE corridas.id_corridas = '{$_GET["id_registro"]}'
+	
+	GROUP BY id_precio
+	";
   
 	
 	$result = mysqli_query($link,$consulta);
@@ -93,22 +98,22 @@
 		
 		<div class="form-row">
 			<div class="col-3">
-				Asiento.	
+				Tipo Boleto.	
 			</div>
 			<div class="col-9">
-				Credencial
+				Importe
 			</div>
 			 
 		</div>
 		
-		<?php foreach($filas as $i => $item){ ?>
+		<?php foreach($filas as $i => $fila){ ?>
 			
 			<div class="form-row">
 				<div class="col-3">
-					<?php echo $item["num_asiento"]?>
+					<?php echo $fila["tipo_precio"]?>
 				</div>
 				<div class="col-9">
-					<?php echo $item["nombre_pasajero"]?>
+					<?php echo $fila["suma_boletos"]?>
 				</div>
 			</div>
 			<?php	 
