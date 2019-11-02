@@ -68,8 +68,8 @@
 							<div class="col-4">			
 								<select class="form-control" name="mes_cargos">
 									<option value="201912">2019-12 </option>
-									<option value="201911">2019-11 </option>
-									<option selected value="201910">2019-10 </option>
+									<option selected value="201911">2019-11 </option>
+									<option  value="201910">2019-10 </option>
 									<option value="201909">2019-09 </option>
 									<option value="201908">2019-08 </option>
 									<option value="201907">2019-07 </option>
