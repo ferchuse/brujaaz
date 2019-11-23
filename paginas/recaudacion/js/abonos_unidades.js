@@ -29,7 +29,7 @@ function listarRegistros(){
 		// $("#dataTable").dataTable();
 		$(".imprimir").click(imprimirTicket);
 		$(".cancelar").click(confirmaCancelacion);
-		
+		dame_permiso();
 		
 		}).always(function(){
 		

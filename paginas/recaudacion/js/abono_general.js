@@ -246,7 +246,7 @@ function listarRegistros(){
 		$(".imprimir").click(imprimirTicket);
 		$(".cancelar").click(confirmaCancelacion);
 		
-		
+		dame_permiso();
 		}).always(function(){
 		
 		boton.prop('disabled',false);
