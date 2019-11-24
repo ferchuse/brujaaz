@@ -22,7 +22,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		let form = $(this);
 		let boton = form.find(':submit');
-		let icono = boton.find('.fa');
+		let icono = boton.find('.fas');
 		let datos = form.serializeArray();
 		let fecha = new Date().toString('yyyy-MM-dd HH:mm:ss')
 		
@@ -129,7 +129,7 @@ function listarRegistros(){
 	
 	let form = $("#form_filtro");
 	let boton = form.find(":submit");
-	let icono = boton.find('.fa');
+	let icono = boton.find('.fas');
 	
 	boton.prop('disabled',true);
 	icono.toggleClass('fa-search fa-spinner fa-pulse ');

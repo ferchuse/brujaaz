@@ -104,7 +104,7 @@
 				$("#tabla_registros").html("<h3 class='text-center'>Cargando <i class='fas fa-spinner fa-spin'></i></h3>")
 				let form = $("#form_filtro");
 				let boton = form.find(":submit");
-				let icono = boton.find('.fa');
+				let icono = boton.find('.fas');
 				
 				boton.prop('disabled',true);
 				icono.toggleClass('fa-save fa-spinner fa-pulse ');

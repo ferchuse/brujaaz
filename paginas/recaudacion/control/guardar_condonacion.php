@@ -9,7 +9,7 @@
 	
 	
 	$insert_condonacion  ="INSERT INTO condonaciones SET 
-	fecha_condonaciones = CURTIME(),
+	fecha_condonaciones = NOW(),
 	tarjeta = {$_POST['tarjeta']},
 	id_motivo_condonacion = {$_POST['id_motivo_condonacion']},
 	monto_condonaciones = {$_POST['monto_condonaciones']},
@@ -33,6 +33,8 @@
 		$respuesta["estatus_insert"] = "error";
 		$respuesta["mensaje_insert"] = "Error en insert: $insert_condonacion  ".mysqli_error($link);		
 	}
+	
+	$respuesta["insert_condonacion"] = $insert_condonacion;
 	
 	//Actualiza saldo de tarjeta
 	

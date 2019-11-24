@@ -6,15 +6,15 @@
 	
 	include('../../../conexi.php');
 	include('../../../funciones/generar_select.php');
-	include('../../../funciones/console_log.php');
+	include('../../../funciones/dame_permiso.php');
 	$link = Conectarse();
 	$filas = array();
 	$respuesta = array();
 	$tarjeta = $_GET['tarjeta'];
 	
-	$consulta = "SELECT *, condonaciones.datos_cancelacion AS datos_cancelacion_condonaciones FROM condonaciones 
+	$consulta = "SELECT *, condonaciones.id_usuarios AS id_usuario_condona, condonaciones.datos_cancelacion AS datos_cancelacion_condonaciones FROM condonaciones 
 	LEFT JOIN motivos_condonacion USING(id_motivo_condonacion)
-	LEFT JOIN usuarios USING(id_usuarios)
+	LEFT JOIN usuarios ON usuarios.id_usuarios = condonaciones.id_usuarios
 	LEFT JOIN tarjetas USING(tarjeta)
 	LEFT JOIN conductores USING(id_conductores)
 	LEFT JOIN unidades USING(id_unidades)
@@ -41,7 +41,7 @@
 		}
 		
 		while($fila = mysqli_fetch_assoc($result)){
-		
+			
 			$filas[] = $fila ;
 			
 		}
@@ -77,17 +77,23 @@
 				?>
 				<tr>
 					<td class="text-center"> 
-						<?php if($fila["estatus_condonaciones"] != "Cancelado"){
-							$totales+=$fila['monto_condonaciones'];
-						?>
-						<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_condonaciones']?>'>
-							<i class="fas fa-times"></i>
-						</button>
-						<button class="btn btn-info imprimir" data-id_registro='<?php echo $fila['id_condonaciones']?>'>
-							<i class="fas fa-print"></i>
-						</button>
-						<?php
-						}
+						<?php 
+							if($fila["estatus_condonaciones"] != "Cancelado"){
+								$totales+=$fila['monto_condonaciones'];
+								if(dame_permiso("condonacion_tarjeta.php", $link) == 'Supervisor'){
+								?>
+								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_condonaciones']?>'>
+									<i class="fas fa-times"></i>
+								</button>
+								
+								<?php
+								}
+							?>
+							<button class="btn btn-info imprimir" data-id_registro='<?php echo $fila['id_condonaciones']?>'>
+								<i class="fas fa-print"></i>
+							</button>
+							<?php
+							}
 						?>
 						
 					</td>
@@ -104,11 +110,11 @@
 					<td class="text-center"><?php echo $fila['nombre_usuarios'];?></td>
 					<td class="text-center">
 						<?php 
-							echo $fila['estatus_condonaciones'];
-							if( $fila["estatus_condonaciones"] == "Cancelado"){
-								echo "<br>".$fila["datos_cancelacion_condonaciones"];
-							}
-						?>
+						echo $fila['estatus_condonaciones'];
+						if( $fila["estatus_condonaciones"] == "Cancelado"){
+							echo "<br>".$fila["datos_cancelacion_condonaciones"];
+						}
+					?>
 					</td>
 					
 				</tr> 

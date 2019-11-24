@@ -38,13 +38,13 @@
 						<div class="row mb-2">
 							<div class="col-12">
 								<div class="col-12 mb-3">
-									<button type="button" class="btn btn-success btn-sm nuevo" >
-										<i class="fas fa-plus"></i> Nuevo
-									</button>
 									<button  class="btn btn-primary btn-sm" >
 										<i class="fas fa-search"></i> Buscar
 									</button>
 									
+									<button type="button" class="btn btn-success btn-sm nuevo" >
+										<i class="fas fa-plus"></i> Nuevo
+									</button>
 									<button hidden class="btn btn-info btn-sm" onclick="window.print()" type="button">
 										<i class="fas fa-print"></i> Imprimir
 									</button>

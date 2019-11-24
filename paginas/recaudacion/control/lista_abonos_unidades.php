@@ -5,6 +5,7 @@
 	}
 	include('../../../conexi.php');
 	include('../../../funciones/generar_select.php');
+	include('../../../funciones/dame_permiso.php');
 	$link = Conectarse();
 	$filas = array();
 	$respuesta = array();
@@ -36,21 +37,21 @@
 	
 	$result = mysqli_query($link,$consulta);
 	if($result){
-	
-	if( mysqli_num_rows($result) == 0){
-	
-	die("<div class='alert alert-danger'>No hay registros</div>");
-	
-	
-	}
-	
-	while($fila = mysqli_fetch_assoc($result)){
-	// console_log($fila);
-	$filas[] = $fila ;
-	
-	
-	}
-	
+		
+		if( mysqli_num_rows($result) == 0){
+			
+			die("<div class='alert alert-danger'>No hay registros</div>");
+			
+			
+		}
+		
+		while($fila = mysqli_fetch_assoc($result)){
+			// console_log($fila);
+			$filas[] = $fila ;
+			
+			
+		}
+		
 	?>
 	
 	<pre hidden>
@@ -105,15 +106,22 @@
 					?>
 					<tr>
 						<td class="text-center"> 
-							<?php if($fila["estatus_abonos"] != 'Cancelado'){?>
+							<?php if($fila["estatus_abonos"] != 'Cancelado'){
+								
+								if(dame_permiso("abonos_unidades.php", $link) == 'Supervisor'){
+								?>
 								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_abonos_unidades']?>'>
 									<i class="fas fa-times"></i>
 								</button>
-								<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_abonos_unidades']?>'>
-									<i class="fas fa-print"></i>
-								</button>
+								
 								<?php
 								}
+							?>
+							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_abonos_unidades']?>'>
+								<i class="fas fa-print"></i>
+							</button>
+							<?php
+							}
 							?>
 						</td>
 						<td><?php echo $fila["id_abonos_unidades"]?></td>

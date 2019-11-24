@@ -15,7 +15,7 @@ function listarRegistros(){
 	
 	let form = $("#form_filtro");
 	let boton = form.find(":submit");
-	let icono = boton.find('.fa');
+	let icono = boton.find('.fas');
 	
 	boton.prop('disabled',true);
 	icono.toggleClass('fa-search fa-spinner fa-spin ');
@@ -76,9 +76,20 @@ function confirmaCancelacion(event){
 	var id_registro = $(this).data("id_registro");
 	var fila = boton.closest('tr');
 	
-	alertify.confirm('Confirmación', '¿Deseas Cancelar?', cancelarRegistro , function(){});
+	// alertify.prompt('Confirmación', '¿Deseas Cancelar?', cancelarRegistro , function(){});
 	
-	
+	alertify.confirm()
+  .setting({
+    'reverseButtons': true,
+		'labels' :{ok:"SI", cancel:'NO'},
+    'title': "Confirmar" ,
+    'message': "¿Deseas cancelar?" ,
+    'onok':cancelarIngreso,
+    'oncancel': function(){
+			boton.prop('disabled', false);
+			
+		}
+	}).show();
 	function cancelarRegistro(){
 		
 		boton.prop("disabled", true);
@@ -108,3 +119,51 @@ function confirmaCancelacion(event){
 		});
 	}
 }
+
+// function confirmaCancelarIngreso(event) {
+	// console.log("confirmaCancelarIngreso()")
+	// var boton = $(this);
+	// var id_registro = boton.data('id_registro');
+	// var fila = boton.closest('tr');
+	
+	// boton.prop('disabled', true);
+	// icono = boton.find(".fa");
+	
+	
+	// alertify.confirm()
+  // .setting({
+    // 'reverseButtons': true,
+		// 'labels' :{ok:"SI", cancel:'NO'},
+    // 'title': "Confirmar" ,
+    // 'message': "¿Deseas cancelar esta Entrada?" ,
+    // 'onok':cancelarIngreso,
+    // 'oncancel': function(){
+			// boton.prop('disabled', false);
+			
+		// }
+	// }).show();
+	
+	
+	// function cancelarIngreso(evnt,value) {
+		// $.ajax({
+			// url: 'consultas/cancelar_ingresos.php',
+			// method: 'POST',
+			// data:{ 
+				// "id_registro": id_registro,
+				// "motivo": value
+				
+			// }
+			// }).done(function(respuesta){
+			// alertify.success("Cancelado"); 
+			// window.location.reload();
+			
+			// }).fail(function(){
+			// alertify.error("Ocurrió un error");
+			
+			// }).always(function(){
+			// icono.toggleClass("fa-times fa-spinner fa-spin");
+			// boton.prop('disabled', false);
+			
+		// });
+	// }
+// }

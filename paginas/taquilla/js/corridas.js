@@ -81,7 +81,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		let form = $(this);
 		let boton = form.find(':submit');
-		let icono = boton.find('.fa');
+		let icono = boton.find('.fas');
 		let datos = form.serialize();
 		
 		datos+="&id_usuarios="+ $("#id_usuarios").val();

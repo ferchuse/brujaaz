@@ -5,6 +5,7 @@
 	}
 	include('../../../conexi.php');
 	include('../../../funciones/generar_select.php');
+	include('../../../funciones/dame_permiso.php');
 	$link = Conectarse();
 	$filas = array();
 	$respuesta = array();
@@ -76,15 +77,19 @@
 					<td class="text-center"> 
 						<?php if($fila["estatus_abono"] != 'Cancelado'){
 							$totales[0]+= $fila["monto_abonogeneral"];
+							if(dame_permiso("abono_general.php", $link) == 'Supervisor'){
 							?>
 							<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_abonogeneral']?>'>
 								<i class="fas fa-times"></i>
 							</button>
-							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_abonogeneral']?>'>
-								<i class="fas fa-print"></i>
-							</button>
 							<?php
 							}
+						?>
+						<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_abonogeneral']?>'>
+							<i class="fas fa-print"></i>
+						</button>
+						<?php
+						}
 						?>
 					</td>
 					<td><?php echo $fila["id_abonogeneral"]?></td>
@@ -99,33 +104,33 @@
 				<?
 				}
 			?>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<?php
-					foreach($totales as $i =>$total){
+			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<?php
+						foreach($totales as $i =>$total){
+						?>
+						<td class="h6"><?php echo number_format($total)?></td>
+						<?php	
+						}
 					?>
-					<td class="h6"><?php echo number_format($total)?></td>
-					<?php	
-					}
-				?>
-				
-			</tr>
-		</tfoot>
-	</table>
-	
-	<?php
+					
+				</tr>
+			</tfoot>
+		</table>
 		
+		<?php
+			
+			
+		}
+		else {
+			echo  "Error en ".$consulta.mysqli_Error($link);
+		}
 		
-	}
-	else {
-		echo  "Error en ".$consulta.mysqli_Error($link);
-	}
-	
-?>	
+	?>		

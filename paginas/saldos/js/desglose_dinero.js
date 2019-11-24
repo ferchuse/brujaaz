@@ -34,7 +34,7 @@ function guardarRegistro(event){
 	event.preventDefault();
 	let form = $(this);
 	let boton = form.find(':submit');
-	let icono = boton.find('.fa');
+	let icono = boton.find('.fas');
 	let datos = form.serializeArray();
 	datos.push({"name": "id_usuarios", "value": $("#sesion_id_usuarios").val()})
 	datos.push({"name": "id_administrador", "value": $("#sesion_id_administrador").val()})
