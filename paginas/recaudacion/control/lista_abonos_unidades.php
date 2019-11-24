@@ -30,6 +30,9 @@
 	if($_GET["num_eco"] != ""){
 		$consulta.=  " AND num_eco = '{$_GET['num_eco']}' ";
 	}
+	if($_GET["estatus_abonos"] != "Todos"){
+		$consulta.=  " AND estatus_abonos = '{$_GET['estatus_abonos']}' ";
+	}
 	if($_GET["id_usuarios"] != ''){
 		$consulta.= " AND abonos_unidades.id_usuarios = '{$_GET["id_usuarios"]}' ";
 	}
@@ -90,6 +93,7 @@
 					foreach($filas as $index=>$fila){
 						if($fila["estatus_abonos"] != "Cancelado"){
 							$total_cuenta = $fila["cuenta"] - $fila["condonacion"];
+							$bg = '';
 							
 							$totales[0]+= $fila["cuenta"];
 							$totales[1]+= $fila["condonacion"];
@@ -102,10 +106,15 @@
 							$totales[8]+= $fila["abono_unidad"];
 							$totales[9]+= $fila["devolucion"];
 						}
+						else{
+							$bg = "bg-danger text-white";
+							
+						}
+						
 						
 					?>
-					<tr>
-						<td class="text-center"> 
+					<tr class="<?= $bg;?>">
+						<td class="text-center " > 
 							<?php if($fila["estatus_abonos"] != 'Cancelado'){
 								
 								if(dame_permiso("abonos_unidades.php", $link) == 'Supervisor'){

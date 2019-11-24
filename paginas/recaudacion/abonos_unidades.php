@@ -59,9 +59,7 @@
 									<a href="abonar_unidades.php" class="btn btn-success btn-sm" >
 										<i class="fas fa-dollar-sign"></i> Abonar
 									</a>
-									<button hidden class="btn btn-info btn-sm" onclick="window.print()" type="button">
-										<i class="fas fa-print"></i> Imprimir
-									</button>
+									
 								</div>
 								
 							</div>
@@ -93,6 +91,16 @@
 							</div>	
 							<div class="col-2">			
 								<input class="form-control" type="text" name="num_eco" id="num_eco" >
+							</div>  	
+							<div class="col-1">
+								<label for="nombre_condonaciones">Estatus:</label>
+							</div>	
+							<div class="col-2">			
+								<select name="estatus_abonos" class="form-control">
+									<option>Todos</option>
+									<option>Activo</option>
+									<option>Cancelado</option>
+								</select>
 							</div>  
 						</div>
 					</form>
@@ -140,7 +148,7 @@
 		
 		
 		<?php include("../../scripts.php")?>
-		<script src="js/abonos_unidades.js"></script>
+		<script src="js/abonos_unidades.js?v=<?php echo date('Y-m-d-H:i:s'); ?>"></script>
 	</body>
 	
 </html>																																		
