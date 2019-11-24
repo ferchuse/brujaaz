@@ -75,7 +75,8 @@
 							</div>	
 							<div class="col-sm-2">			
 								<select class="form-control" name="estatus_unidades">
-									<option  selected>Alta</option>
+									<option  selected >Todos</option>
+									<option  >Alta</option>
 									<option >Baja</option>
 									<option >Inactivo</option>
 								</select>
@@ -114,7 +115,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td colspan="10"><h3>Cargando...</h3></td>
+									<td colspan="10"><h3>Presiona Buscar</h3></td>
 								</tr>
 							</tbody>
 						</table>

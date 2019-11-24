@@ -7,9 +7,6 @@ $(document).ready(function(){
 	$('#imprimir_abonos').on('click', imprimirTicket);
 	
 	$('.importe').on('keyup',sumarImportes);
-	// $('.folio_inicial').on('keyup', contarFolios);
-	// $('.folio_final').on('keyup', contarFolios);
-	// $('#efectivo').on('keyup', sumarImportes);
 	
 	$('form').on('keypress',function( event){
 		
@@ -27,7 +24,7 @@ $(document).ready(function(){
 	
 	
 	
-
+	
 	$('#form_filtro').on('submit', function filtrar(event){
 		event.preventDefault();
 		

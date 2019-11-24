@@ -96,7 +96,7 @@
 	) traspaso_utilidad USING (id_unidades)
 	";
 	$consulta.="
-	WHERE estatus_unidades = '{$_GET["estatus_unidades"]}' 
+	WHERE 1
 	AND unidades.id_administrador = '{$_SESSION["id_administrador"]}'
 	"; 
 	
@@ -106,6 +106,14 @@
 	
 	if($_SESSION["tipo_usuario"] == "propietario"){
 		$consulta.=  " AND id_propietarios  = '{$_SESSION["id_usuarios"]}' ";
+	}
+	
+	if($_GET["id_propietarios"] != ""){
+		$consulta.=  " AND id_propietarios  = '{$_GET["id_propietarios"]}' ";
+	}
+	
+	if($_GET["estatus_unidades"] != 'Todos'){
+		$consulta.=  " AND estatus_unidades  = '{$_GET["estatus_unidades"]}' ";
 	}
 	
 	
