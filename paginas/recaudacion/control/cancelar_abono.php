@@ -17,7 +17,8 @@
 	estatus_tarjetas = 'Sin Recaudar',
 	estatus_boletaje = 'Activo',
 	
-	abonos_unidades.datos_cancelacion='Usuario: {$_GET["nombre_usuarios"]} <br> Fecha: $fecha_cancelacion'
+	abonos_unidades.datos_cancelacion = 'Usuario: {$_GET["nombre_usuarios"]} <br> Fecha: $fecha_cancelacion <br> Motivo: {$_GET["motivo"]}'
+	
 	WHERE  id_abonos_unidades = {$_GET["id_registro"]}";
 	
 	$result_abono = mysqli_query($link,$cancela_abono) ;

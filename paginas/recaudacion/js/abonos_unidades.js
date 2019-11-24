@@ -78,19 +78,27 @@ function confirmaCancelacion(event){
 	
 	// alertify.prompt('Confirmación', '¿Deseas Cancelar?', cancelarRegistro , function(){});
 	
-	alertify.confirm()
+	alertify.prompt()
   .setting({
     'reverseButtons': true,
 		'labels' :{ok:"SI", cancel:'NO'},
-    'title': "Confirmar" ,
-    'message': "¿Deseas cancelar?" ,
-    'onok':cancelarIngreso,
+    'title': "Cancelar Abono" ,
+    'message': "Motivo de Cancelación" ,
+    'onok':cancelarRegistro,
     'oncancel': function(){
 			boton.prop('disabled', false);
 			
 		}
 	}).show();
-	function cancelarRegistro(){
+	
+	
+	function cancelarRegistro(evt, motivo){
+		if(motivo == ''){
+			console.log("Escribe un motivo");
+			alertify.error("Escribe un motivo");
+			return false;
+			
+		}
 		
 		boton.prop("disabled", true);
 		icono.toggleClass("fa-times fa-spinner fa-spin");
@@ -100,7 +108,8 @@ function confirmaCancelacion(event){
 			dataType:"JSON",
 			data:{
 				id_registro : id_registro,
-				nombre_usuarios : $("#sesion_nombre_usuarios").text()
+				nombre_usuarios : $("#sesion_nombre_usuarios").text(),
+				motivo : motivo
 			}
 			}).done(function (respuesta){
 			if(respuesta.result == "success"){
@@ -121,49 +130,49 @@ function confirmaCancelacion(event){
 }
 
 // function confirmaCancelarIngreso(event) {
-	// console.log("confirmaCancelarIngreso()")
-	// var boton = $(this);
-	// var id_registro = boton.data('id_registro');
-	// var fila = boton.closest('tr');
-	
-	// boton.prop('disabled', true);
-	// icono = boton.find(".fa");
-	
-	
-	// alertify.confirm()
-  // .setting({
-    // 'reverseButtons': true,
-		// 'labels' :{ok:"SI", cancel:'NO'},
-    // 'title': "Confirmar" ,
-    // 'message': "¿Deseas cancelar esta Entrada?" ,
-    // 'onok':cancelarIngreso,
-    // 'oncancel': function(){
-			// boton.prop('disabled', false);
-			
-		// }
-	// }).show();
-	
-	
-	// function cancelarIngreso(evnt,value) {
-		// $.ajax({
-			// url: 'consultas/cancelar_ingresos.php',
-			// method: 'POST',
-			// data:{ 
-				// "id_registro": id_registro,
-				// "motivo": value
-				
-			// }
-			// }).done(function(respuesta){
-			// alertify.success("Cancelado"); 
-			// window.location.reload();
-			
-			// }).fail(function(){
-			// alertify.error("Ocurrió un error");
-			
-			// }).always(function(){
-			// icono.toggleClass("fa-times fa-spinner fa-spin");
-			// boton.prop('disabled', false);
-			
-		// });
-	// }
+// console.log("confirmaCancelarIngreso()")
+// var boton = $(this);
+// var id_registro = boton.data('id_registro');
+// var fila = boton.closest('tr');
+
+// boton.prop('disabled', true);
+// icono = boton.find(".fa");
+
+
+// alertify.confirm()
+// .setting({
+// 'reverseButtons': true,
+// 'labels' :{ok:"SI", cancel:'NO'},
+// 'title': "Confirmar" ,
+// 'message': "¿Deseas cancelar esta Entrada?" ,
+// 'onok':cancelarIngreso,
+// 'oncancel': function(){
+// boton.prop('disabled', false);
+
+// }
+// }).show();
+
+
+// function cancelarIngreso(evnt,value) {
+// $.ajax({
+// url: 'consultas/cancelar_ingresos.php',
+// method: 'POST',
+// data:{ 
+// "id_registro": id_registro,
+// "motivo": value
+
+// }
+// }).done(function(respuesta){
+// alertify.success("Cancelado"); 
+// window.location.reload();
+
+// }).fail(function(){
+// alertify.error("Ocurrió un error");
+
+// }).always(function(){
+// icono.toggleClass("fa-times fa-spinner fa-spin");
+// boton.prop('disabled', false);
+
+// });
+// }
 // }
