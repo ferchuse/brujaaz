@@ -20,7 +20,7 @@ $(document).ready(function(){
 	});
 	
 	
-	$('#tarjeta').on('keyup', function buscarTarjeta(event){
+	$('#tarjeta').on('keyup',function(event){
 		event.preventDefault();
 		
 		var tarjeta = $(this).val();
@@ -49,7 +49,7 @@ $(document).ready(function(){
 				else{
 					
 					$.each(respuesta.mensaje[0], function(name, value){
-						$("#form_edicion #"+name).val(value);
+						$("#"+name).val(value);
 						if(name == 'estatus_tarjetas' && value == 'Recaudada'){
 							alertify.error("Tarjeta Ya recaudada");
 							$("#tarjeta").select();
@@ -79,7 +79,7 @@ $(document).ready(function(){
 	});
 	
 	
-	$('#form_edicion').on('submit', function guardarRegistro(event){
+	$('#form_edicion').on('submit',function(event){
 		
 		//guarda en condonaciones, 
 		event.preventDefault();

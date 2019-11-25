@@ -15,7 +15,7 @@ function listarRegistros(){
 	
 	let form = $("#form_filtro");
 	let boton = form.find(":submit");
-	let icono = boton.find('.fas');
+	let icono = boton.find('.fa');
 	
 	boton.prop('disabled',true);
 	icono.toggleClass('fa-search fa-spinner fa-spin ');
@@ -29,7 +29,7 @@ function listarRegistros(){
 		// $("#dataTable").dataTable();
 		$(".imprimir").click(imprimirTicket);
 		$(".cancelar").click(confirmaCancelacion);
-		dame_permiso();
+		
 		
 		}).always(function(){
 		
@@ -76,29 +76,10 @@ function confirmaCancelacion(event){
 	var id_registro = $(this).data("id_registro");
 	var fila = boton.closest('tr');
 	
-	// alertify.prompt('Confirmación', '¿Deseas Cancelar?', cancelarRegistro , function(){});
-	
-	alertify.prompt()
-  .setting({
-    'reverseButtons': true,
-		'labels' :{ok:"SI", cancel:'NO'},
-    'title': "Cancelar Abono" ,
-    'message': "Motivo de Cancelación" ,
-    'onok':cancelarRegistro,
-    'oncancel': function(){
-			boton.prop('disabled', false);
-			
-		}
-	}).show();
+	alertify.confirm('Confirmación', '¿Deseas Cancelar?', cancelarRegistro , function(){});
 	
 	
-	function cancelarRegistro(evt, motivo){
-		if(motivo == ''){
-			console.log("Escribe un motivo");
-			alertify.error("Escribe un motivo");
-			return false;
-			
-		}
+	function cancelarRegistro(){
 		
 		boton.prop("disabled", true);
 		icono.toggleClass("fa-times fa-spinner fa-spin");
@@ -108,8 +89,7 @@ function confirmaCancelacion(event){
 			dataType:"JSON",
 			data:{
 				id_registro : id_registro,
-				nombre_usuarios : $("#sesion_nombre_usuarios").text(),
-				motivo : motivo
+				nombre_usuarios : $("#sesion_nombre_usuarios").text()
 			}
 			}).done(function (respuesta){
 			if(respuesta.result == "success"){
@@ -128,51 +108,3 @@ function confirmaCancelacion(event){
 		});
 	}
 }
-
-// function confirmaCancelarIngreso(event) {
-// console.log("confirmaCancelarIngreso()")
-// var boton = $(this);
-// var id_registro = boton.data('id_registro');
-// var fila = boton.closest('tr');
-
-// boton.prop('disabled', true);
-// icono = boton.find(".fa");
-
-
-// alertify.confirm()
-// .setting({
-// 'reverseButtons': true,
-// 'labels' :{ok:"SI", cancel:'NO'},
-// 'title': "Confirmar" ,
-// 'message': "¿Deseas cancelar esta Entrada?" ,
-// 'onok':cancelarIngreso,
-// 'oncancel': function(){
-// boton.prop('disabled', false);
-
-// }
-// }).show();
-
-
-// function cancelarIngreso(evnt,value) {
-// $.ajax({
-// url: 'consultas/cancelar_ingresos.php',
-// method: 'POST',
-// data:{ 
-// "id_registro": id_registro,
-// "motivo": value
-
-// }
-// }).done(function(respuesta){
-// alertify.success("Cancelado"); 
-// window.location.reload();
-
-// }).fail(function(){
-// alertify.error("Ocurrió un error");
-
-// }).always(function(){
-// icono.toggleClass("fa-times fa-spinner fa-spin");
-// boton.prop('disabled', false);
-
-// });
-// }
-// }

@@ -52,7 +52,7 @@ $(document).ready(function(){
         event.preventDefault();
         let form = $(this);
         let boton = form.find(':submit');
-        let icono = boton.find('.fas');
+        let icono = boton.find('.fa');
         let datos = form.serializeArray();
         let importe = $('#importe_entregadinero').val();
         boton.prop('disabled',true);

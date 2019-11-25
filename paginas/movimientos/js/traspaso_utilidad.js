@@ -115,7 +115,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		let form = $(this);
 		let boton = form.find(':submit');
-		let icono = boton.find('.fas');
+		let icono = boton.find('.fa');
 		let datos = form.serialize();
 		let fecha = obtenerFecha(); 
 		
@@ -201,7 +201,7 @@ function listarRegistros(){
 	
 	let form = $("#form_filtro");
 	let boton = form.find(":submit");
-	let icono = boton.find('.fas');
+	let icono = boton.find('.fa');
 	
 	boton.prop('disabled',true);
 	icono.toggleClass('fa-search fa-spinner fa-pulse ');

@@ -125,7 +125,7 @@ $(document).ready(function(){
 		
 		let form = $("#form_abono");
 		let boton = $("#boton_guardar_abono");
-		let icono = boton.find('.fas');
+		let icono = boton.find('.fa');
 		let datos = form.serialize();
 		
 		//Agrega campos de sesion extras
@@ -177,7 +177,7 @@ $(document).ready(function(){
 		
 		let form = $("#form_edicion");
 		let boton = $(this).find(":submit");
-		let icono = boton.find('.fas');
+		let icono = boton.find('.fa');
 		let datos = form.serializeArray();
 		let fecha_creacion = new Date().toString('yyyy-MM-dd HH:mm:ss')
 		

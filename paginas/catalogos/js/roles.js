@@ -33,7 +33,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		let form = $(this);
 		let boton = form.find(':submit');
-		let icono = boton.find('.fas'); 
+		let icono = boton.find('.fa'); 
 		let datos = form.serialize();
 		
 		boton.prop('disabled',true);
