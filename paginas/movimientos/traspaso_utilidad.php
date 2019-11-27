@@ -31,9 +31,9 @@
 						</li>
 						<li class="breadcrumb-item active"><?php echo $nombre_pagina; ?></li>
 					</ol>
-					 
+					
 					<form id="form_filtro" autocomplete="off">
-						<div class="col-12">
+						<div class="col-12 mb-3">
 							<button  type="submit" id="btn_buscar"  class="btn btn-primary" >
 								<i class="fas fa-search"></i> Buscar
 							</button> 
@@ -42,23 +42,23 @@
 							</button>
 						</div>
 						<div class="row"> 
-							<label class="col-2">Fecha Inicial:</label>
+							<label class="col-1">Fecha Inicial:</label>
 							<div class="col-2">
 								<input class="form-control" name="fecha_inicial" type="date" id="fecha_inicial" value="<?php echo date("Y-m-d")?>">
 							</div>
-						</div>	
-						<div class="form-row">
 							<label class="col-2">Fecha Incial:</label>
 							<div class="col-2">
 								<input class="form-control" name="fecha_final" type="date" id="fecha_final" value="<?php echo date("Y-m-d")?>">
 							</div>
-						</div>
-						<div class="form-row" hidden> 
-							<label class="col-2">Num Eco:</label>
+						</div>	
+						<div class="row">
+							
+							<label class="col-1">Num Eco:</label>
 							<div class="col-2">
 								<input class="form-control" name="num_eco" type="text" >
 							</div>
 						</div>
+						
 					</form>
 					<hr>
 					<div class="card mb-3">
@@ -124,7 +124,7 @@
 			include("../../scripts.php");
 			include('forms/forms_traspaso.php');
 		?>
-    <script src="js/traspaso_utilidad.js"></script>
+    <script src="js/traspaso_utilidad.js?v=<?php echo date('Y-m-d-H:i:s');?>"></script>
     <script src="../catalogos/js/buscar.js"></script>
 	</body>
 </html>

@@ -9,16 +9,28 @@
 	
 	
 	
-	$consulta = "SELECT * FROM traspaso_utilidad
-
+	$consulta = "SELECT *, GROUP_CONCAT(num_eco) AS unidades 
+	
+	FROM 
+	traspaso_utilidad
+	LEFT JOIN traspaso_utilidad_unidades USING(id_traspaso)
+	LEFT JOIN unidades USING(id_unidades)
 	LEFT JOIN usuarios USING(id_usuarios)
+	
 	WHERE usuarios.id_administrador = {$_SESSION["id_administrador"]}
 	";
 	
 	$consulta.=  " 
 	AND  DATE(fecha_traspaso)
 	BETWEEN '{$_GET['fecha_inicial']}' 
-	AND '{$_GET['fecha_final']}'"; 
+	AND '{$_GET['fecha_final']}' 
+	
+	GROUP BY id_traspaso
+	"; 
+	if($_GET["num_eco"] != ''){
+		
+		$consulta.=  " HAVING unidades LIKE '%{$_GET["num_eco"]}%' "; 
+	}
 	
 	$result = mysqli_query($link,$consulta);
 	
@@ -49,6 +61,7 @@
 				<th>Fecha Aplicación</th>
 				<th>Beneficiario</th>
 				<th>Concepto</th>
+				<th>Unidades</th>
 				<th>Monto</th>
 				<th>Estatus</th>
 				<th>Usuario</th>
@@ -76,6 +89,7 @@
 						<td><?php echo $fila["fecha_aplicacion"]?></td>
 						<td><?php echo $fila["beneficiario"]?></td>
 						<td><?php echo $fila["concepto_traspaso"]?></td>
+						<td><?php echo $fila["unidades"]?></td>
 						<td><?php echo $fila["monto_traspaso"]?></td>
 						<td><?php echo $fila["estatus_traspaso"]?></td>
 						<td><?php echo $fila["nombre_usuarios"]?></td>
