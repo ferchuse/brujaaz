@@ -12,7 +12,7 @@
 	$respuesta = array();
 	$tarjeta = $_GET['tarjeta'];
 	
-	$consulta = "SELECT *, condonaciones.id_usuarios AS id_usuario_condona, condonaciones.datos_cancelacion AS datos_cancelacion_condonaciones FROM condonaciones 
+	$consulta = "SELECT *, condonaciones.id_usuarios AS id_usuario_condona,  condonaciones.datos_cancelacion AS datos_cancelacion_condonaciones FROM condonaciones 
 	LEFT JOIN motivos_condonacion USING(id_motivo_condonacion)
 	LEFT JOIN usuarios ON usuarios.id_usuarios = condonaciones.id_usuarios
 	LEFT JOIN tarjetas USING(tarjeta)
@@ -67,7 +67,7 @@
 				<th class="text-center">Motivo</th>
 				<th class="text-center">Monto</th>
 				<th class="text-center">Observaciones</th>
-				<th class="text-center">Usuario</th> 
+				<th class="text-center">Usuario Condona</th> 
 				<th class="text-center">Estatus</th> 
 			</tr>
 		</thead>

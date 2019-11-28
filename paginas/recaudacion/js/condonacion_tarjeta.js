@@ -28,47 +28,14 @@ $(document).ready(function(){
 		let subconsulta = `LEFT JOIN empresas USING(id_empresas)
 		LEFT JOIN conductores USING(id_conductores)
 		LEFT JOIN unidades USING(id_unidades)
-		WHERE tarjeta = ${tarjeta}
-		
-		`;
+		WHERE tarjeta = ${tarjeta}`;
 		if(event.which == 13){
-			$("#tarjeta").addClass("cargando"); 
-			$.ajax({
-				url: '../catalogos/control/listar.php',
-				method: 'POST',
-				dataType: 'JSON',
-				data: {
-					tabla: 'tarjetas',
-					subconsulta :subconsulta
-				}
-				}).done(function(respuesta){
-				console.log(respuesta) 
-				if(respuesta.num_rows == 0){
-					alertify.error("No encontrado")
-				}
-				else{
-					
-					$.each(respuesta.mensaje[0], function(name, value){
-						$("#"+name).val(value);
-						if(name == 'estatus_tarjetas' && value == 'Recaudada'){
-							alertify.error("Tarjeta Ya recaudada");
-							$("#tarjeta").select();
-							$("#form_edicion")[0].reset();
-							return false;
-						}
-						
-					});
-					
-				}
-				
-				}).always(function(){
-				
-				$("#tarjeta").removeClass("cargando"); 
-			});
+			buscarTarjeta(subconsulta);
 			
 		};
 	});
 	
+
 	//==========GUARDAR ============
 	$('#form_edicion').on('keypress',function(event){
 		if(event.which == 13){
@@ -78,6 +45,43 @@ $(document).ready(function(){
 		
 	});
 	
+	
+	function buscarTarjeta(subconsulta){
+		
+		$("#tarjeta").addClass("cargando"); 
+		$.ajax({
+			url: '../catalogos/control/listar.php',
+			method: 'POST',
+			dataType: 'JSON',
+			data: {
+				tabla: 'tarjetas',
+				subconsulta :subconsulta
+			}
+			}).done(function(respuesta){
+			console.log(respuesta) 
+			if(respuesta.num_rows == 0){
+				alertify.error("No encontrado")
+			}
+			else{
+				
+				$.each(respuesta.mensaje[0], function(name, value){
+					$("#"+name).val(value);
+					if(name == 'estatus_tarjetas' && value == 'Recaudada'){
+						alertify.error("Tarjeta Ya recaudada");
+						$("#tarjeta").select();
+						$("#form_edicion")[0].reset();
+						return false;
+					}
+					
+				});
+				
+			}
+			
+			}).always(function(){
+			
+			$("#tarjeta").removeClass("cargando"); 
+		});
+	}
 	
 	$('#form_edicion').on('submit',function(event){
 		

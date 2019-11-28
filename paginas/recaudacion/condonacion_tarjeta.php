@@ -143,7 +143,7 @@
 		</div>
 		<?php include("forms/form_condonacion.php")?>  
 		<?php include("../../scripts.php")?> 
-		<script src="js/condonacion_tarjeta.js"></script>
+		<script src="js/condonacion_tarjeta.js?v=<?= date("d-m-y-H-i-s")?>"></script>
 	</body>
 	
 </html>
