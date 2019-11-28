@@ -58,6 +58,14 @@
 		$_SESSION["tipo_usuario"] = $row["tipo_usuario"];
 		$response["login"] = "valid"; 
 		
+			
+		setcookie("id_usuarios", $id_usuarios,  0, "/");
+		setcookie("nombre_usuarios", $nombre_usuarios,  0, "/");
+		setcookie("permiso_usuarios", $row["permiso_usuarios"],  0, "/");
+		setcookie("id_recaudaciones",  $row["id_recaudaciones"],  0, "/");
+		setcookie("id_administrador",  $row["id_administrador"],  0, "/");
+		setcookie("tipo_usuario",  $row["tipo_usuario"],  0, "/");
+		
 	}
 	else{
 		$response["login"] = "invalid";
