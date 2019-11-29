@@ -175,7 +175,7 @@
 		
     <?php include("../../scripts.php")?>
     <?php include("forms/form_general.php");?>
-    <script src="js/abono_general.js"></script>
+    <script src="js/abono_general.js?v=<?php echo date('Y-m-d-H:i:s'); ?>"></script>
     <script src="js/buscar.js"></script>
 	</body>
 </html>

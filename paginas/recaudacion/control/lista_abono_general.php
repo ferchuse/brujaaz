@@ -71,25 +71,37 @@
 		<tbody id="tabla_DB">
 			<?php 
 				foreach($filas as $index=>$fila){
+					if($fila["estatus_abono"] != "Cancelado"){
+							$totales[0]+= $fila["monto_abonogeneral"];
+							$bg = '';
+							
+						}
+						else{
+							$bg = "bg-danger text-white";
+						}
+					
 					
 				?>
-				<tr>
+				<tr class="<?= $bg;?>">
 					<td class="text-center"> 
-						<?php if($fila["estatus_abono"] != 'Cancelado'){
-							$totales[0]+= $fila["monto_abonogeneral"];
-							if(dame_permiso("abono_general.php", $link) == 'Supervisor'){
+						<?php 
+							if($fila["estatus_abono"] != 'Cancelado'){
+							
+								if(dame_permiso("abono_general.php", $link) == 'Supervisor'){ ?>
+								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_abonogeneral']?>'>
+									<i class="fas fa-times"></i>
+								</button>
+								<?php
+								}
 							?>
-							<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_abonogeneral']?>'>
-								<i class="fas fa-times"></i>
+							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_abonogeneral']?>'>
+								<i class="fas fa-print"></i>
 							</button>
 							<?php
 							}
-						?>
-						<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_abonogeneral']?>'>
-							<i class="fas fa-print"></i>
-						</button>
-						<?php
-						}
+							else{
+								
+								}
 						?>
 					</td>
 					<td><?php echo $fila["id_abonogeneral"]?></td>
@@ -99,38 +111,46 @@
 					<td><?php echo $fila["nombre_motivosAbono"]?></td>
 					<td><?php echo $fila["monto_abonogeneral"]?></td>
 					<td><?php echo $fila["nombre_usuarios"]?></td>
-					<td><?php echo $fila["estatus_abono"]?></td>
+					<td>
+						
+						<?php echo $fila["estatus_abono"];
+							if( $fila["estatus_abono"] == "Cancelado"){
+								echo "<br>".$fila["datos_cancelacion_abono_general"];
+							}	
+							
+							
+						?></td>
 				</tr>
 				<?
 				}
 			?>
-			</tbody>
-			<tfoot>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<?php
-						foreach($totales as $i =>$total){
-						?>
-						<td class="h6"><?php echo number_format($total)?></td>
-						<?php	
-						}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<?php
+					foreach($totales as $i =>$total){
 					?>
-					
-				</tr>
-			</tfoot>
-		</table>
+					<td class="h6"><?php echo number_format($total)?></td>
+					<?php	
+					}
+				?>
+				
+			</tr>
+		</tfoot>
+	</table>
+	
+	<?php
 		
-		<?php
-			
-			
-		}
-		else {
-			echo  "Error en ".$consulta.mysqli_Error($link);
-		}
 		
-	?>		
+	}
+	else {
+		echo  "Error en ".$consulta.mysqli_Error($link);
+	}
+	
+?>		

@@ -76,20 +76,41 @@ function confirmaCancelacion(event){
 	var id_registro = $(this).data("id_registro");
 	var fila = boton.closest('tr');
 	
-	alertify.confirm('Confirmación', '¿Deseas Cancelar?', cancelarRegistro , function(){});
+	alertify.prompt()
+  .setting({
+    'reverseButtons': true,
+		'labels' :{ok:"SI", cancel:'NO'},
+		'title': "Cancelar Abono" ,
+    'message': "Motivo de Cancelación" ,
+    'onok':cancelarRegistro,
+    'oncancel': function(){
+			boton.prop('disabled', false);
+			
+		}
+	}).show();
 	
 	
-	function cancelarRegistro(){
+	
+	
+	function cancelarRegistro(evt, motivo){
+		if(motivo == ''){
+			console.log("Escribe un motivo");
+			alertify.error("Escribe un motivo");
+			return false;
+			
+		}
 		
 		boton.prop("disabled", true);
 		icono.toggleClass("fa-times fa-spinner fa-spin");
+		
 		
 		return $.ajax({
 			url: "control/cancelar_abono.php",
 			dataType:"JSON",
 			data:{
 				id_registro : id_registro,
-				nombre_usuarios : $("#sesion_nombre_usuarios").text()
+				nombre_usuarios : $("#sesion_nombre_usuarios").text(),
+				motivo : motivo
 			}
 			}).done(function (respuesta){
 			if(respuesta.result == "success"){
