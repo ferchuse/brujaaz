@@ -99,7 +99,7 @@
 											</div>
 											<div class="col-2 form-group ">
 												<button class="btn btn-success mt-4" >
-													<i class="fas fa-print"></i> Imprimir
+													<i class="fas fa-dollar-sign"></i> Vender
 												</button>
 											</div>
 										</div>
