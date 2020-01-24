@@ -57,8 +57,8 @@
 				while($fila = mysqli_fetch_assoc($result)){
 					// console_log($fila);
 					$filas = $fila ;
-					echo chr(0);
-					echo chr(1);
+					// echo chr(0);
+					// echo chr(1);
 					
 					
 				?>

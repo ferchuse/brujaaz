@@ -46,8 +46,8 @@
 								<li class="nav-item">
 									<a class="nav-link active" id="pill_corridas" data-toggle="pill" href="#tab_corridas">Corridas</a>
 								</li>
-								<li class="nav-item">
-									<a class="nav-link" id="pill_venta" data-toggle="pill" href="#tab_boletos">Venta de Boletos</a>
+								<li class="nav-item disabled">
+									<a class="nav-link " id="pill_venta" data-toggle="pill" href="#tab_boletos">Venta de Boletos</a>
 								</li>
 								
 							</ul>
@@ -74,53 +74,37 @@
 									</div>
 								</div>
 								
-								<div class="tab-pane container " id="tab_boletos">
+								<div class="tab-pane  " id="tab_boletos">
 									<hr>
 									<div class="row">
-										
-										<div class="col-sm-9">
-											<form id="form_boletos" class="was-validated" autocomplete="off">
-												<div class="form-row">
-													<div class="form-group col-2"> 
-														<label>Corrida #	</label>
-														<input name="id_corridas" id="id_corridas" class="form-control" readonly value="<?php echo $_GET["id_corridas"]?>">
-													</div>
-													<div class="form-group col-2"> 
-														<label>Num Eco:	</label>
-														<input id="num_eco" name="num_eco" class="form-control"  value="<?php echo $_GET["num_eco"]?>">
-													</div>
-													<div class="col-4  form-group">
-														<label>Destino:	</label>
-														<?php include("boletos_iv/destinos.php")?>
-													</div>
-													<div class="col-2 form-group">
-														<label>Precio:	</label>
-														<input name="precio" readonly class="form-control precio" >
-													</div>
-													<div class="col-2 form-group ">
-														<button class="btn btn-success float-right mt-4" >
-															<i class="fas fa-print"></i> Imprimir
-														</button>
-														
-													</div>
-												</div>
-												
-												<div class="row" hidden>
-													<div class="col-12 ">
-														<div class="form-group float-right" >
-															<label class="h3">TOTAL: </label>
-															<input id="importe_total" type="number" readonly class="form-control h3" value="0">
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-12">
-														
-													</div>
-												</div>
-											</form>
+										<div class="form-group col-2"> 
+											<label>Corrida #	</label>
+											<input name="id_corridas" id="id_corridas" class="form-control" readonly value="<?php echo $_GET["id_corridas"]?>">
 										</div>
-									</div>
+										<div class="form-group col-2"> 
+											<label>Num Eco:	</label>
+											<input id="num_eco" name="num_eco" class="form-control"  value="<?php echo $_GET["num_eco"]?>" readonly>
+										</div>
+									</div>	
+									<hr>
+									<form id="form_boletos" class="was-validated form-inline" autocomplete="off">
+										<div class="row">
+											<div class="col-4  form-group">
+												<label>Destino:	</label>
+												<?php include("boletos_iv/destinos.php")?>
+											</div>
+											<div class="col-4 form-group">
+												<label>Precio:	</label>
+												<input name="precio" readonly class="form-control precio" >
+											</div>
+											<div class="col-2 form-group ">
+												<button class="btn btn-success mt-4" >
+													<i class="fas fa-print"></i> Imprimir
+												</button>
+											</div>
+										</div>
+									</form>
+									
 									<div class="card card-primary mt-4 ">
 										<div class="card-header text-center">
 											Resumen de Ventas
@@ -135,34 +119,34 @@
 								
 							</div><!-- /.tab-content-->
 						</div><!-- /.card-body-->
-					</div><!-- /.card -->
-				</div><!-- /.container-fluid -->
-				
-				
-				<!-- Sticky Footer -->
-				<footer class="sticky-footer">
-					<div class="container my-auto ">
-						<div class="copyright text-center my-auto">
-							<span class="d-print-none">Copyright © Glifo Media 2018</span>
-						</div>
+				</div><!-- /.card -->
+			</div><!-- /.container-fluid -->
+			
+			
+			<!-- Sticky Footer -->
+			<footer class="sticky-footer">
+				<div class="container my-auto ">
+					<div class="copyright text-center my-auto">
+						<span class="d-print-none">Copyright © Glifo Media 2018</span>
 					</div>
-				</footer>
-			</div> 
-			<!-- /.content-wrapper -->
-		</div>
-		<!-- /#wrapper -->
-		
-		<!-- Scroll to Top Button-->
-		<a class="scroll-to-top rounded d-print-none" href="#page-top">
-			<i class="fas fa-angle-up"></i>
-		</a>
-		
-		<div class="d-print-block p-2" hidden id="ticket">
-		</div>
-		<?php include("../../scripts.php")?>
-		<?php include("boletos_iv/form_corridas.php");?>
-		
-		<script src="boletos_iv/venta_boletos.js?v=<?= date("Y-m-d-H-i-s")?>"></script>
-		
-	</body>
+				</div>
+			</footer>
+		</div> 
+		<!-- /.content-wrapper -->
+	</div>
+	<!-- /#wrapper -->
+	
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded d-print-none" href="#page-top">
+		<i class="fas fa-angle-up"></i>
+	</a>
+	
+	<div class="d-print-block p-2" hidden id="ticket">
+	</div>
+	<?php include("../../scripts.php")?>
+	<?php include("boletos_iv/form_corridas.php");?>
+	
+	<script src="boletos_iv/venta_boletos.js?v=<?= date("Y-m-d-H-i-s")?>"></script>
+	
+</body>
 </html>																												

@@ -20,15 +20,9 @@
 	";
 	
 	$consulta_guia = "SELECT *,
-	COUNT(id_boletos) AS cantidad,
-	nombre_origenes as destino
+	COUNT(id_boletos) AS cantidad
 	FROM boletos 
 	LEFT JOIN precios_boletos USING(id_precio)
-	LEFT JOIN (
-	SELECT id_origenes as id_destinos, nombre_origenes AS destino 
-	FROM origenes
-	) AS destinos
-	ON precios_boletos.id_destinos = destinos.id_destinos
 	WHERE id_corridas = {$_GET["id_corridas"]}
 	GROUP BY id_precio
 	";
@@ -93,13 +87,7 @@
 							<td><?php echo $filas["id_boletos"]?></td>
 							<td><?php echo $filas["destino"]?></td>
 							<td>$<?php echo number_format($filas["precio_boletos"])?></td>
-							<td><?php
-								echo $filas["estatus_corridas"]."<br>";
-								if($filas["estatus_corridas"] == "Cancelado"){
-									echo $fila["datos_cancelacion"];
-									
-								}
-							?></td>
+							
 						</tr>
 						
 						<?php
@@ -139,17 +127,18 @@
 				<tbody>
 					<?php 
 						$total_guia = 0;
+						echo "<pre>".$consulta_guia."</pre>";
 						
 						foreach($guias AS $i =>$fila){
-							$importe= $filas["cantidad"] * $filas["precio_boletos"];
+							$importe= $fila["cantidad"] * $fila["precio_boletos"];
 							$total_guia+= $importe;
 							
 						?>
 						<tr>
 							
 							<td><?php echo $fila["cantidad"]?></td>
-							<td><?php echo $filas["destino"]?></td>
-							<td><?php echo $filas["precio_boletos"]?></td>
+							<td><?php echo $fila["destino"]?></td>
+							<td><?php echo $fila["precio_boletos"]?></td>
 							<td><?php echo $importe;?></td>
 							
 							

@@ -43,7 +43,8 @@ function abrirTaquilla(event){
 	
 	$("#id_corridas").val($(this).data("id_corridas"));
 	$("#num_eco").val($(this).data("num_eco"));
-	$("#pill_venta").click();
+	$("#pill_venta").tab("show");
+	listaBoletos();
 	
 }
 function guardarCorrida(event){
@@ -127,22 +128,26 @@ function guardarBoletos(event){
 	let form = $(this);
 	let boton = form.find(':submit');
 	let icono = boton.find('.fa');
-	let datos = form.serialize();
 	
-	datos+="&id_usuarios="+ $("#id_usuarios").val();
 	
 	boton.prop('disabled',true);
 	icono.toggleClass('fa-save fa-spinner fa-pulse ');
+	
 	$.ajax({
 		url: 'boletos_iv/guardar_boletos.php',
 		method: 'POST',
 		dataType: 'JSON',
-		data: datos
+		data: {
+			"id_corridas" : $("#id_corridas").val(),
+			"precio_boletos" : $("#precio_boletos").val(),
+			"id_usuarios" : $("#id_usuarios").val()
+			
+			}
 		}).done(function(respuesta){
 		if(respuesta.result == 'success'){
 			
 			alertify.success('Se ha guardado correctamente');
-			desactivaAsientosOcupados();
+			// desactivaAsientosOcupados();
 			$("#form_boletos")[0].reset();
 			
 			
