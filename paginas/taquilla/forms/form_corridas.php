@@ -15,6 +15,7 @@
 					<div class="form-row">
 						<div class="form-group col-6">
 							<label for="fecha_abonogeneral">Taquilla:</label>
+							
 							<?php echo generar_select($link, "recaudaciones", "id_recaudaciones", "nombre_recaudaciones", false, false, true, $_SESSION["id_recaudaciones"])?>
 						</div>
 						

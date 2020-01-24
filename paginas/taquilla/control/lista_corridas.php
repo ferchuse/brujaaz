@@ -65,7 +65,7 @@
 						<button class="btn btn-danger cancelar " title="Cancelar" data-id_registro='<?php echo $filas["id_corridas"]?>'>
 							<i class="fas fa-times"></i>
 						</button>	
-						<a class="btn btn-success " title="Boletos" href='boletos.php?id_corridas=<?php echo $filas["id_corridas"]."&num_eco=".$filas["num_eco"]."&asientos=".$filas["asientos"]?>'>
+						<a class="btn btn-success " title="Boletos" href='venta_boletos.php?id_corridas=<?php echo $filas["id_corridas"]."&num_eco=".$filas["num_eco"]."&asientos=".$filas["asientos"]?>'>
 							<i class="fas fa-ticket-alt"></i>
 						</button>
 						<?php

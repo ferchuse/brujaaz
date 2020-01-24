@@ -88,7 +88,7 @@
 		
 		$host="localhost";
 		
-		if($_SERVER["SERVER_NAME"] == "localhost"){
+		if($_SERVER["SERVER_NAME"] == "localhost"  || $_SERVER["SERVER_NAME"] == "192.168.1.81"){
 			$db="brujaaz";
 			$usuario="sistemas";
 			$pass="Glifom3dia";
