@@ -48,7 +48,7 @@
 	// echo "<pre>".var_dump($respuesta)."</pre>";
 ?>
 
-<select required name="id_precio" data-indice='$data_indice' class="form-control tipo_boleto">;
+<select required id="id_precio" name="id_precio" data-destino='<?= $item["nombre_destinos"]?>' class="form-control tipo_boleto">;
 	<option value=''>Seleccione...</option>
 	
 	<?php foreach($respuesta["precios_boletos"] as $i => $item){ ?>

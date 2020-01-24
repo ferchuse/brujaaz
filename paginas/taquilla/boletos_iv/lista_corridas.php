@@ -39,7 +39,6 @@
 	<table class="table table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th></th>
 				<th>Estatus</th>
 				<th>Folio</th>
 				<th>Num Eco</th>
@@ -63,35 +62,37 @@
 					
 				?>
 				<tr>
-					<td>
-						<?php if($fila["estatus_corridas"] != 'Cancelado'){?>
-							
-							<button class="btn btn-danger  btn-sm cancelar " title="Cancelar" data-id_registro='<?php echo $filas["id_corridas"]?>'>
-								<i class="fas fa-times"></i> Cancelar
-							</button>	
-							<button class="btn btn-success  btn-sm btn_venta" title="Venta de Boletos" data-id_corridas="<?php echo $filas["id_corridas"]?>" data-num_eco="<?php echo $filas["num_eco"]?>" >
-								<i class="fas fa-ticket-alt"></i> Venta de Boletos
-							</button>
-							<?php
-								
-							}
-						?>
-					</td>
+					
 					<td>
 						<?php
 							switch($filas["estatus_corridas"]){
 								case "Activa":
 								echo "<span class='badge badge-success'>".$filas["estatus_corridas"]."</span>";
+							?>
+							<button class="btn btn-success  btn-sm btn_venta" title="Venta de Boletos" data-id_corridas="<?php echo $filas["id_corridas"]?>" data-num_eco="<?php echo $filas["num_eco"]?>" >
+								<i class="fas fa-ticket-alt"></i> Venta de Boletos
+							</button>
+							
+							<?php
 								break;
 								
 								case "Finalizada":
 								echo "<span class='badge badge-warning'>".$filas["estatus_corridas"]."</span>";
+								
+							?>
+							<button class="btn btn-info  btn-sm imprimir " title="Imprimir" data-id_registro='<?php echo $filas["id_corridas"]?>'>
+								<i class="fas fa-print"></i> Imprimir Guía
+							</button>	
+							
+							<?php
+								
+								
 								break;
 								
-								case "Cancelada":
-								echo "<span class='badge badge-danger'>".$filas["estatus_corridas"]."</span>";
-								break;
-								
+							case "Cancelada":
+							echo "<span class='badge badge-danger'>".$filas["estatus_corridas"]."</span>";
+							break;
+							
 							}
 							
 							if($filas["estatus_corridas"] == "Cancelado"){
@@ -139,5 +140,5 @@
 		
 	}
 	
-
+	
 ?>

@@ -11,6 +11,17 @@ function onLoad(){
 	
 	listarCorridas();
 	
+	$("#lista_boletos").on("click", ".imprimir", function(){
+		imprimirTicket([$(this.data("id_registro"))])
+		
+	});
+	
+	$("#lista_corridas").on("click", ".imprimir", function(){
+		imprimirGuia([$(this.data("id_corridas"))])
+		
+	});
+	
+	
 	
 	$(".nuevo").on('click',function(){
 		console.log("Nuevo")
@@ -24,10 +35,10 @@ function onLoad(){
 	$('#lista_corridas').on('click', ".btn_venta", abrirTaquilla);
 	
 	
-	$(".tipo_boleto").change(function( evt){
-		console.log("cambiar_tipo_boleto", evt)
+	$(".tipo_boleto").change( function eligeBoleto( evt){
+		console.log("eligeBoleto()")
 		
-		$(this).closest(".form-row").find(".precio").val($(this).find(":selected").data("precio"));
+		$(this).closest(".row").find(".precio").val($(this).find(":selected").data("precio"));
 		
 		sumarImportes();
 	});
@@ -37,6 +48,55 @@ function onLoad(){
 	
 	
 }
+
+
+
+function finalizarCorrida(){
+	console.log("finalizarCorrida()");
+	$("#imprimir_guia").prop("disabled", true);
+	
+	$.ajax({
+		"url": "boletos_iv/finalizar_corrida.php",
+		"method": "post",
+		"data": {
+			"id_corridas": $("#id_corridas").val()
+		}
+		}).done(function(){
+		
+		listarCorridas();
+		//ir a tab corridas
+		
+		$("#pill_corridas").tab("show");
+		
+		imprimirGuia($("#id_corridas").val())
+		
+		}).fail(function(){
+		
+		
+		}).always(function(){
+		$("#imprimir_guia").prop("disabled", false);
+		
+	});
+}
+
+function imprimirGuia(id_corridas){
+console.log("imprimirGuia()");
+
+$.ajax({
+	"url": "boletos_iv/imprimir_guias.php",
+	"data": {
+		"id_corridas": id_corridas
+	}
+	}).done(function(respuesta){
+	
+	$("#ticket").html(respuesta); 
+	window.print();
+});
+
+
+}
+
+
 
 function abrirTaquilla(event){
 	console.log("abrirTaquilla()");
@@ -91,6 +151,10 @@ function listaBoletos(){
 		
 		}).done(function (respuesta){
 		$("#lista_boletos").html(respuesta);
+		
+		$("#imprimir_guia").on("click", finalizarCorrida);
+		
+		
 	});
 	
 }
@@ -139,10 +203,12 @@ function guardarBoletos(event){
 		dataType: 'JSON',
 		data: {
 			"id_corridas" : $("#id_corridas").val(),
-			"precio_boletos" : $("#precio_boletos").val(),
+			"id_precio" : $("#id_precio").val(),
+			"destino" : $("#id_precio").find(":selected").data("destino"),
+			"precio" : $("#precio").val(),
 			"id_usuarios" : $("#id_usuarios").val()
 			
-			}
+		}
 		}).done(function(respuesta){
 		if(respuesta.result == 'success'){
 			

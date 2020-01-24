@@ -19,10 +19,11 @@
 	ORDER BY id_boletos DESC
 	";
 	
-	$consulta_guia = "SELECT *,
+	$consulta_guia = "SELECT *, nombre_origenes as destino,
 	COUNT(id_boletos) AS cantidad
-	FROM boletos 
+	FROM	boletos 
 	LEFT JOIN precios_boletos USING(id_precio)
+	LEFT JOIN origenes ON precios_boletos.id_destinos = origenes.id_origenes
 	WHERE id_corridas = {$_GET["id_corridas"]}
 	GROUP BY id_precio
 	";
@@ -75,7 +76,7 @@
 							<td>
 								<?php if($fila["estatus_boletos"] != 'Cancelado'){?>
 									
-									<a target="_blank" class="btn btn-info imprimir " title="Imprimir" href="impresion/imprimir_boletos.php?boletos[]=<?php echo $filas["id_boletos"]?>" data-id_registro='<?php echo $filas["id_corridas"]?>'>
+									<a target="_blank" class="btn btn-info imprimir " title="Imprimir" href="boletos_iv/imprimir_boletos.php?boletos[]=<?php echo $filas["id_boletos"]?>" data-id_registro='<?php echo $filas["id_corridas"]?>'>
 										<i class="fas fa-print"></i>
 									</a>	
 									
@@ -127,7 +128,11 @@
 				<tbody>
 					<?php 
 						$total_guia = 0;
-						echo "<pre>".$consulta_guia."</pre>";
+						if(!$result_guia){
+							echo "<pre>".mysqli_error($result_guia)."</pre>";
+							
+						}
+						// echo "<pre>".$consulta_guia."</pre>";
 						
 						foreach($guias AS $i =>$fila){
 							$importe= $fila["cantidad"] * $fila["precio_boletos"];
@@ -139,7 +144,7 @@
 							<td><?php echo $fila["cantidad"]?></td>
 							<td><?php echo $fila["destino"]?></td>
 							<td><?php echo $fila["precio_boletos"]?></td>
-							<td><?php echo $importe;?></td>
+							<td class="text-right"><?php echo number_format($importe, 2);?></td>
 							
 							
 						</tr>
@@ -153,14 +158,17 @@
 				</tbody>
 				<tfoot>
 					<tr >
-						<td colspan="4"> TOTAL</td>
+						<td colspan="3"> <b>TOTAL<b></td>
 						
-						<td><?php echo number_format($total_guia)?></td>
+						<td class="text-right"><?php echo number_format($total_guia,2)?></td>
 						
 					</tr>
 				</tfoot>
 			</table>
 			
+			<button class="btn btn-info" id="imprimir_guia">
+				<i class="fas fa-print"></i> Imprimir y Finalizar 
+			</button>
 		</div>
 	</div>
 	

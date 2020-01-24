@@ -1,4 +1,8 @@
 <?php 
+	session_start();
+	if(count($_SESSION) == 0){
+		die("<div class='alert alert-danger'>Tu Sesión ha caducado, recarga la página.</div>");
+	}
 	include('../../../conexi.php');
 	include('../../../funciones/generar_select.php');
 	include('../../../funciones/console_log.php');
@@ -7,132 +11,111 @@
 	$respuesta = array();
 	
 	
+
 	
-	$consulta = "SELECT *, SUM(precio_boletos) AS suma_boletos FROM corridas 
-	LEFT JOIN unidades USING(id_unidades) 
-	LEFT JOIN origenes USING(id_origenes)
-	LEFT JOIN (
-	SELECT id_origenes AS id_destinos, 
-	nombre_origenes AS nombre_destinos 
-	FROM origenes ) AS t_destinos 
-	USING(id_destinos)
-	LEFT JOIN usuarios USING(id_usuarios)
-	LEFT JOIN boletos USING(id_corridas)
+	$consulta_guia = "SELECT *, nombre_origenes as destino,
+	COUNT(id_boletos) AS cantidad
+	FROM	boletos 
 	LEFT JOIN precios_boletos USING(id_precio)
-	
-	WHERE corridas.id_corridas = '{$_GET["id_registro"]}'
-	
+	LEFT JOIN origenes ON precios_boletos.id_destinos = origenes.id_origenes
+	WHERE id_corridas = {$_GET["id_corridas"]}
 	GROUP BY id_precio
 	";
   
 	
-	$result = mysqli_query($link,$consulta);
-	if($result){
-		
-		if( mysqli_num_rows($result) == 0){
-			
-			die("<div class='alert alert-danger'>Tarjeta No encontrada</div>");
-			
-			
-		}
-		
-		while($fila = mysqli_fetch_assoc($result)){
-			
-			$filas[] = $fila ;
-			
-		}
-		
-	?> 
-	<div>
-		
-		<div class="row mb-1">
-			<div class="col-6">
-				<b >CORRIDA :</b>
-			</div>	 
-			<div class="col-6">			
-				<?php echo $filas[0]["id_corridas"]?>
-			</div>
-		</div>
-		<div class="row mb-1">
-			<div class="col-6">
-				<b >ORIGEN :</b>
-			</div>	 
-			<div class="col-6">			
-				<?php echo $filas[0]["nombre_origenes"]?>
-			</div>
-		</div>
-		<div class="row mb-1">
-			<div class="col-6">
-				<b >DESTINO :</b>
-			</div>	 
-			<div class="col-6">			
-				<?php echo $filas[0]["nombre_destinos"]?>
-			</div>
-		</div>
-		<div class="row mb-2">
-			<div class="col-6">
-				<b >NUM ECO:</b>
-			</div>	 
-			<div class="col-6">			
-				<?php echo $filas[0]["num_eco"]?>
-			</div>
-		</div>
-		<div class="row mb-2">
-			<div class="col-6">
-				<b >FECHA:</b>
-			</div>	 
-			<div class="col-6">			
-				<?php echo$filas[0]["fecha_corridas"]?>
-			</div>
-		</div>
-		<div class="row mb-2">
-			<div class="col-6">
-				<b >NUM PASAJEROS:</b>
-			</div>	 
-			<div class="col-6">			
-				<?php echo count($filas)?>
-			</div>
-		</div>
 	
-		<hr>
+	$result_guia = mysqli_query($link,$consulta_guia);
+	
+	
+	while($fila_guia = mysqli_fetch_assoc($result_guia)){
 		
-		<div class="form-row">
-			<div class="col-3">
-				Tipo Boleto.	
-			</div>
-			<div class="col-9">
-				Importe
-			</div>
-			 
-		</div>
+		$guias[] = $fila_guia ;
+	}
+	
+	if($result_guia){
 		
-		<?php foreach($filas as $i => $fila){ ?>
+		if( mysqli_num_rows($result_guia) == 0){
+			die("<div class='alert alert-danger'>No hay boletos venidos</div>");
 			
-			<div class="form-row">
-				<div class="col-3">
-					<?php echo $fila["tipo_precio"]?>
-				</div>
-				<div class="col-9">
-					<?php echo $fila["suma_boletos"]?>
-				</div>
-			</div>
-			<?php	 
-			}
-		?>
+		}
 		
-		<hr>
+	?>  
+	<pre hidden>
+		<?php echo $consulta;?>
+	</pre>
+	
+	
+	
+	<div class="row">
 		
+		
+		<div class="col-12">
+			<h4 class="text-center">GUÍA</h4>
+			<h4 >Corrida: <?= $guias[0]["id_corridas"]?></h4>
+			<h4 >Fecha:  <?= $guias[0]["fecha_corridas"]?></h4>
+			<h4 >Num Eco: <?= $guias[0]["num_eco"]?></h4>
+			<table class="table table-bordered table-condensed">
+				<thead>
+					<tr>
+						<th>Cant</th>
+						<th>Destino</th>
+						<th>Precio </th>
+						<th>Importe </th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php 
+						$total_guia = 0;
+						if(!$result_guia){
+							echo "<pre>".mysqli_error($result_guia)."</pre>";
+							
+						}
+						// echo "<pre>".$consulta_guia."</pre>";
+						
+						foreach($guias AS $i =>$fila){
+							$importe= $fila["cantidad"] * $fila["precio_boletos"];
+							$total_guia+= $importe;
+							
+						?>
+						<tr>
+							
+							<td><?php echo $fila["cantidad"]?></td>
+							<td><?php echo $fila["destino"]?></td>
+							<td><?php echo $fila["precio_boletos"]?></td>
+							<td class="text-right"><?php echo number_format($importe, 2);?></td>
+							
+							
+						</tr>
+						
+						<?php
+							
+							
+						}
+					?>
+					
+				</tbody>
+				<tfoot>
+					<tr >
+						<td colspan="3"> TOTAL</td>
+						
+						<td class="text-right"><?php echo number_format($total_guia,2)?></td>
+						
+					</tr>
+				</tfoot>
+			</table>
+			
+		
+		</div>
 	</div>
-	
 	
 	<?php
 		
-		
 	}
+	
 	else {
 		echo "Error en ".$consulta.mysqli_Error($link);
 		
 	}
 	
 	
-?>
+?>	

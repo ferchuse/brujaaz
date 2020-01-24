@@ -95,7 +95,7 @@
 											</div>
 											<div class="col-4 form-group">
 												<label>Precio:	</label>
-												<input name="precio" readonly class="form-control precio" >
+												<input id="precio" name="precio" readonly class="form-control precio" >
 											</div>
 											<div class="col-2 form-group ">
 												<button class="btn btn-success mt-4" >
@@ -141,7 +141,7 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 	
-	<div class="d-print-block p-2" hidden id="ticket">
+	<div class="d-print-block p-2" style="max-width:90mm; font-size: 14px !important;" hidden id="ticket" >
 	</div>
 	<?php include("../../scripts.php")?>
 	<?php include("boletos_iv/form_corridas.php");?>
