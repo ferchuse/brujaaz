@@ -69,7 +69,7 @@
 					?> 
 				</div>
 			</li>
-			<?
+			<?php
 			}
 		?>
 		<?php if($_SESSION["id_administrador"] != 4){?>
@@ -89,7 +89,7 @@
 					?> 
 				</div> 
 			</li>
-			<?
+			<?php
 			}
 		?>
 		<li class="nav-item dropdown">

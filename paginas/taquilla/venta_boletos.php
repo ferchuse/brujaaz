@@ -17,17 +17,17 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Venta de Boletos </title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Venta de Boletos </title>
 		<?php include('../../styles.php')?>
 	</head>
 	<body id="page-top">
-    <?php include("../../navbar.php")?>
-    <div id="wrapper" class="d-print-none">
+		<?php include("../../navbar.php")?>
+		<div id="wrapper" class="d-print-none">
 			<?php include("../../menu.php")?>	
 			<div id="content-wrapper">		
 				<div class="container-fluid">		
@@ -44,13 +44,37 @@
 							
 							<ul class="nav nav-pills nav-justified mb-4">
 								<li class="nav-item">
-									<a class="nav-link active" data-toggle="pill" href="#boletos">Venta de Boletos</a>
+									<a class="nav-link active" id="pill_corridas" data-toggle="pill" href="#tab_corridas">Corridas</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="pill_venta" data-toggle="pill" href="#tab_boletos">Venta de Boletos</a>
 								</li>
 								
 							</ul>
 							
 							<div class="tab-content">
-								<div class="tab-pane container active" id="boletos">
+								
+								
+								
+								<div class="tab-pane   active" id="tab_corridas">	
+									<div class="row">
+										<div class="col-12">
+											<button type="button" class="btn btn-success mb-2 nuevo">
+												<i class="fas fa-plus"></i> Nueva
+											</button>
+										</div>
+									</div>
+									<div class="card">
+										<div class="card-header">
+											<h3 >Lista de Corridas</h3>
+										</div>
+										<div class="card-body" id="lista_corridas">
+											
+										</div>
+									</div>
+								</div>
+								
+								<div class="tab-pane container " id="tab_boletos">
 									<hr>
 									<div class="row">
 										
@@ -59,11 +83,11 @@
 												<div class="form-row">
 													<div class="form-group col-2"> 
 														<label>Corrida #	</label>
-														<input name="id_corridas" id="id_corridas" class="form-control"  value="<?php echo $_GET["id_corridas"]?>">
+														<input name="id_corridas" id="id_corridas" class="form-control" readonly value="<?php echo $_GET["id_corridas"]?>">
 													</div>
 													<div class="form-group col-2"> 
 														<label>Num Eco:	</label>
-														<input name="num_eco" class="form-control"  value="<?php echo $_GET["num_eco"]?>">
+														<input id="num_eco" name="num_eco" class="form-control"  value="<?php echo $_GET["num_eco"]?>">
 													</div>
 													<div class="col-4  form-group">
 														<label>Destino:	</label>
@@ -80,7 +104,7 @@
 														
 													</div>
 												</div>
-											
+												
 												<div class="row" hidden>
 													<div class="col-12 ">
 														<div class="form-group float-right" >
@@ -108,32 +132,7 @@
 								</div>
 								
 								
-								<div class="tab-pane container fade" id="paqueteria">	
-									<div class="card">
-										<div class="card-header">
-											<h3 >Paquetes</h3>
-										</div>
-										<div class="card-body">
-											<div class="form-group">
-												<label>Tipo de Paquete</label>
-												<select name="paquetes[tipo_paquete][]" class="form-control">
-													<option value="">Elige</option>
-													<option value="Chico">Chico</option>
-													<option value="Mediano">Mediano</option>
-													<option value="Grande">Grande</option>
-												</select>
-											</div>
-											<div class="form-group">
-												<label>Destinatario</label>
-												<input name="paquetes[destinatario][]" class="form-control">
-											</div>
-											<div class="form-group">
-												<label>Precio</label>
-												<input name="paquetes[precio][]" class="form-control">
-											</div>
-										</div>
-									</div>
-								</div>
+								
 							</div><!-- /.tab-content-->
 						</div><!-- /.card-body-->
 					</div><!-- /.card -->
@@ -161,8 +160,7 @@
 		<div class="d-print-block p-2" hidden id="ticket">
 		</div>
 		<?php include("../../scripts.php")?>
-		<?php include("forms/form_corrida.php");?>
-		<?php include("forms/form_boletos.php");?>
+		<?php include("boletos_iv/form_corridas.php");?>
 		
 		<script src="boletos_iv/venta_boletos.js?v=<?= date("Y-m-d-H-i-s")?>"></script>
 		

@@ -9,6 +9,21 @@ function onLoad(){
 	listaBoletos();
 	
 	
+	listarCorridas();
+	
+	
+	$(".nuevo").on('click',function(){
+		console.log("Nuevo")
+		$("#form_corridas")[0].reset();
+		$(".modal-title").text("Nueva Corrida");
+		$("#modal_corridas").modal("show");
+		
+	});
+	
+	$('#form_corridas').on('submit', guardarCorrida);
+	$('#lista_corridas').on('click', ".btn_venta", abrirTaquilla);
+	
+	
 	$(".tipo_boleto").change(function( evt){
 		console.log("cambiar_tipo_boleto", evt)
 		
@@ -18,43 +33,54 @@ function onLoad(){
 	});
 	
 	
+	
+	
+	
+}
+
+function abrirTaquilla(event){
+	console.log("abrirTaquilla()");
+	
+	$("#id_corridas").val($(this).data("id_corridas"));
+	$("#num_eco").val($(this).data("num_eco"));
+	$("#pill_venta").click();
+	
+}
+function guardarCorrida(event){
+	console.log("guardarCorrida()");
+	event.preventDefault();
+	let form = $(this);
+	let boton = form.find(':submit');
+	let icono = boton.find('.fa');
+	let datos = form.serialize();
+	
+	datos+="&id_usuarios="+ $("#id_usuarios").val();
+	
+	boton.prop('disabled',true);
+	icono.toggleClass('fa-save fa-spinner fa-pulse ');
 	$.ajax({
-		"url" : "control/precios_boletos_json.php",
-		"dataType" : "JSON"
-		
-		
-		}).done(function (respuesta){
-		$select_boletos+= `<select class="tipo_boleto form-control" name="id_precio[]" required >`;
-		$select_boletos+= `<option value="" >Elige...</option>`;
-		
-		$.each(respuesta.precios_boletos, function(index, item){
-		$select_boletos+=`<option data-precio="${item.precio} " value="${item.id_precio}"> 
-		${item.nombre_origenes}-${item.nombre_destinos} 
-		${item.tipo_precio}-$ ${item.precio} 
-		
-		</option>`
-		});
-		
-		$select_boletos+= `</select>`;
-		
-		console.log("select_boletos", $select_boletos)
-		
-		$("input[type=checkbox]").change( function( evt){
-			console.log("change asiento", evt)
-			if($(this).prop("checked")){
-				$("#form_boletos :submit").prop("disabled", false)
-				// $("#num_asiento").val(evt.target.id)
-				agregarBoleto(evt.target.id);
-				
-				// $("#modal_boleto").modal("show")
-			}
-			else{
-				quitarBoleto(evt.target.id);
-			}
+		url: 'boletos_iv/guardar_corridas.php',
+		method: 'POST',
+		dataType: 'JSON',
+		data: datos
+		}).done(function(respuesta){
+		if(respuesta.estatus == 'success'){
 			
-		});
+			alertify.success('Se ha guardado correctamente');
+			$('#modal_corridas').modal('hide');
+			
+			listarCorridas();
+		}
+		else{
+			alertify.error('Ocurrio un error');
+		}
+		}).always(function(){
+		boton.prop('disabled',false);
+		icono.toggleClass('fa-save fa-spinner fa-pulse ');
 	});
 }
+
+
 
 function listaBoletos(){
 	console.log("listaBoletos");
@@ -68,7 +94,19 @@ function listaBoletos(){
 	
 }
 
-desactivaAsientosOcupados();
+function listarCorridas(){
+	console.log("listarCorridas()")
+	$.ajax({
+		url: 'boletos_iv/lista_corridas.php',
+		data:{}
+	}).done(
+	function(respuesta){
+		$("#lista_corridas").html(respuesta)
+		// $('.imprimir').on('click',imprimirTicket)
+		// $(".cancelar").click(confirmaCancelacion);
+		
+	});
+}
 
 
 $("#nueva_venta").click( nueva_venta);
@@ -80,27 +118,7 @@ function nueva_venta(){
 	// $("#form_boletos")[0].reset();
 	
 }
-function desactivaAsientosOcupados(){
-	console.log(" desactivaAsientosOcupados()")
-	
-	$.ajax({
-		url: "control/asientos_ocupados.php" ,
-		dataType: "JSON" ,
-		data:{
-			id_corridas : $("#id_corridas").val()
-		}
-		}).done(function (respuesta){
-		
-		$.each(respuesta.asientos_ocupados, function(index, num_asiento){
-			$("#"+ num_asiento).prop("disabled", true);
-		})
-		}).always(function(){
-		
-		// boton.prop("disabled", false);
-		// icono.toggleClass("fa-print fa-spinner fa-spin");
-		
-	});
-}
+
 $("#form_boletos").submit(guardarBoletos);
 
 

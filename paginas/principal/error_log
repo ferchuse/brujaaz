@@ -1,6 +1,0 @@
-[12-Dec-2018 23:51:09 America/Mexico_City] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/brujaaz/public_html/funciones/dame_permiso.php on line 12
-[12-Dec-2018 23:51:31 America/Mexico_City] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/brujaaz/public_html/funciones/dame_permiso.php on line 12
-[04-Feb-2019 13:56:19 America/Mexico_City] PHP Parse error:  syntax error, unexpected '{' in /home/brujaaz/public_html/menu.php on line 2
-[04-Feb-2019 13:56:44 America/Mexico_City] PHP Parse error:  syntax error, unexpected '{' in /home/brujaaz/public_html/menu.php on line 2
-[04-Feb-2019 14:00:47 America/Mexico_City] PHP Parse error:  syntax error, unexpected '{' in /home/brujaaz/public_html/menu.php on line 2
-[11-Feb-2019 12:20:54 America/Mexico_City] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/brujaaz/public_html/menu.php on line 53
