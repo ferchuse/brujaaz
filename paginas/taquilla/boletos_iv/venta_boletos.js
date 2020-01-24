@@ -17,7 +17,7 @@ function onLoad(){
 	});
 	
 	$("#lista_corridas").on("click", ".imprimir", function(){
-		imprimirGuia([$(this.data("id_corridas"))])
+	imprimirGuia($(this).data("id_registro"))
 		
 	});
 	
@@ -80,7 +80,7 @@ function finalizarCorrida(){
 }
 
 function imprimirGuia(id_corridas){
-console.log("imprimirGuia()");
+console.log("imprimirGuia()", id_corridas);
 
 $.ajax({
 	"url": "boletos_iv/imprimir_guias.php",

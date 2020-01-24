@@ -16,9 +16,10 @@
 	$consulta_guia = "SELECT *, nombre_origenes as destino,
 	COUNT(id_boletos) AS cantidad
 	FROM	boletos 
+	LEFT JOIN corridas USING(id_corridas)
 	LEFT JOIN precios_boletos USING(id_precio)
 	LEFT JOIN origenes ON precios_boletos.id_destinos = origenes.id_origenes
-	WHERE id_corridas = {$_GET["id_corridas"]}
+	WHERE id_corridas = '{$_GET["id_corridas"]}' 
 	GROUP BY id_precio
 	";
   

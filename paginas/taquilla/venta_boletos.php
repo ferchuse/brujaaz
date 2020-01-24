@@ -141,7 +141,7 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 	
-	<div class="d-print-block p-2" style="max-width:90mm; font-size: 14px !important;" hidden id="ticket" >
+	<div class="d-print-block p-2" style="max-width:100mm;" hidden id="ticket" >
 	</div>
 	<?php include("../../scripts.php")?>
 	<?php include("boletos_iv/form_corridas.php");?>
