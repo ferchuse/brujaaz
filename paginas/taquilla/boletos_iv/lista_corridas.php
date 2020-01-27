@@ -40,6 +40,7 @@
 		<thead>
 			<tr>
 				<th>Estatus</th>
+				<th>Estatus Pago</th>
 				<th>Folio</th>
 				<th>Num Eco</th>
 				<th>Fecha</th>
@@ -63,6 +64,7 @@
 				?>
 				<tr>
 					
+				
 					<td>
 						<?php
 							switch($filas["estatus_corridas"]){
@@ -77,6 +79,7 @@
 								break;
 								
 								case "Finalizada":
+								
 								echo "<span class='badge badge-warning'>".$filas["estatus_corridas"]."</span>";
 								
 							?>
@@ -89,16 +92,47 @@
 								
 								break;
 								
-							case "Cancelada":
-							echo "<span class='badge badge-danger'>".$filas["estatus_corridas"]."</span>";
-							break;
-							
-							}
-							
-							if($filas["estatus_corridas"] == "Cancelado"){
-								echo $fila["datos_cancelacion"];
+								case "Cancelada":
+								echo "<span class='badge badge-danger'>".$filas["estatus_corridas"]."</span>";
+								break;
 								
 							}
+							
+						?>
+					</td>
+						<td>
+						<?php
+							switch($filas["estatus_pago"]){
+								case "PENDIENTE":
+								echo "<label> " class='badge badge-warning'>" <input type='checkbox' class='select' data-id_corridas='".$filas["estatus_pago"]."'>";
+								echo .$filas["estatus_pago"]."</span>";
+							
+							?>
+							
+							
+							<?php
+								break;
+								
+								case "PAGADA":
+								
+								echo "<span class='badge badge-success'>".$filas["estatus_corridas"]."</span>";
+								
+							?>
+							<button class="btn btn-info  btn-sm imprimir " title="Imprimir" data-id_registro='<?php echo $filas["id_corridas"]?>'>
+								<i class="fas fa-print"></i> Imprimir Guía
+							</button>	
+							
+							<?php
+								
+								
+								break;
+								
+								case "Cancelada":
+								echo "<span class='badge badge-danger'>".$filas["estatus_corridas"]."</span>";
+								break;
+								
+							}
+							
 						?>
 					</td>
 					<td><?php echo $filas["id_corridas"]?></td>

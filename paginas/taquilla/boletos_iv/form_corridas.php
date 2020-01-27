@@ -16,9 +16,18 @@
 						<div class="form-group col-md-6">
 							<label for="fecha_abonogeneral">Num Eco:</label>
 							<input type="number" class="form-control" name="num_eco" required autofocus="true">
-							
 						</div>
 					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="fecha_abonogeneral">Empresa:</label>
+							<?php 
+								echo generar_select($link, "empresas", "id_empresas", "nombre_empresas", false, false, true);
+							?>
+						</div>
+					</div>
+					
+					
 					<div class="form-row">
 						<div class="form-group col-6">
 							<label for="fecha_abonogeneral">Taquilla:</label>

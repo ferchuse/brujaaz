@@ -78,7 +78,7 @@
 			$respuesta.=  $fila["cantidad"]."\x09";
 			$respuesta.=  $fila["destino"]."\x09"."\x09";
 			$respuesta.="$". $fila["precio_boletos"]."\x09"."\x09";
-			$respuesta.= "$" .	number_format($importe, 2);
+			$respuesta.= "$" .	number_format($importe,0);
 			
 			$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
 			
@@ -87,7 +87,7 @@
 		}
 		
 		
-		$respuesta.= "TOTAL: $". number_format($total_guia,2). "\n"; // Blank line
+		$respuesta.= "TOTAL: $". number_format($total_guia). "\n"; // Blank line
 		$respuesta.= "Boletos Vendidos: ". $total_boletos ."\n"; // Blank line
 		$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
 		$respuesta.= "VA"; // Cut
