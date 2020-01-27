@@ -85,14 +85,16 @@ function imprimirGuia(id_corridas){
 	console.log("imprimirGuia()", id_corridas);
 	
 	$.ajax({
-		"url": "boletos_iv/imprimir_guias.php",
+		"url": "boletos_iv/imprimir_guias_escpos.php",
 		"data": {
 			"id_corridas": id_corridas
 		}
 		}).done(function(respuesta){
+		printService.submit({
+			'type': 'RECEIPT',
+			'raw_content': respuesta
+		});
 		
-		$("#ticket").html(respuesta); 
-		window.print();
 	});
 	
 	

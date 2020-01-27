@@ -11,7 +11,7 @@
 	$respuesta = array();
 	
 	
-
+	
 	
 	$consulta_guia = "SELECT *, nombre_origenes as destino,
 	COUNT(id_boletos) AS cantidad
@@ -39,11 +39,63 @@
 			
 		}
 		
+		
+		
+		$respuesta ="";
+		
+		$empresa = "GRUPO SAUCES";
+		
+		$respuesta.=   "\x1b"."@";
+		$respuesta.= "\x1b"."E".chr(1); // Bold
+		$respuesta.= "!";
+		$respuesta.=   "$empresa \n";
+		$respuesta.=   "GUIA \n";
+		$respuesta.=  "\x1b"."E".chr(0); // Not Bold
+		$respuesta.= "!\x11"; //font size
+		$respuesta.= "Fecha:". $guias[0]["fecha_corridas"];
+		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
+		$respuesta.= "Num Eco:". $guias[0]["num_eco"];;
+		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
+		
+		
+		$respuesta.=   "\x1b"."@"; // RESET defaults
+		$respuesta.= "\x1b"."d".chr(2); // 4 Blank lines
+		
+		
+		
+		$total_guia = 0;
+		if(!$result_guia){
+			echo "<pre>".mysqli_error($result_guia)."</pre>";
+			
+		}
+		
+		foreach($guias AS $i =>$fila){
+			$importe= $fila["cantidad"] * $fila["precio_boletos"];
+			$total_guia+= $importe;
+			$total_boletos += $fila["cantidad"];
+			
+			
+			$respuesta.=  $fila["cantidad"]."\x09";
+			$respuesta.=  $fila["destino"]."\x09"."\x09";
+			$respuesta.="$". $fila["precio_boletos"]."\x09"."\x09";
+			$respuesta.= "$" .	number_format($importe, 2);
+			
+			$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
+			
+			
+			
+		}
+		
+		
+		$respuesta.= "TOTAL: $". number_format($total_guia,2). "\n"; // Blank line
+		$respuesta.= "Boletos Vendidos: ". $total_boletos ."\n"; // Blank line
+		$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
+		$respuesta.= "VA"; // Cut
+		echo base64_encode ( $respuesta );
+		
+		exit(0);
+		
 	?>  
-	<pre hidden>
-		<?php echo $consulta;?>
-	</pre>
-	
 	
 	
 	<div class="row ml-3">
@@ -104,7 +156,7 @@
 				</tfoot>
 			</table>
 			
-		
+			
 		</div>
 	</div>
 	
@@ -118,4 +170,4 @@
 	}
 	
 	
-?>	
+?>		

@@ -53,9 +53,7 @@
 		$respuesta.=  "\x1b"."E".chr(0); // Not Bold
 		$respuesta.= "!\x10";
 		$respuesta.= "\x1b"."d".chr(2); // 4 Blank lines
-		
 		$respuesta.=  	"Folio:". $item["id_boletos"]. "\n"."\n";
-		
 		$respuesta.=  "Taquillero:" . $item["nombre_usuarios"]."\n";
 		$respuesta.= "\x1b"."d".chr(1); // Blank line
 		$respuesta.= "Destino :". $item["destino"]."\n";
@@ -68,8 +66,9 @@
 		$respuesta.= "Precio: $ ". $item["precio_boletos"]."\n";
 		$respuesta.= "\x1b"."d".chr(1); // Blank line
 		$respuesta.= "aSeguro de Viajero\n"; // Blank line
-	$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
-	
+		$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
+		$respuesta.= "VA"; // Cut
+		
 		
 		// /* Output an example receipt */
 		// echo ESC."@"; // Reset to defaults
@@ -86,7 +85,6 @@
 		// echo ESC."d".chr(1); // Blank line
 		// echo "987654321\n"; // Print number
 		// $respuesta.= " \x1d"."V\x41".chr(3); // Cut
-		$respuesta.= "VA"; // Cut
 		
 		// $respuesta = "@@aHello World
 		// !aESC/POS Printer Test
