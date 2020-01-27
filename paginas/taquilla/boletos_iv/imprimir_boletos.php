@@ -9,6 +9,7 @@
 	$boletos = implode("," ,$_GET['boletos']);
 	
 	$consulta = "SELECT * FROM boletos 
+	LEFT JOIN usuarios ON boletos.id_usuarios = usuarios.id_usuarios
 	LEFT JOIN corridas  USING(id_corridas)
 	LEFT JOIN origenes  USING(id_origenes)
 	LEFT JOIN precios_boletos  USING(id_precio)
@@ -43,11 +44,12 @@
 		<?php foreach($filas as $i => $item){?>
 			<h4 class="text-center">GRUPO SAUCES</h4>
 			<div class="form-row mb-2">
-				
 				<b >Folio:</b>
-				
 				<?php echo $item["id_boletos"]?>
-				
+			</div>
+			<div class="form-row mb-2">
+				<b >Taquillero: </b>
+				<?php echo $item["nombre_usuarios"]?>
 			</div>
 			
 			<div class="form-row mb-2">

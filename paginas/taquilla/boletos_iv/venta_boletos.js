@@ -1,5 +1,7 @@
 
 
+var printService = new WebSocketPrinter();
+
 var  $select_boletos = "";
 
 $(document).ready(onLoad);
@@ -11,13 +13,13 @@ function onLoad(){
 	
 	listarCorridas();
 	
-	$("#lista_boletos").on("click", ".imprimir", function(){
-		imprimirTicket([$(this.data("id_registro"))])
+	$("#lista_corridas").on("click", ".imprimir", function(){
+		imprimirGuia($(this).data("id_registro"));
 		
 	});
 	
-	$("#lista_corridas").on("click", ".imprimir", function(){
-	imprimirGuia($(this).data("id_registro"))
+	$("#lista_boletos").on("click", ".imprimir", function(){
+		imprimirESCPOS($(this).data("id_registro"))
 		
 	});
 	
@@ -80,20 +82,20 @@ function finalizarCorrida(){
 }
 
 function imprimirGuia(id_corridas){
-console.log("imprimirGuia()", id_corridas);
-
-$.ajax({
-	"url": "boletos_iv/imprimir_guias.php",
-	"data": {
-		"id_corridas": id_corridas
-	}
-	}).done(function(respuesta){
+	console.log("imprimirGuia()", id_corridas);
 	
-	$("#ticket").html(respuesta); 
-	window.print();
-});
-
-
+	$.ajax({
+		"url": "boletos_iv/imprimir_guias.php",
+		"data": {
+			"id_corridas": id_corridas
+		}
+		}).done(function(respuesta){
+		
+		$("#ticket").html(respuesta); 
+		window.print();
+	});
+	
+	
 }
 
 
@@ -218,7 +220,7 @@ function guardarBoletos(event){
 			
 			
 			listaBoletos();
-			imprimirTicket(respuesta.boletos);
+			imprimirESCPOS(respuesta.boletos[0]);
 		}
 		else{
 			alertify.error(respuesta.mensaje);
@@ -304,6 +306,39 @@ function sumarImportes(){
 	
 }
 
+function imprimirESCPOS(boletos){
+	console.log("imprimirESCPOS()");
+	var id_registro = $(this).data("id_registro");
+	// var url = $(this).data("url");
+	var boton = $(this); 
+	var icono = boton.find("fas");
+	
+	boton.prop("disabled", true);
+	icono.toggleClass("fa-print fa-spinner fa-spin");
+	
+	$.ajax({
+		url: "boletos_iv/imprimir_escpos.php" ,
+		data:{
+			boletos : boletos
+		}
+		}).done(function (respuesta){
+		
+		$("#ticket").html(respuesta); 
+		
+		
+		printService.submit({
+			'type': 'RECEIPT',
+			'raw_content': respuesta
+		});
+		}).always(function(){
+		
+		boton.prop("disabled", false);
+		icono.toggleClass("fa-print fa-spinner fa-spin");
+		
+	});
+}
+
+
 function imprimirTicket(boletos){
 	console.log("imprimirTicket()");
 	var id_registro = $(this).data("id_registro");
@@ -330,5 +365,3 @@ function imprimirTicket(boletos){
 		
 	});
 }
-
-

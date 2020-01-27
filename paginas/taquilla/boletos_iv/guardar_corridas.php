@@ -13,6 +13,7 @@
 	origen = '{$_POST["origen"]}',
 	destino = '{$_POST["destino"]}',
 	num_eco = '{$_POST["num_eco"]}',
+	id_administrador = '{$_COOKIE["id_administrador"]}',
 	estatus_corridas = 'Activa'
 	";
 	

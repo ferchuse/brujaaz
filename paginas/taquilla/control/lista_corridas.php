@@ -13,7 +13,6 @@
 	
 	
 	$consulta = "SELECT * FROM corridas 
-	LEFT JOIN unidades USING(id_unidades) 
 	LEFT JOIN origenes USING(id_origenes)
 	LEFT JOIN (
 	SELECT id_origenes AS id_destinos, 
@@ -21,7 +20,7 @@
 	FROM origenes ) AS t_destinos 
 	USING(id_destinos)
 	LEFT JOIN usuarios USING(id_usuarios)
-	WHERE unidades.id_administrador = {$_SESSION["id_administrador"]}
+	WHERE corridas.id_administrador = {$_SESSION["id_administrador"]}
 	";
   
 	

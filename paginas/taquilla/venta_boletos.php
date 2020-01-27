@@ -144,6 +144,7 @@
 	<div class="d-print-block p-2" style="max-width:100mm;" hidden id="ticket" >
 	</div>
 	<?php include("../../scripts.php")?>
+	<script src="../../plugins/pos_print/websocket-printer.js" > </script>
 	<?php include("boletos_iv/form_corridas.php");?>
 	
 	<script src="boletos_iv/venta_boletos.js?v=<?= date("Y-m-d-H-i-s")?>"></script>

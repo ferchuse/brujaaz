@@ -12,6 +12,7 @@
 	id_usuarios = '{$_POST["id_usuarios"]}',
 	id_origenes = '{$_POST["id_origenes"]}',
 	id_destinos = '{$_POST["id_destinos"]}',
+	id_administrador = '{$_COOKIE["id_administrador"]}',
 	estatus_corridas = 'Activo'
 	";
 	

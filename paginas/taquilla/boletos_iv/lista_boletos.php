@@ -76,9 +76,9 @@
 							<td>
 								<?php if($fila["estatus_boletos"] != 'Cancelado'){?>
 									
-									<a target="_blank" class="btn btn-info imprimir " title="Imprimir" href="boletos_iv/imprimir_boletos.php?boletos[]=<?php echo $filas["id_boletos"]?>" data-id_registro='<?php echo $filas["id_corridas"]?>'>
+									<button  class="btn btn-info imprimir" title="Imprimir"     data-id_registro='<?php echo $filas["id_boletos"]?>'>
 										<i class="fas fa-print"></i>
-									</a>	
+									</button>	
 									
 									<?php
 										
