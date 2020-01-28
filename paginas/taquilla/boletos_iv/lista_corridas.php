@@ -104,8 +104,8 @@
 						<?php
 							switch($filas["estatus_pago"]){
 								case "PENDIENTE":
-								echo "<label> " class='badge badge-warning'>" <input type='checkbox' class='select' data-id_corridas='".$filas["estatus_pago"]."'>";
-								echo .$filas["estatus_pago"]."</span>";
+								echo "<label class='badge badge-warning'> <input type='checkbox' class='select' data-id_corridas='".$filas["estatus_pago"]."'>";
+								echo .$filas["estatus_pago"]."</label>";
 							
 							?>
 							
