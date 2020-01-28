@@ -64,7 +64,7 @@
 				?>
 				<tr>
 					
-				
+					
 					<td>
 						<?php
 							switch($filas["estatus_corridas"]){
@@ -100,17 +100,14 @@
 							
 						?>
 					</td>
-						<td>
+					<td>
 						<?php
 							switch($filas["estatus_pago"]){
 								case "PENDIENTE":
 								echo "<label class='badge badge-warning'> <input type='checkbox' class='select' data-id_corridas='".$filas["estatus_pago"]."'>";
-								echo .$filas["estatus_pago"]."</label>";
+								echo $filas["estatus_pago"]."</label>";
+								
 							
-							?>
-							
-							
-							<?php
 								break;
 								
 								case "PAGADA":
