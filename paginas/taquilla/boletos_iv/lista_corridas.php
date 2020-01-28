@@ -127,8 +127,8 @@
 								
 								case "Cancelada":
 								echo "<span class='badge badge-danger'>".$filas["estatus_corridas"]."</span>";
-							break;
-							
+								break;
+								
 							}
 							
 						?>
@@ -137,16 +137,20 @@
 					<td><?php echo $filas["num_eco"]?></td>
 					<td><?php echo $filas["fecha_corridas"]?></td>
 					<td><?php echo $filas["hora_corridas"]?></td>
-					<td class="text-right"><?php echo number_format($filas["importe_corridas"], 0)?></td>
+					<td class="text-right">
+						$ <?php echo number_format($filas["importe_corridas"], 0)?></td>
 					<td><?php echo $filas["nombre_empresas"]?></td>
 					
 				</tr>
 				
 				<?php
-					$total_corrida+= $filas["importe_corridas"];
-					$total_ingresos+= $ingresos;
-					$total_cargos+= $filas["gasto_administracion"];
-					$total_seguro+= $filas["seguro_derroteros"];
+					if($fila["estatus_corridas"] != "Cancelada"){
+						
+						$total_corrida+= $filas["importe_corridas"];
+					}
+					// $total_ingresos+= $ingresos;
+					// $total_cargos+= $filas["gasto_administracion"];
+					// $total_seguro+= $filas["seguro_derroteros"];
 					
 				}
 			?>
