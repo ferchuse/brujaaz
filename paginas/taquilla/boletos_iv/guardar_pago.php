@@ -9,14 +9,14 @@
 	$insert ="INSERT INTO pagos_taquilla SET 
 	fecha_pagos= NOW(),
 	id_usuarios = '{$_COOKIE['id_usuarios']}',
-	total_pago = '{$_POST['total_pago']}',
+	total_pagos = '{$_POST['total_pago']}',
 	corridas = '{$corridas}'
 	";
 	
 	$result = 	mysqli_query($link,$insert);
 	
 	if($result){
-		$respuesta["estatus"] = "success";
+		$respuesta["estatus_insert"] = "success";
 		$respuesta["mensaje_insert"] = "Guardado Correctamente";
 		$respuesta["id_pagos"] = mysqli_insert_id($link);
 		$respuesta["insert"] = $insert;

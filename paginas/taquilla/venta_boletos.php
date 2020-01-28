@@ -143,7 +143,7 @@
 			<!-- /.content-wrapper -->
 		</div>
 		<!-- /#wrapper -->
-		<form id="form_corridas">
+		<form id="form_pagar_corridas">
 		</form>
 		<!-- Scroll to Top Button-->
 		<a class="scroll-to-top rounded d-print-none" href="#page-top">

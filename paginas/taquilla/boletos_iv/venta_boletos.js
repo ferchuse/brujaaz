@@ -234,7 +234,7 @@ function guardarPago(event){
 		url: 'boletos_iv/guardar_pago.php',
 		method: 'POST',
 		dataType: 'JSON',
-		data: $("#form_corridas").serialize()
+		data: $("#form_pagar_corridas").serialize()
 		}).done(function(respuesta){
 		if(respuesta.estatus_insert == 'success'){
 			
@@ -388,6 +388,37 @@ function imprimirESCPOS(boletos){
 		}).done(function (respuesta){
 		
 		$("#ticket").html(respuesta); 
+		
+		
+		printService.submit({
+			'type': 'RECEIPT',
+			'raw_content': respuesta
+		});
+		}).always(function(){
+		
+		boton.prop("disabled", false);
+		icono.toggleClass("fa-print fa-spinner fa-spin");
+		
+	});
+}
+function imprimirPago(id_pagos){
+	console.log("imprimirPago()");
+	var id_registro = $(this).data("id_registro");
+	// var url = $(this).data("url");
+	var boton = $(this); 
+	var icono = boton.find("fas");
+	
+	boton.prop("disabled", true);
+	icono.toggleClass("fa-print fa-spinner fa-spin");
+	
+	$.ajax({
+		url: "boletos_iv/imprimir_pago.php" ,
+		data:{
+			id_pagos : id_pagos
+		}
+		}).done(function (respuesta){
+		
+		// $("#ticket").html(respuesta); 
 		
 		
 		printService.submit({

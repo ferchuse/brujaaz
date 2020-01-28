@@ -60,7 +60,7 @@
 				while($fila = mysqli_fetch_assoc($result)){
 					// console_log($fila);
 					$filas = $fila ;
-				
+					
 					
 				?>
 				<tr>
@@ -105,15 +105,17 @@
 						<?php
 							switch($filas["estatus_pago"]){
 								case "PENDIENTE":
-								echo "<label class='badge badge-warning'> <input type='checkbox' form='form_corridas' name='corridas[]' class='select' value='".$filas["id_corridas"]."'> ";
-								echo $filas["estatus_pago"]."</label>";
+								if($filas["estatus_corridas"] == "Finalizada"){
+									echo "<label class='badge badge-warning'> <input type='checkbox' form='form_corridas' name='corridas[]' class='select' value='".$filas["id_corridas"]."'> ";
+									echo $filas["estatus_pago"]."</label>";
+								}
 								
-							
 								break;
 								
 								case "PAGADA":
 								
 								echo "<span class='badge badge-success'>".$filas["estatus_pago"]."</span>";
+								
 								
 							?>
 							<?php
@@ -123,8 +125,8 @@
 								
 								case "Cancelada":
 								echo "<span class='badge badge-danger'>".$filas["estatus_corridas"]."</span>";
-								break;
-								
+							break;
+							
 							}
 							
 						?>
@@ -160,8 +162,8 @@
 			<tr class="bg-secondary text-white">
 				<td colspan="6">TOTAL</td>
 				<td class="text-right"><?= number_format($total_corrida,0)?></td>
+				<td></td>
 			</tr>
-			<td></td>
 		</tfoot>
 	</table>
 	
@@ -175,4 +177,4 @@
 	}
 	
 	
-?>
+?>	
