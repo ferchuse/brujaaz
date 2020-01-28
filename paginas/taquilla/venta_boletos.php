@@ -93,6 +93,11 @@
 											<label>Num Eco:	</label>
 											<input id="num_eco" name="num_eco" class="form-control"  value="<?php echo $_GET["num_eco"]?>" readonly>
 										</div>
+										<div class="form-group col-2"> 
+											<button class="btn btn-default btn-sm mt-4" id="btn_test">
+													<i class="fas fa-test"></i> Probar Impresora
+												</button>
+										</div>
 									</div>	
 									<hr>
 									<form id="form_boletos" class="was-validated" autocomplete="off">

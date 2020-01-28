@@ -18,6 +18,7 @@ function onLoad(){
 	});
 	
 	
+	$("#btn_test").on("click", imprimirPrueba);
 	$("#lista_corridas").on("change", ".select", sumarCorridas);
 	
 	$("#btn_pagar").on("click", guardarPago);
@@ -403,6 +404,36 @@ function imprimirESCPOS(boletos){
 		
 	});
 }
+function imprimirPrueba(){
+	console.log("imprimirPago()");
+	
+	// var url = $(this).data("url");
+	var boton = $(this); 
+	var icono = boton.find("fas");
+	
+	boton.prop("disabled", true);
+	icono.toggleClass("fa-print fa-spinner fa-spin");
+	
+	$.ajax({
+		url: "boletos_iv/imprimir_prueba.php" ,
+		
+		}).done(function (respuesta){
+		
+		// $("#ticket").html(respuesta); 
+		
+		
+		printService.submit({
+			'type': 'LABEL',
+			'raw_content': respuesta
+		});
+		}).always(function(){
+		
+		boton.prop("disabled", false);
+		icono.toggleClass("fa-print fa-spinner fa-spin");
+		
+	});
+}
+
 function imprimirPago(id_pagos){
 	console.log("imprimirPago()");
 	var id_registro = $(this).data("id_registro");
