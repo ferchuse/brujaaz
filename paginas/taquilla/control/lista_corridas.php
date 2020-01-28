@@ -13,6 +13,7 @@
 	
 	
 	$consulta = "SELECT * FROM corridas 
+	LEFT JOIN empresas USING(id_empresas)
 	LEFT JOIN origenes USING(id_origenes)
 	LEFT JOIN (
 	SELECT id_origenes AS id_destinos, 
@@ -45,7 +46,7 @@
 				<th>Hora</th>
 				<th>Origen</th>
 				<th>Destino</th>
-				<th>Usuario</th>
+				<th>Empresa</th>
 				<th>Estatus</th>
 			</tr>
 		</thead>

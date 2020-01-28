@@ -55,18 +55,26 @@
 							<div class="tab-content">
 								
 								
-								
 								<div class="tab-pane   active" id="tab_corridas">	
 									<div class="row">
 										<div class="col-12">
 											<button type="button" class="btn btn-success mb-2 nuevo">
 												<i class="fas fa-plus"></i> Nueva
 											</button>
+											<label>
+												Empresa:
+											<label>
+											<?php echo generar_select($link, "empresas", "id_empresas", "nombre_empresas", true	);	?>
 										</div>
 									</div>
 									<div class="card">
 										<div class="card-header">
-											<h3 >Lista de Corridas</h3>
+											<h3 >Lista de Corridas
+												
+												<button disabled type="button" class="btn btn-primary float-right" id="btn_pagar">
+													<i class="fas fa-dollar-sign"></i> Pagar <span id="span_num_selected">0</span>
+												</button>
+											</h3>
 										</div>
 										<div class="card-body" id="lista_corridas">
 											
@@ -87,13 +95,13 @@
 										</div>
 									</div>	
 									<hr>
-									<form id="form_boletos" class="was-validated form-inline" autocomplete="off">
+									<form id="form_boletos" class="was-validated" autocomplete="off">
 										<div class="row">
-											<div class="col-4  form-group">
+											<div class="col-5  form-group">
 												<label>Destino:	</label>
 												<?php include("boletos_iv/destinos.php")?>
 											</div>
-											<div class="col-4 form-group">
+											<div class="col-3 form-group">
 												<label>Precio:	</label>
 												<input id="precio" name="precio" readonly class="form-control precio" >
 											</div>
@@ -119,35 +127,36 @@
 								
 							</div><!-- /.tab-content-->
 						</div><!-- /.card-body-->
-				</div><!-- /.card -->
-			</div><!-- /.container-fluid -->
-			
-			
-			<!-- Sticky Footer -->
-			<footer class="sticky-footer">
-				<div class="container my-auto ">
-					<div class="copyright text-center my-auto">
-						<span class="d-print-none">Copyright © Glifo Media 2018</span>
+					</div><!-- /.card -->
+				</div><!-- /.container-fluid -->
+				
+				
+				<!-- Sticky Footer -->
+				<footer class="sticky-footer">
+					<div class="container my-auto ">
+						<div class="copyright text-center my-auto">
+							<span class="d-print-none">Copyright © Glifo Media 2018</span>
+						</div>
 					</div>
-				</div>
-			</footer>
-		</div> 
-		<!-- /.content-wrapper -->
-	</div>
-	<!-- /#wrapper -->
-	
-	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded d-print-none" href="#page-top">
-		<i class="fas fa-angle-up"></i>
-	</a>
-	
-	<div class="d-print-block p-2" style="max-width:100mm;" hidden id="ticket" >
-	</div>
-	<?php include("../../scripts.php")?>
-	<script src="../../plugins/pos_print/websocket-printer.js" > </script>
-	<?php include("boletos_iv/form_corridas.php");?>
-	
-	<script src="boletos_iv/venta_boletos.js?v=<?= date("Y-m-d-H-i-s")?>"></script>
-	
-</body>
+				</footer>
+			</div> 
+			<!-- /.content-wrapper -->
+		</div>
+		<!-- /#wrapper -->
+		<form id="form_corridas">
+		</form>
+		<!-- Scroll to Top Button-->
+		<a class="scroll-to-top rounded d-print-none" href="#page-top">
+			<i class="fas fa-angle-up"></i>
+		</a>
+		
+		<div class="d-print-block p-2" style="max-width:100mm;" hidden id="ticket" >
+		</div>
+		<?php include("../../scripts.php")?>
+		<script src="../../plugins/pos_print/websocket-printer.js" > </script>
+		<?php include("boletos_iv/form_corridas.php");?>
+		
+		<script src="boletos_iv/venta_boletos.js?v=<?= date("Y-m-d-H-i-s")?>"></script>
+		
+	</body>
 </html>																												

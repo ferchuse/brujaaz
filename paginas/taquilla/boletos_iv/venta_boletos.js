@@ -15,8 +15,12 @@ function onLoad(){
 	
 	$("#lista_corridas").on("click", ".imprimir", function(){
 		imprimirGuia($(this).data("id_registro"));
-		
 	});
+	
+	
+	$("#lista_corridas").on("change", ".select", sumarCorridas);
+	
+	$("#btn_pagar").on("click", guardarPago);
 	
 	$("#lista_boletos").on("click", ".imprimir", function(){
 		imprimirESCPOS($(this).data("id_registro"))
@@ -52,6 +56,28 @@ function onLoad(){
 }
 
 
+
+function sumarCorridas(){
+	console.log("sumarCorridas()");
+	let importe_pago = 0
+	
+	$(".select:checked").each(function(i, item){
+		importe_pago+= $(this).data("importe")
+		
+		
+	})
+	
+	$("#span_num_selected").text($(".select:checked").length);
+	
+	if($(".select:checked").length > 0 ){
+		
+		$("#btn_pagar").prop("disabled", false)
+	}
+	else{
+		$("#btn_pagar").prop("disabled", true)
+	}
+	
+}
 
 function finalizarCorrida(){
 	console.log("finalizarCorrida()");
@@ -190,6 +216,42 @@ function nueva_venta(){
 
 $("#form_boletos").submit(guardarBoletos);
 
+
+function guardarPago(event){
+	console.log("guardarPago()")
+	event.preventDefault();
+	
+	let boton = $(this);
+	let icono = boton.find('.fas');
+	
+	
+	boton.prop('disabled',true);
+	icono.toggleClass('fa-dollar fa-spinner fa-pulse ');
+	
+	
+	
+	$.ajax({
+		url: 'boletos_iv/guardar_pago.php',
+		method: 'POST',
+		dataType: 'JSON',
+		data: $("#form_corridas").serialize()
+		}).done(function(respuesta){
+		if(respuesta.estatus_insert == 'success'){
+			
+			alertify.success('Se ha guardado correctamente');
+			
+			imprimirPago(respuesta.id_pagos);
+			
+			listarCorridas();
+		}
+		else{
+			alertify.error(respuesta.mensaje);
+		}
+		}).always(function(){
+		boton.prop('disabled',false);
+		icono.toggleClass('fa-save fa-spinner fa-pulse ');
+	});
+}
 
 function guardarBoletos(event){
 	event.preventDefault();

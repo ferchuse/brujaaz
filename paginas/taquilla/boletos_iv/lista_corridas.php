@@ -14,6 +14,7 @@
 	
 	$consulta = "SELECT * FROM corridas 
 	
+	LEFT JOIN empresas USING(id_empresas)
 	LEFT JOIN origenes USING(id_origenes)
 	LEFT JOIN (
 	SELECT id_origenes AS id_destinos, 
@@ -21,6 +22,9 @@
 	FROM origenes ) AS t_destinos 
 	USING(id_destinos)
 	LEFT JOIN usuarios USING(id_usuarios)
+	LEFT JOIN (SELECT id_corridas, SUM(precio_boletos) AS importe_corridas
+	FROM boletos GROUP BY id_corridas
+	) AS t_importes USING(id_corridas)
 	WHERE corridas.id_administrador = {$_COOKIE["id_administrador"]}
 	";
 	
@@ -45,9 +49,8 @@
 				<th>Num Eco</th>
 				<th>Fecha</th>
 				<th>Hora</th>
-				<th>Origen</th>
-				<th>Destino</th>
-				<th>Taquillero</th>
+				<th>Importe</th>
+				<th>Empresa</th>
 				
 			</tr>
 		</thead>
@@ -57,9 +60,7 @@
 				while($fila = mysqli_fetch_assoc($result)){
 					// console_log($fila);
 					$filas = $fila ;
-					// echo chr(0);
-					// echo chr(1);
-					
+				
 					
 				?>
 				<tr>
@@ -104,7 +105,7 @@
 						<?php
 							switch($filas["estatus_pago"]){
 								case "PENDIENTE":
-								echo "<label class='badge badge-warning'> <input type='checkbox' class='select' data-id_corridas='".$filas["estatus_pago"]."'>";
+								echo "<label class='badge badge-warning'> <input type='checkbox' form='form_corridas' name='corridas[]' class='select' value='".$filas["id_corridas"]."'> ";
 								echo $filas["estatus_pago"]."</label>";
 								
 							
@@ -112,13 +113,9 @@
 								
 								case "PAGADA":
 								
-								echo "<span class='badge badge-success'>".$filas["estatus_corridas"]."</span>";
+								echo "<span class='badge badge-success'>".$filas["estatus_pago"]."</span>";
 								
 							?>
-							<button class="btn btn-info  btn-sm imprimir " title="Imprimir" data-id_registro='<?php echo $filas["id_corridas"]?>'>
-								<i class="fas fa-print"></i> Imprimir Guía
-							</button>	
-							
 							<?php
 								
 								
@@ -136,14 +133,13 @@
 					<td><?php echo $filas["num_eco"]?></td>
 					<td><?php echo $filas["fecha_corridas"]?></td>
 					<td><?php echo $filas["hora_corridas"]?></td>
-					<td><?php echo $filas["origen"]?></td>
-					<td><?php echo $filas["destino"]?></td>
-					<td><?php echo $filas["nombre_usuarios"]?></td>
+					<td class="text-right"><?php echo number_format($filas["importe_corridas"], 0)?></td>
+					<td><?php echo $filas["nombre_empresas"]?></td>
 					
 				</tr>
 				
 				<?php
-					$total_saldo_unidades+= $filas["saldo_unidades"];
+					$total_corrida+= $filas["importe_corridas"];
 					$total_ingresos+= $ingresos;
 					$total_cargos+= $filas["gasto_administracion"];
 					$total_seguro+= $filas["seguro_derroteros"];
@@ -160,6 +156,13 @@
 				
 			</tr>
 		</tbody>
+		<tfoot>
+			<tr class="bg-secondary text-white">
+				<td colspan="6">TOTAL</td>
+				<td class="text-right"><?= number_format($total_corrida,0)?></td>
+			</tr>
+			<td></td>
+		</tfoot>
 	</table>
 	
 	<?php
