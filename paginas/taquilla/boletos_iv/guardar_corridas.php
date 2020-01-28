@@ -6,7 +6,7 @@
 	
 	$insert ="INSERT INTO corridas SET 
 	fecha_corridas= '{$_POST['fecha_corridas']}',
-	hora_corridas= '{$_POST['hora_corridas']}',
+	hora_corridas= CURTIME(),
 	id_unidades = '{$_POST['id_unidades']}',
 	id_taquillas = '{$_POST['id_recaudaciones']}',
 	id_usuarios = '{$_POST["id_usuarios"]}',
