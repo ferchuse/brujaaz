@@ -59,13 +59,15 @@ function onLoad(){
 
 function sumarCorridas(){
 	console.log("sumarCorridas()");
-	let importe_pago = 0
+	let total_pago = 0
 	
 	$(".select:checked").each(function(i, item){
-		importe_pago+= $(this).data("importe")
+		total_pago+= $(this).data("importe_corridas")
 		
 		
 	})
+	
+	$("#total_pago").val(total_pago);
 	
 	$("#span_num_selected").text($(".select:checked").length);
 	
@@ -117,7 +119,7 @@ function imprimirGuia(id_corridas){
 		}
 		}).done(function(respuesta){
 		printService.submit({
-			'type': 'RECEIPT',
+			'type': 'LABEL',
 			'raw_content': respuesta
 		});
 		
@@ -391,7 +393,7 @@ function imprimirESCPOS(boletos){
 		
 		
 		printService.submit({
-			'type': 'RECEIPT',
+			'type': 'LABEL',
 			'raw_content': respuesta
 		});
 		}).always(function(){
@@ -422,7 +424,7 @@ function imprimirPago(id_pagos){
 		
 		
 		printService.submit({
-			'type': 'RECEIPT',
+			'type': 'LABEL',
 			'raw_content': respuesta
 		});
 		}).always(function(){

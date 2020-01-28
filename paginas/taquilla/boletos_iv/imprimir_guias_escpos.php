@@ -10,7 +10,7 @@
 	$filas = array();
 	$respuesta = array();
 	
-	
+		
 	
 	
 	$consulta_guia = "SELECT *, nombre_origenes as destino,

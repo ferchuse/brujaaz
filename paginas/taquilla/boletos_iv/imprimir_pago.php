@@ -36,20 +36,24 @@
 		
 		$respuesta ="";
 		
-		$empresa = "GRUPO SAUCES";
+		$empresa = "";
 		
 		$respuesta.=   "\x1b"."@";
 		$respuesta.= "\x1b"."E".chr(1); // Bold
-		$respuesta.= "!";
+		$respuesta.= "!"; //Font BIG
 		$respuesta.=   "$empresa \n";
 		$respuesta.=   "PAGO DE TAQUILLA \n";
+		
+			$respuesta.= "\x1b"."d".chr(3); // 4 Blank lines	
 		$respuesta.=  "\x1b"."E".chr(0); // Not Bold
 		$respuesta.= "!\x11"; //font size
-		$respuesta.= "Fecha:". $guias[0]["fecha_pagos"];
+		$respuesta.= "Fecha:". date("Y-m-d", strtotime($filas[0]["fecha_pagos"]));
+		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines	
+		$respuesta.= "Hora:". date("H-i-s", strtotime($filas[0]["fecha_pagos"]));
 		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
-		$respuesta.= "Corridas: ". $guias[0]["corridas"];;
+		$respuesta.= "Corridas: ". $filas[0]["corridas"];;
 		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
-		$respuesta.= "Total: ". $guias[0]["total"];;
+		$respuesta.= "Total: $". $filas[0]["total_pagos"];;
 		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
 		
 		
@@ -57,36 +61,10 @@
 		$respuesta.= "\x1b"."d".chr(2); // 4 Blank lines
 		
 		
-		
-		$total_guia = 0;
-		if(!$result_guia){
-			echo "<pre>".mysqli_error($result_guia)."</pre>";
-			
-		}
-		
-		foreach($guias AS $i =>$fila){
-			$importe= $fila["cantidad"] * $fila["precio_boletos"];
-			$total_guia+= $importe;
-			$total_boletos += $fila["cantidad"];
-			
-			
-			$respuesta.=  $fila["cantidad"]."\x09";
-			$respuesta.=  $fila["destino"]."\x09"."\x09";
-			$respuesta.="$". $fila["precio_boletos"]."\x09"."\x09";
-			$respuesta.= "$" .	number_format($importe,0);
-			
-			$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
-			
-			
-			
-		}
-		
-		
-		$respuesta.= "TOTAL: $". number_format($total_guia). "\n"; // Blank line
-		$respuesta.= "Boletos Vendidos: ". $total_boletos ."\n"; // Blank line
 		$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
 		$respuesta.= "VA"; // Cut
 		echo base64_encode ( $respuesta );
+		// echo  ( $respuesta );
 		
 		exit(0);
 		

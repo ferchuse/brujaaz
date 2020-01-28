@@ -144,6 +144,7 @@
 		</div>
 		<!-- /#wrapper -->
 		<form id="form_pagar_corridas">
+		<input type="number" id="total_pago" name="total_pago">
 		</form>
 		<!-- Scroll to Top Button-->
 		<a class="scroll-to-top rounded d-print-none" href="#page-top">
