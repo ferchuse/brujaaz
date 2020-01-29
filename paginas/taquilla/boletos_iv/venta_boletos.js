@@ -42,13 +42,8 @@ function onLoad(){
 	$('#lista_corridas').on('click', ".btn_venta", abrirTaquilla);
 	
 	
-	$(".tipo_boleto").change( function eligeBoleto( evt){
-		console.log("eligeBoleto()")
-		
-		$(this).closest(".row").find(".precio").val($(this).find(":selected").data("precio"));
-		
-		sumarImportes();
-	});
+	$(".tipo_boleto").change(eligeBoleto );
+	$(".cantidad").change(calculaImporte );
 	
 	
 	
@@ -56,7 +51,26 @@ function onLoad(){
 	
 }
 
+function eligeBoleto(evt){
+		console.log("eligeBoleto()")
+		let $fila = $(this).closest(".row");
+		let precio = $(this).find(":selected").data("precio");
+	
+		$fila.find(".precio").val(precio);
+		
+		calculaImporte(evt);
+	}
 
+function calculaImporte(evnt){
+		console.log("calculaImporte()", $(evnt.target));
+		let $fila = $(evnt.target).closest(".row");
+		let cantidad = Number($fila.find(".cantidad").val());
+		let precio = Number($fila.find(".precio").val());
+		let importe = cantidad * precio; 
+		
+		$fila.find(".importe").val(importe); 
+	
+	}
 
 function sumarCorridas(){
 	console.log("sumarCorridas()");

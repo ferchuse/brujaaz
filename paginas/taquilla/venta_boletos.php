@@ -106,13 +106,17 @@
 												<label>Cantidad:	</label>
 												<input min="1" required id="cantidad" type="number" name="cantidad" value="1" class="form-control cantidad" >
 											</div>
-											<div class="col-5  form-group">
+											<div class="col-3  form-group">
 												<label>Destino:	</label>
 												<?php include("boletos_iv/destinos.php")?>
 											</div>
-											<div class="col-3 form-group">
+											<div class="col-2 form-group">
 												<label>Precio:	</label>
 												<input id="precio" name="precio" readonly class="form-control precio" >
+											</div>
+											<div class="col-2 form-group">
+												<label>Importe:	</label>
+												<input id="importe" name="importe" readonly class="form-control importe" >
 											</div>
 											<div class="col-2 form-group ">
 												<button class="btn btn-success mt-4" >
