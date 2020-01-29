@@ -10,6 +10,7 @@
 	fecha_pagos= NOW(),
 	id_usuarios = '{$_COOKIE['id_usuarios']}',
 	total_pagos = '{$_POST['total_pago']}',
+	recibe = '{$_POST['recibe']}',
 	corridas = '{$corridas}'
 	";
 	

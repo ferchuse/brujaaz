@@ -21,7 +21,7 @@ function onLoad(){
 	$("#btn_test").on("click", imprimirPrueba);
 	$("#lista_corridas").on("change", ".select", sumarCorridas);
 	
-	$("#btn_pagar").on("click", guardarPago);
+	$("#btn_pagar").on("click", quienRecibe);
 	
 	$("#lista_boletos").on("click", ".imprimir", function(){
 		imprimirESCPOS($(this).data("id_registro"))
@@ -51,26 +51,44 @@ function onLoad(){
 	
 }
 
-function eligeBoleto(evt){
-		console.log("eligeBoleto()")
-		let $fila = $(this).closest(".row");
-		let precio = $(this).find(":selected").data("precio");
+function quienRecibe(evt){
+	console.log("quienRecibe()")
 	
-		$fila.find(".precio").val(precio);
-		
-		calculaImporte(evt);
-	}
+	
+	alertify.prompt()
+  .setting({
+    'reverseButtons': true,
+		'labels' :{ok:"Aceptar", cancel:'Cancelar'},
+    'title': "Quien Recibe" ,
+    'message': "¿Quien Recibe el Pago?" ,
+    'onok': guardarPago
+	}).show();
+	
+	
+	
+}
+
+
+function eligeBoleto(evt){
+	console.log("eligeBoleto()")
+	let $fila = $(this).closest(".row");
+	let precio = $(this).find(":selected").data("precio");
+	
+	$fila.find(".precio").val(precio);
+	
+	calculaImporte(evt);
+}
 
 function calculaImporte(evnt){
-		console.log("calculaImporte()", $(evnt.target));
-		let $fila = $(evnt.target).closest(".row");
-		let cantidad = Number($fila.find(".cantidad").val());
-		let precio = Number($fila.find(".precio").val());
-		let importe = cantidad * precio; 
-		
-		$fila.find(".importe").val(importe); 
+	console.log("calculaImporte()", $(evnt.target));
+	let $fila = $(evnt.target).closest(".row");
+	let cantidad = Number($fila.find(".cantidad").val());
+	let precio = Number($fila.find(".precio").val());
+	let importe = cantidad * precio; 
 	
-	}
+	$fila.find(".importe").val(importe); 
+	
+}
 
 function sumarCorridas(){
 	console.log("sumarCorridas()");
@@ -234,9 +252,8 @@ function nueva_venta(){
 $("#form_boletos").submit(guardarBoletos);
 
 
-function guardarPago(event){
-	console.log("guardarPago()")
-	event.preventDefault();
+function guardarPago(evt, recibe){
+	console.log("guardarPago()", recibe)
 	
 	let boton = $(this);
 	let icono = boton.find('.fas');
@@ -251,7 +268,7 @@ function guardarPago(event){
 		url: 'boletos_iv/guardar_pago.php',
 		method: 'POST',
 		dataType: 'JSON',
-		data: $("#form_pagar_corridas").serialize()
+		data: $("#form_pagar_corridas").serialize() + "&recibe=" + recibe
 		}).done(function(respuesta){
 		if(respuesta.estatus_insert == 'success'){
 			
