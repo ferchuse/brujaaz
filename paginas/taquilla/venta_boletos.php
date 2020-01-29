@@ -102,6 +102,10 @@
 									<hr>
 									<form id="form_boletos" class="was-validated" autocomplete="off">
 										<div class="row">
+											<div class="col-1  form-group">
+												<label>Cantidad:	</label>
+												<input min="1" required id="cantidad" type="number" name="cantidad" value="1" class="form-control cantidad" >
+											</div>
 											<div class="col-5  form-group">
 												<label>Destino:	</label>
 												<?php include("boletos_iv/destinos.php")?>

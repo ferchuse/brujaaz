@@ -274,6 +274,7 @@ function guardarBoletos(event){
 			"id_corridas" : $("#id_corridas").val(),
 			"id_precio" : $("#id_precio").val(),
 			"destino" : $("#id_precio").find(":selected").data("destino"),
+			"cantidad" : $("#cantidad").val(),
 			"precio" : $("#precio").val(),
 			"id_usuarios" : $("#id_usuarios").val()
 			
@@ -287,7 +288,7 @@ function guardarBoletos(event){
 			
 			
 			listaBoletos();
-			imprimirESCPOS(respuesta.boletos[0]);
+			imprimirESCPOS(respuesta.boletos);
 		}
 		else{
 			alertify.error(respuesta.mensaje);

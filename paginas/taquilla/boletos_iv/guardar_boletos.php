@@ -8,12 +8,11 @@
 	
 	$respuesta = array();
 	
-	
-	//Inserta detalle de boletos
-
+	for($i = 0 ; $i < $_POST["cantidad"]; $i++){
+		//Inserta detalle de boletos
+		
 		$insert ="INSERT INTO boletos SET 
 		id_corridas = '{$_POST['id_corridas']}' ,
-	
 		tipo_boleto = '{$_POST["tipo_boleto"]}',
 		id_precio = '{$_POST["id_precio"]}',
 		precio_boletos = '{$_POST["precio"]}',
@@ -30,8 +29,8 @@
 			$respuesta["result"] = "error";		
 			$respuesta["mensaje"] = "Error en insert: $insert  ".mysqli_error($link);		
 		}		
-	
-	
+		
+	}
 	
 	echo json_encode($respuesta);
 	

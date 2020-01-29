@@ -6,7 +6,7 @@
 	$filas = array();
 	$respuesta = array();
 	
-	$boletos = implode("," ,$_GET['boletos']);
+	$boletos_id= implode("," ,$_GET['boletos']);
 	
 	$consulta = "SELECT * FROM boletos 
 	LEFT JOIN usuarios ON boletos.id_usuarios = usuarios.id_usuarios
@@ -19,7 +19,7 @@
 	) AS destinos
 	ON precios_boletos.id_destinos = destinos.id_destinos
 	
-	WHERE id_boletos = '{$_GET['boletos']}'";
+	WHERE id_boletos IN($boletos_id)";
   
 	
 	$result = mysqli_query($link,$consulta);
@@ -34,7 +34,7 @@
 		
 		while($fila = mysqli_fetch_assoc($result)){
 			
-			$item = $fila ;
+			$boletos[] = $fila ;
 			
 		}
 		
@@ -45,31 +45,31 @@
 		// public const NUL="\x00";
 		
 		// echo "GRUPO SAUCES \n"; // Company
-		
-		$respuesta.=   "\x1b"."@";
-		$respuesta.= "\x1b"."E".chr(1); // Bold
-		$respuesta.= "!";
-		$respuesta.=   "GRUPO SAUCES \n";
-		$respuesta.=  "\x1b"."E".chr(0); // Not Bold
-		$respuesta.= "!\x10";
-		$respuesta.= "\x1b"."d".chr(2); // 4 Blank lines
-		$respuesta.=  	"Folio:". $item["id_boletos"]. "\n"."\n";
-		$respuesta.=  "Taquillero:" . $item["nombre_usuarios"]."\n";
-		$respuesta.= "\x1b"."d".chr(1); // Blank line
-		$respuesta.= "Destino :". $item["destino"]."\n";
-		$respuesta.= "\x1b"."d".chr(1); // Blank line
-		$respuesta.= "Fecha:" . date('d-m-Y', strtotime($item["fecha_boletos"]))."\n";
-		$respuesta.= "\x1b"."d".chr(1); // Blank line
-		$respuesta.= "Hora:" . date('H:i:s', strtotime($item["fecha_boletos"]))."\n";
-		$respuesta.= "\x1b"."d".chr(1); // Blank line
-		$respuesta.= "#Eco:". $item["num_eco"]."\n";
-		$respuesta.= "Precio: $ ". $item["precio_boletos"]."\n";
-		$respuesta.= "\x1b"."d".chr(1); // Blank line
-		$respuesta.= "aSeguro de Viajero\n"; // Blank line
-		$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
-		$respuesta.= "VA"; // Cut
-		
-		
+		foreach($boletos AS $i =>$item){
+			$respuesta.=   "\x1b"."@";
+			$respuesta.= "\x1b"."E".chr(1); // Bold
+			$respuesta.= "!";
+			$respuesta.=   "GRUPO SAUCES \n";
+			$respuesta.=  "\x1b"."E".chr(0); // Not Bold
+			$respuesta.= "!\x10";
+			$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
+			$respuesta.= 	"Folio:". $item["id_boletos"]. "\n";
+			$respuesta.= "#Num Eco:". $item["num_eco"]."\n";
+			$respuesta.= "Fecha:" . date('d/m/Y', strtotime($item["fecha_boletos"]))."\n";
+			$respuesta.= "Hora:" . date('H:i:s', strtotime($item["fecha_boletos"]))."\n";
+			$respuesta.= "Destino :". $item["destino"]."\n";
+			$respuesta.= "Precio: $ ". $item["precio_boletos"]."\n";
+			// $respuesta.=  "Taquillero:" . $item["nombre_usuarios"]."\n";
+			// $respuesta.= "\x1b"."d".chr(1); // Blank line
+			// $respuesta.= "\x1b"."d".chr(1); // Blank line
+			// $respuesta.= "\x1b"."d".chr(1); // Blank line
+			// $respuesta.= "\x1b"."d".chr(1); // Blank line
+			$respuesta.= "\x1b"."d".chr(1); // Blank line
+			$respuesta.= "aSeguro de Viajero\n"; // Blank line
+			$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
+			$respuesta.= "VA"; // Cut
+			
+		}
 		// /* Output an example receipt */
 		// echo ESC."@"; // Reset to defaults
 		// echo ESC."E".chr(1); // Bold
@@ -96,11 +96,11 @@
 		
 		
 		
-	}
-	else {
-		echo "Error en ".$consulta.mysqli_Error($link);
-		
-	}
+		}
+		else {
+			echo "Error en ".$consulta.mysqli_Error($link);
+			
+		}
 	
 	
 	/*
