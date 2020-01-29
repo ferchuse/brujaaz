@@ -52,6 +52,8 @@
 		$respuesta.=   "GUIA \n";
 		$respuesta.=  "\x1b"."E".chr(0); // Not Bold
 		$respuesta.= "!\x11"; //font size
+		$respuesta.= "Folio: ". $guias[0]["id_corridas"];
+		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
 		$respuesta.= "Fecha:". $guias[0]["fecha_corridas"];
 		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
 		$respuesta.= "Num Eco:". $guias[0]["num_eco"];;
