@@ -1,3 +1,6 @@
+
+var printService = new WebSocketPrinter();
+
 $(document).ready(function(){
   
 
@@ -33,7 +36,10 @@ function imprimirPago(){
 		data: {"id_pagos": id_pagos}
 		}).done(function(respuesta){
 		
-		
+		printService.submit({
+			'type': 'LABEL',
+			'raw_content': respuesta
+		});
 		alertify.success('Imprimiendo...');
 		
 		}).always(function(){
