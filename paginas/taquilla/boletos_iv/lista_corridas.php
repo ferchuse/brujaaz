@@ -97,6 +97,7 @@
 				<th>Fecha</th>
 				<th>Hora</th>
 				<th>Importe</th>
+				<th>Empresa</th>
 				<th>Usuario</th>
 				
 			</tr>
@@ -207,6 +208,7 @@
 					<td><?php echo $filas["hora_corridas"]?></td>
 					<td class="text-right">
 					$ <?php echo number_format($filas["importe_corridas"], 0)?></td>
+					<td><?php echo $filas["nombre_empresas"]?></td>
 					<td><?php echo $filas["nombre_usuarios"]?></td>
 					
 					</tr>

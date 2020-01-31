@@ -124,6 +124,6 @@
 		
 		<div class="d-print-block p-2" hidden id="ticket"></div>
     <?php include("../../scripts.php")?>
-    <script src="pagos_taquilla/pagos_taquilla.js"></script>
+    <script src="pagos_taquilla/pagos_taquilla.js?v=<?= date("Y-m-d-H-i-s")?>"></script>
 	</body>
 </html>

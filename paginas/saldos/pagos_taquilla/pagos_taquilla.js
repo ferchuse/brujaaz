@@ -25,15 +25,16 @@ function listarPagos(event){
 }
 
 function imprimirPago(){
+	var id_pagos = $(this).data("id_pagos");
 	
 	$.ajax({
-		url: '../pagos_taquilla/imprimir_pago.php',
+		url: '../taquilla/boletos_iv/imprimir_pago.php',
 		
-		data: {}
+		data: {"id_pagos": id_pagos}
 		}).done(function(respuesta){
 		
 		
-		alertify.error('Ocurrio un error');
+		alertify.success('Imprimiendo...');
 		
 		}).always(function(){
 		
