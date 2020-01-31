@@ -12,6 +12,39 @@
 	
 	
 	
+	function dame_permiso($url_paginas,$link){
+		
+		// return false;
+		$consulta = "SELECT * FROM permisos LEFT JOIN paginas USING(id_paginas) 
+		WHERE url_paginas = '$url_paginas' 
+		AND id_usuarios = {$_COOKIE["id_usuarios"]}";
+		
+		
+		$result = mysqli_query($link, $consulta) or die("Error dame_permiso($consulta) ". mysqli_error($link));
+		
+		if(mysqli_num_rows($result) > 0){
+			while($fila = mysqli_fetch_assoc($result)){
+				
+				$respuesta= $fila["permiso"];
+			}
+			
+			if($respuesta == "Sin Acceso"){
+				return "hidden"; 
+			}
+			else{
+				return $respuesta;
+			}
+			
+			
+		}
+		else{
+			
+			return false;//"Pagina no existe, $url_paginas,{$_SESSION["id_usuarios"]}, $consulta";
+		}
+		
+	}
+	
+	
 	$consulta_boletos = "SELECT *, nombre_origenes as destino FROM boletos 
 	LEFT JOIN precios_boletos USING(id_precio)
 	LEFT JOIN origenes ON precios_boletos.id_destinos = origenes.id_origenes
@@ -79,107 +112,119 @@
 									<button hidden class="btn btn-info imprimir" title="Imprimir"     data-id_registro='<?php echo $filas["id_boletos"]?>'>
 										<i class="fas fa-print"></i>
 									</button>	
+									<?php
+										if(dame_permiso("venta_boletos.php", $link) == 'Supervisor'){
+										?>
+										<button class="btn btn-danger cancelar" title="Cancelar"     data-id_registro='<?php echo $filas["id_boletos"]?>'>
+											<i class="fas fa-times"></i>
+											</button>	
+											
+											<?php
+											}
+										}
+										elseif($fila["estatus_boletos"] == 'Cancelado'){
+											
+											echo "<span class='badge badge-danger'>".$filas["estatus_boletos"]."</span>";
+											echo "<small >".$filas["datos_cancelacion"]."</small>";
+											
+										}
+										?>
+									</td>
+									<td><?php echo $filas["id_boletos"]?></td>
+									<td><?php echo $filas["destino"]?></td>
+									<td>$<?php echo number_format($filas["precio_boletos"])?></td>
+									
+									</tr>
 									
 									<?php
+										$total_saldo_unidades+= $filas["saldo_unidades"];
+										$total_ingresos+= $ingresos;
+										$total_cargos+= $filas["gasto_administracion"];
+										$total_seguro+= $filas["seguro_derroteros"];
 										
 									}
 								?>
-							</td>
-							<td><?php echo $filas["id_boletos"]?></td>
-							<td><?php echo $filas["destino"]?></td>
-							<td>$<?php echo number_format($filas["precio_boletos"])?></td>
-							
-						</tr>
-						
-						<?php
-							$total_saldo_unidades+= $filas["saldo_unidades"];
-							$total_ingresos+= $ingresos;
-							$total_cargos+= $filas["gasto_administracion"];
-							$total_seguro+= $filas["seguro_derroteros"];
-							
-						}
-					?>
-					
-				</tbody>
-				<tfoot>
-					<tr hidden>
-						<td colspan="4"> TOTALES</td>
-						<td><?php echo number_format($total_saldo_unidades);?></td>
-						<td><?php echo number_format($total_ingresos);?></td>
-						<td><?php echo number_format($total_cargos);?></td>
-						<td><?php echo number_format($ingresos)?></td>
-					</tr>
-				</tfoot>
-			</table>
-			
-		</div>
-		
-		<div class="col-6">
-			<h4 class="text-center">GUÍA</h4>
-			<table class="table table-bordered table-condensed">
-				<thead>
-					<tr>
-						<th>Cantidad</th>
-						<th>Destino</th>
-						<th>Precio </th>
-						<th>Importe </th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php 
-						$total_guia = 0;
-						if(!$result_guia){
-							echo "<pre>".mysqli_error($result_guia)."</pre>";
-							
-						}
-						// echo "<pre>".$consulta_guia."</pre>";
-						
-						foreach($guias AS $i =>$fila){
-							$importe= $fila["cantidad"] * $fila["precio_boletos"];
-							$total_guia+= $importe;
-							
-						?>
-						<tr>
-							
-							<td><?php echo $fila["cantidad"]?></td>
-							<td><?php echo $fila["destino"]?></td>
-							<td><?php echo $fila["precio_boletos"]?></td>
-							<td class="text-right"><?php echo number_format($importe, 2);?></td>
-							
-							
-						</tr>
-						
-						<?php
-							
-							
-						}
-					?>
-					
-				</tbody>
-				<tfoot>
-					<tr >
-						<td colspan="3"> <b>TOTAL<b></td>
-						
-						<td class="text-right"><?php echo number_format($total_guia,2)?></td>
-						
-					</tr>
-				</tfoot>
-			</table>
-			
-			<button class="btn btn-info" id="imprimir_guia">
-				<i class="fas fa-print"></i> Imprimir y Finalizar 
-			</button>
-		</div>
-	</div>
-	
-	<?php
-		
-	}
-	
-	else {
-		echo "Error en ".$consulta.mysqli_Error($link);
-		
-	}
-	
-	
-?>	
+								
+								</tbody>
+								<tfoot>
+								<tr hidden>
+								<td colspan="4"> TOTALES</td>
+								<td><?php echo number_format($total_saldo_unidades);?></td>
+								<td><?php echo number_format($total_ingresos);?></td>
+								<td><?php echo number_format($total_cargos);?></td>
+								<td><?php echo number_format($ingresos)?></td>
+								</tr>
+								</tfoot>
+								</table>
+								
+								</div>
+								
+								<div class="col-6">
+								<h4 class="text-center">GUÍA</h4>
+								<table class="table table-bordered table-condensed">
+								<thead>
+								<tr>
+								<th>Cantidad</th>
+								<th>Destino</th>
+								<th>Precio </th>
+								<th>Importe </th>
+								</tr>
+								</thead>
+								<tbody>
+								<?php 
+									$total_guia = 0;
+									if(!$result_guia){
+										echo "<pre>".mysqli_error($result_guia)."</pre>";
+										
+									}
+									// echo "<pre>".$consulta_guia."</pre>";
+									
+									foreach($guias AS $i =>$fila){
+										$importe= $fila["cantidad"] * $fila["precio_boletos"];
+										$total_guia+= $importe;
+										
+									?>
+									<tr>
+									
+									<td><?php echo $fila["cantidad"]?></td>
+									<td><?php echo $fila["destino"]?></td>
+									<td><?php echo $fila["precio_boletos"]?></td>
+									<td class="text-right"><?php echo number_format($importe, 2);?></td>
+									
+									
+									</tr>
+									
+									<?php
+										
+										
+									}
+								?>
+								
+								</tbody>
+								<tfoot>
+								<tr >
+								<td colspan="3"> <b>TOTAL<b></td>
+								
+								<td class="text-right"><?php echo number_format($total_guia,2)?></td>
+								
+								</tr>
+								</tfoot>
+								</table>
+								
+								<button class="btn btn-info" id="imprimir_guia">
+								<i class="fas fa-print"></i> Imprimir y Finalizar 
+								</button>
+								</div>
+								</div>
+								
+								<?php
+									
+								}
+								
+								else {
+									echo "Error en ".$consulta.mysqli_Error($link);
+									
+								}
+								
+								
+							?>								

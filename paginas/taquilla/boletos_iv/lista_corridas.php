@@ -25,8 +25,9 @@
 	LEFT JOIN (SELECT id_corridas, SUM(precio_boletos) AS importe_corridas
 	FROM boletos GROUP BY id_corridas
 	) AS t_importes USING(id_corridas)
-	WHERE corridas.id_administrador = {$_COOKIE["id_administrador"]}
-	
+	WHERE corridas.id_administrador = '{$_COOKIE["id_administrador"]}'
+	AND date(fecha_corridas) = CURDATE()
+	AND corridas.id_usuarios = '{$_COOKIE["id_usuarios"]}'
 	ORDER BY id_corridas DESC
 	";
 	
