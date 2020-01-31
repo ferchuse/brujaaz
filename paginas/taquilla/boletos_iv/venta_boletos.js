@@ -8,27 +8,33 @@ $(document).ready(onLoad);
 
 function onLoad(){
 	
-	listaBoletos();
-	
-	
 	listarCorridas();
+	// listaBoletos();
 	
-	$("#lista_boletos").on("click", ".cancelar", confirmaCancelacion);
-	
-	$("#lista_corridas").on("click", ".imprimir", function(){
-		imprimirGuia($(this).data("id_registro"));
-	});
-	
+	$("#form_filtros select").on("change", listarCorridas);
 	
 	$("#btn_test").on("click", imprimirPrueba);
-	$("#lista_corridas").on("change", ".select", sumarCorridas);
 	
 	$("#btn_pagar").on("click", quienRecibe);
 	
+	
+	
+	$("#lista_boletos").on("click", ".cancelar", confirmaCancelacion);
 	$("#lista_boletos").on("click", ".imprimir", function(){
 		imprimirESCPOS($(this).data("id_registro"))
 		
 	});
+	
+	
+	$("#lista_corridas").on("click", ".cancelar", confirmaCancelarCorrida);
+	
+	$("#lista_corridas").on("click", ".imprimir", function(){
+		imprimirGuia($(this).data("id_registro"));
+	});
+	$("#lista_corridas").on("change", ".select", sumarCorridas);
+	
+	
+	
 	
 	
 	
@@ -71,6 +77,66 @@ function quienRecibe(evt){
 }
 
 
+function confirmaCancelarCorrida(event){
+	console.log("confirmaCancelacion()");
+	let boton = $(this);
+	let icono = boton.find(".fas");
+	var id_registro = $(this).data("id_registro");
+	var fila = boton.closest('tr');
+	
+	alertify.prompt()
+  .setting({
+    'reverseButtons': true,
+		'labels' :{ok:"SI", cancel:'NO'},
+		'title': "Cancelar Guia" ,
+    'message': "Motivo de Cancelación" ,
+    'onok':cancelarCorrida,
+    'oncancel': function(){
+			boton.prop('disabled', false);
+			
+		}
+	}).show();
+	
+	
+	function cancelarCorrida(evt, motivo){
+		if(motivo == ''){
+			console.log("Escribe un motivo");
+			alertify.error("Escribe un motivo");
+			return false;
+			
+		}
+		
+		boton.prop("disabled", true);
+		icono.toggleClass("fa-times fa-spinner fa-spin");
+		
+		
+		return $.ajax({
+			url: "boletos_iv/cancelar_corrida.php",
+			method:"POST",
+			dataType:"JSON",
+			data:{
+				id_registro : id_registro,
+				nombre_usuarios : $("#sesion_nombre_usuarios").text(),
+				motivo : motivo
+			}
+			}).done(function (respuesta){
+			if(respuesta.result == "success"){
+				alertify.success("Cancelado");
+				listarCorridas();
+			}
+			else{
+				alertify.error(respuesta.result);
+				
+			}
+			
+			}).always(function(){
+			boton.prop("disabled", false);
+			icono.toggleClass("fa-times fa-spinner fa-spin");
+			
+		});
+	}
+}
+
 function confirmaCancelacion(event){
 	console.log("confirmaCancelacion()");
 	let boton = $(this);
@@ -84,7 +150,7 @@ function confirmaCancelacion(event){
 		'labels' :{ok:"SI", cancel:'NO'},
 		'title': "Cancelar Boleto" ,
     'message': "Motivo de Cancelación" ,
-    'onok':cancelarRegistro,
+    'onok':cancelarBoleto,
     'oncancel': function(){
 			boton.prop('disabled', false);
 			
@@ -92,9 +158,7 @@ function confirmaCancelacion(event){
 	}).show();
 	
 	
-	
-	
-	function cancelarRegistro(evt, motivo){
+	function cancelarBoleto(evt, motivo){
 		if(motivo == ''){
 			console.log("Escribe un motivo");
 			alertify.error("Escribe un motivo");
@@ -293,7 +357,7 @@ function listarCorridas(){
 	console.log("listarCorridas()")
 	$.ajax({
 		url: 'boletos_iv/lista_corridas.php',
-		data:{}
+		data: $("#form_filtros").serialize()
 	}).done(
 	function(respuesta){
 		$("#lista_corridas").html(respuesta)

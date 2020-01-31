@@ -61,10 +61,16 @@
 											<button type="button" class="btn btn-success mb-2 nuevo">
 												<i class="fas fa-plus"></i> Nueva
 											</button>
-											<label>
-												Empresa:
-											<label>
-											<?php echo generar_select($link, "empresas", "id_empresas", "nombre_empresas", true	);	?>
+											<form id="form_filtros" class="form-inline">
+												<label>
+													Empresa:
+												</label>
+												<?php echo generar_select($link, "empresas", "id_empresas", "nombre_empresas", true	);	?>
+												<label>
+													Usuario:
+												</label>
+												<?php echo generar_select($link, "usuarios", "id_usuarios", "nombre_usuarios", true, false, false, $_COOKIE["id_usuarios"])?>
+											</form>
 										</div>
 									</div>
 									<div class="card">
@@ -95,82 +101,82 @@
 										</div>
 										<div class="form-group col-2"> 
 											<button class="btn btn-default btn-sm mt-4" id="btn_test">
-													<i class="fas fa-test"></i> Probar Impresora
-												</button>
+												<i class="fas fa-test"></i> Probar Impresora
+											</button>
 										</div>
-									</div>	
-									<hr>
-									<form id="form_boletos" class="was-validated" autocomplete="off">
-										<div class="row">
-											<div class="col-1  form-group">
-												<label>Cantidad:	</label>
-												<input min="1" required id="cantidad" type="number" name="cantidad" value="1" class="form-control cantidad" >
+										</div>	
+										<hr>
+										<form id="form_boletos" class="was-validated" autocomplete="off">
+											<div class="row">
+												<div class="col-1  form-group">
+													<label>Cantidad:	</label>
+													<input min="1" required id="cantidad" type="number" name="cantidad" value="1" class="form-control cantidad" >
+												</div>
+												<div class="col-3  form-group">
+													<label>Destino:	</label>
+													<?php include("boletos_iv/destinos.php")?>
+												</div>
+												<div class="col-2 form-group">
+													<label>Precio:	</label>
+													<input id="precio" name="precio" readonly class="form-control precio" >
+												</div>
+												<div class="col-2 form-group">
+													<label>Importe:	</label>
+													<input id="importe" name="importe" readonly class="form-control importe" >
+												</div>
+												<div class="col-2 form-group ">
+													<button class="btn btn-success mt-4" >
+														<i class="fas fa-dollar-sign"></i> Vender
+													</button>
+												</div>
 											</div>
-											<div class="col-3  form-group">
-												<label>Destino:	</label>
-												<?php include("boletos_iv/destinos.php")?>
+										</form>
+										
+										<div class="card card-primary mt-4 ">
+											<div class="card-header text-center">
+												Resumen de Ventas
 											</div>
-											<div class="col-2 form-group">
-												<label>Precio:	</label>
-												<input id="precio" name="precio" readonly class="form-control precio" >
+											<div class="card-body" id="lista_boletos">
+												<h3 class="text-center">Cargando <i class="fas fa-spinner fa-pulse"></i></h3>
 											</div>
-											<div class="col-2 form-group">
-												<label>Importe:	</label>
-												<input id="importe" name="importe" readonly class="form-control importe" >
-											</div>
-											<div class="col-2 form-group ">
-												<button class="btn btn-success mt-4" >
-													<i class="fas fa-dollar-sign"></i> Vender
-												</button>
-											</div>
-										</div>
-									</form>
-									
-									<div class="card card-primary mt-4 ">
-										<div class="card-header text-center">
-											Resumen de Ventas
-										</div>
-										<div class="card-body" id="lista_boletos">
-											<h3 class="text-center">Cargando <i class="fas fa-spinner fa-pulse"></i></h3>
 										</div>
 									</div>
-								</div>
-								
-								
-								
-							</div><!-- /.tab-content-->
-						</div><!-- /.card-body-->
-					</div><!-- /.card -->
-				</div><!-- /.container-fluid -->
-				
-				
-				<!-- Sticky Footer -->
-				<footer class="sticky-footer">
-					<div class="container my-auto ">
-						<div class="copyright text-center my-auto">
-							<span class="d-print-none">Copyright © Glifo Media 2018</span>
+									
+									
+									
+								</div><!-- /.tab-content-->
+							</div><!-- /.card-body-->
+						</div><!-- /.card -->
+					</div><!-- /.container-fluid -->
+					
+					
+					<!-- Sticky Footer -->
+					<footer class="sticky-footer">
+						<div class="container my-auto ">
+							<div class="copyright text-center my-auto">
+								<span class="d-print-none">Copyright © Glifo Media 2018</span>
+							</div>
 						</div>
-					</div>
-				</footer>
-			</div> 
-			<!-- /.content-wrapper -->
-		</div>
-		<!-- /#wrapper -->
-		<form id="form_pagar_corridas">
-		<input type="number" id="total_pago" name="total_pago">
-		</form>
-		<!-- Scroll to Top Button-->
-		<a class="scroll-to-top rounded d-print-none" href="#page-top">
-			<i class="fas fa-angle-up"></i>
-		</a>
-		
-		<div class="d-print-block p-2" style="max-width:100mm;" hidden id="ticket" >
-		</div>
-		<?php include("../../scripts.php")?>
-		<script src="../../plugins/pos_print/websocket-printer.js" > </script>
-		<?php include("boletos_iv/form_corridas.php");?>
-		
-		<script src="boletos_iv/venta_boletos.js?v=<?= date("Y-m-d-H-i-s")?>"></script>
-		
-	</body>
-</html>																												
+					</footer>
+				</div> 
+				<!-- /.content-wrapper -->
+			</div>
+			<!-- /#wrapper -->
+			<form id="form_pagar_corridas">
+				<input type="number" id="total_pago" name="total_pago">
+			</form>
+			<!-- Scroll to Top Button-->
+			<a class="scroll-to-top rounded d-print-none" href="#page-top">
+				<i class="fas fa-angle-up"></i>
+			</a>
+			
+			<div class="d-print-block p-2" style="max-width:100mm;" hidden id="ticket" >
+			</div>
+			<?php include("../../scripts.php")?>
+			<script src="../../plugins/pos_print/websocket-printer.js" > </script>
+			<?php include("boletos_iv/form_corridas.php");?>
+			
+			<script src="boletos_iv/venta_boletos.js?v=<?= date("Y-m-d-H-i-s")?>"></script>
+			
+		</body>
+	</html>																													
