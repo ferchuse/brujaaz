@@ -19,6 +19,44 @@
 	WHERE precios_boletos.id_administrador = {$_GET["id_administrador"]}
 	ORDER BY nombre_destinos
 	";
+	
+
+	
+	$result = mysqli_query($link,$consulta);
+	if($result){
+		
+		if( mysqli_num_rows($result) == 0){
+			die("<div class='alert alert-danger'>No hay registros</div>");
+			
+		}
+		
+		
+		while($fila = mysqli_fetch_assoc($result)){
+			
+			$resultados[] = $fila ;
+			
+			
+		}
+		
+		
+		foreach($resultados as $registro){
+			
+				$respuesta["destinos"][] = $registro["nombre_destinos"];
+				$respuesta["precios"][] = number_format($registro["precio"], 0);
+		}
+		
+		
+	}
+	
+	else {
+		echo "<pre>Error en ".$consulta.mysqli_Error($link)."</pre>";
+		
+	}
+	
+	
+	$consulta = "SELECT * FROM taquillas 	";
+	
+
   
 	
 	$result = mysqli_query($link,$consulta);
@@ -38,10 +76,9 @@
 		}
 		
 		
-		foreach($resultados as $i=> $registro){
+		foreach($resultados as $registro){
 			
-				$respuesta["destinos"][] = $registro["nombre_destinos"];
-				$respuesta["precios"][] = number_format($registro["precio"], 0);
+				$respuesta["taquillas"][] = $registro;
 		}
 		
 		
