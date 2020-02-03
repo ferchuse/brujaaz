@@ -49,6 +49,7 @@
 				<th>Importe</th>
 				<th>Corridas</th>
 				<th>Usuario</th>
+				<th>Recibe</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -69,8 +70,9 @@
 					<td class="text-right">
 						$ <?php echo number_format($fila["total_pagos"], 0)?>
 					</td>
-					<td><?php echo $fila["corridas"]?></td>
+					<td style="word-break:break-all"><?php echo $fila["corridas"]?></td>
 					<td><?php echo $fila["nombre_usuarios"]?></td>
+					<td><?php echo $fila["recibe"]?></td>
 				</tr>
 				
 				<?php
