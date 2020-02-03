@@ -5,7 +5,7 @@
 	}
 	include('../../../conexi.php');
 	include('../../../funciones/generar_select.php');
-	include('../../../funciones/console_log.php');
+	include('../../../funciones/dame_permiso.php');
 	$link = Conectarse();
 	$filas = array();
 	$respuesta = array();
@@ -60,9 +60,32 @@
 				?>
 				<tr>
 					<td>
-						<button class="btn btn-info  btn-sm imprimir" title="Imprimir" data-id_pagos="<?php echo $fila["id_pagos"]?>"  >
-							<i class="fas fa-print"></i> 
-						</button>
+						<?php if($fila["estatus_pagos"] != 'Cancelado'){?>
+							
+							<button class="btn btn-info  btn-sm imprimir" title="Imprimir" data-id_registro="<?php echo $fila["id_pagos"]?>"  >
+								<i class="fas fa-print"></i> 
+							</button>
+							<?php
+								if(dame_permiso("venta_boletos.php", $link) == 'Supervisor'){
+								?>
+								<button class="btn btn-danger cancelar" title="Cancelar"     data-id_registro='<?php echo $fila["id_pagos"]?>'>
+									<i class="fas fa-times"></i>
+								</button>	
+								
+								<?php
+								}
+								
+								$total_pagos+= $fila["total_pagos"];
+							}
+							else{
+								
+								
+								echo "<span class='badge badge-danger'>".$fila["estatus_pagos"]."</span>";
+								echo "<small>".$fila["datos_cancelacion"]."</small>";
+							}
+							
+						?>
+						
 					</td>
 					
 					<td><?php echo $fila["id_pagos"]?></td>
@@ -78,24 +101,18 @@
 				<?php
 					
 					
-					$total_pagos+= $fila["total_pagos"];
+					
 					
 				}
 			?>
 			
-			<tr hidden>
-				<td colspan="3"> TOTALES</td>
-				<td><?php echo number_format($total_saldo_unidades);?></td>
-				<td><?php echo number_format($total_ingresos);?></td>
-				<td><?php echo number_format($total_cargos);?></td>
-				<td><?php echo number_format($ingresos)?></td>
-				
-			</tr>
+			
 		</tbody>
 		<tfoot>
 			<tr class="bg-secondary text-white">
 				<td colspan="3">TOTAL:</td>
 				<td class="text-right">$ <?= number_format($total_pagos,0)?></td>
+				<td></td>
 				<td></td>
 				<td></td>
 			</tr>

@@ -6,7 +6,7 @@
 		// return false;
 		$consulta = "SELECT * FROM permisos LEFT JOIN paginas USING(id_paginas) 
 		WHERE url_paginas = '$url_paginas' 
-		AND id_usuarios = {$_SESSION["id_usuarios"]}";
+		AND id_usuarios = {$_COOKIE["id_usuarios"]}";
 		
 		
 		$result = mysqli_query($link, $consulta) or die("Error dame_permiso($consulta) ". mysqli_error($link));
