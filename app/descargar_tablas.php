@@ -1,4 +1,5 @@
 <?php 
+	header("Content-Type: application/json");
 	session_start();
 	// if(count($_SESSION) == 0){
 		// die("<div class='alert alert-danger'>Tu Sesión ha caducado, recarga la página.</div>");
@@ -10,7 +11,7 @@
 	
 	if(isset($_GET["id_administrador"])){
 		
-		$id_administrador = $_GET["id_administrador";
+		$id_administrador = $_GET["id_administrador"];
 	}
 	else{
 		$id_administrador = 2;
@@ -23,7 +24,7 @@
 	nombre_origenes AS nombre_destinos
 	FROM origenes) t_destinos
 	USING(id_destinos)
-	WHERE precios_boletos.id_administrador = '{$id_administrador}'
+	WHERE precios_boletos.id_administrador = '$id_administrador'
 	ORDER BY nombre_destinos
 	";
 	
@@ -93,7 +94,7 @@
 	////USUARIOS
 	
 	$consulta = "SELECT * FROM usuarios 
-	WHERE id_administrador = 2	
+	WHERE id_administrador = '$id_administrador'
 	AND estatus_usuarios = 'Alta'";
 		
 	$result = mysqli_query($link,$consulta);
