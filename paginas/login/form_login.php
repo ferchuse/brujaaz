@@ -49,6 +49,6 @@
 		</div>
 		
 		<?php include("../../scripts.php")?>
-		<script src="login.js"></script>
+		<script src="login.js?v=<?= date("d-m-Y-H-i-s")?>"></script>
 	</body>
 </html>

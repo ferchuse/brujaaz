@@ -54,11 +54,11 @@
 	}
 	
 	
+	
+	////TAQUILLAS
+	
 	$consulta = "SELECT * FROM taquillas 	";
-	
-
-  
-	
+		
 	$result = mysqli_query($link,$consulta);
 	if($result){
 		
@@ -70,25 +70,51 @@
 		$resultados = [];
 		
 		while($fila = mysqli_fetch_assoc($result)){
-			
 			$resultados[] = $fila ;
-			
-			
 		}
-		
 		
 		foreach($resultados as $registro){
-			
 				$respuesta["taquillas"][] = $registro;
 		}
-		
-		
 	}
-	
 	else {
 		echo "<pre>Error en ".$consulta.mysqli_Error($link)."</pre>";
 		
 	}
+	
+	
+	////USUARIOS
+	
+	$consulta = "SELECT * FROM usuarios 
+	WHERE id_administrador = 2	
+	AND estatus_usuarios = 'Alta'";
+		
+	$result = mysqli_query($link,$consulta);
+	if($result){
+		
+		if( mysqli_num_rows($result) == 0){
+			die("<div class='alert alert-danger'>No hay registros</div>");
+			
+		}
+		
+		$resultados = [];
+		
+		while($fila = mysqli_fetch_assoc($result)){
+			$resultados[] = $fila ;
+		}
+		
+		foreach($resultados as $registro){
+				$respuesta["usuarios"][] = $registro;
+		}
+	}
+	else {
+		echo "<pre>Error en ".$consulta.mysqli_Error($link)."</pre>";
+		
+	}
+	
+	
+	
+	
 	
 	echo json_encode($respuesta);
 	
