@@ -8,6 +8,13 @@
 	$filas = array();
 	$respuesta = array();
 	
+	if(isset($_GET["id_administrador"])){
+		
+		$id_administrador = $_GET["id_administrador";
+	}
+	else{
+		$id_administrador = 2;
+	}
 	
 	$consulta = "SELECT * FROM precios_boletos 
 	LEFT JOIN origenes USING(id_origenes) 
@@ -16,7 +23,7 @@
 	nombre_origenes AS nombre_destinos
 	FROM origenes) t_destinos
 	USING(id_destinos)
-	WHERE precios_boletos.id_administrador = {$_GET["id_administrador"]}
+	WHERE precios_boletos.id_administrador = '{$id_administrador}'
 	ORDER BY nombre_destinos
 	";
 	
