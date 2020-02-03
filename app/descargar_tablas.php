@@ -95,7 +95,9 @@
 	
 	$consulta = "SELECT * FROM usuarios 
 	WHERE id_administrador = '$id_administrador'
-	AND estatus_usuarios = 'Alta'";
+	AND estatus_usuarios = 'Alta'
+	ORDER BY nombre_usuarios
+	";
 		
 	$result = mysqli_query($link,$consulta);
 	if($result){
