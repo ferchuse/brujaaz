@@ -57,12 +57,25 @@
 	LEFT JOIN (SELECT id_corridas, SUM(precio_boletos) AS importe_corridas
 	FROM boletos GROUP BY id_corridas
 	) AS t_importes USING(id_corridas)
-	WHERE corridas.id_administrador = '{$_COOKIE["id_administrador"]}'";
+	WHERE corridas.id_administrador = '{$_COOKIE["id_administrador"]}'
+	
+	
+	AND date(fecha_corridas) BETWEEN '{$_GET["fecha_inicial"]}' AND '{$_GET["fecha_final"]}'
+	";
+	
 	
 	if($_GET["id_usuarios"] != ""){
 		$consulta.="
-		AND date(fecha_corridas) = CURDATE()
+		
 		AND corridas.id_usuarios = '{$_GET["id_usuarios"]}'
+		
+		";
+		
+	}
+	if($_GET["id_empresas"] != ""){
+		$consulta.="
+		
+		AND corridas.id_empresas = '{$_GET["id_empresas"]}'
 		
 		";
 		
