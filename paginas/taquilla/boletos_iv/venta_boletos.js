@@ -11,6 +11,7 @@ function onLoad(){
 	listarCorridas();
 	// listaBoletos();
 	
+
 	$("#form_filtros").on("submit", filtrarRegistros);
 	
 	$("#btn_test").on("click", imprimirPrueba);
@@ -19,11 +20,11 @@ function onLoad(){
 	
 	$("#form_corridas input[name='num_eco']").on("keydown", buscarUnidad);
 	// $("#form_corridas select[name='id_empresas']").on("keydown", function(event){
-		
-		// if(event.key == "Enter"){
-			// $(this).closest("form").submit();
-			
-		// }
+	
+	// if(event.key == "Enter"){
+	// $(this).closest("form").submit();
+	
+	// }
 	// });
 	
 	
@@ -42,10 +43,7 @@ function onLoad(){
 	});
 	$("#lista_corridas").on("change", ".select", sumarCorridas);
 	
-	
-	
-	
-	
+		$("#lista_corridas").on("change", "#check_todos", selectTodos);
 	
 	$(".nuevo").on('click',function(){
 		console.log("Nuevo")
@@ -63,9 +61,12 @@ function onLoad(){
 	$(".cantidad").change(calculaImporte );
 	
 	
-	
-	
-	
+}
+
+function selectTodos(evt){
+	console.log("selectTodos()")
+	$("#lista_corridas .select").prop("checked", $(this).prop("checked"));
+	sumarCorridas();
 }
 
 function filtrarRegistros(evt){
@@ -75,6 +76,7 @@ function filtrarRegistros(evt){
 	listarCorridas();
 	
 }
+
 function quienRecibe(evt){
 	console.log("quienRecibe()")
 	
@@ -240,14 +242,13 @@ function sumarCorridas(){
 	let total_pago = 0
 	
 	$(".select:checked").each(function(i, item){
-		total_pago+= $(this).data("importe_corridas")
-		
-		
+		total_pago+= $(this).data("importe_corridas");
 	})
 	
 	$("#total_pago").val(total_pago);
 	
-	$("#span_num_selected").text($(".select:checked").length);
+	$("#span_num_selected").text(total_pago);
+	// $("#span_num_selected").text($(".select:checked").length);
 	
 	if($(".select:checked").length > 0 ){
 		
@@ -347,7 +348,7 @@ function guardarCorrida(event){
 		}
 		}).always(function(){
 		boton.prop('disabled',false);
-		icono.toggleClass('fa-save fa-spinner fa-pulse ');
+		icono.toggleClass('fa-save fa-spinner fa-pulse');
 	});
 }
 
@@ -371,15 +372,23 @@ function listaBoletos(){
 
 function listarCorridas(){
 	console.log("listarCorridas()")
+	
+	let boton = $("#form_filtros").find(":submit");
+	let icono = boton.find(".fas");
+	
+	boton.prop("disabled", true);
+	icono.toggleClass("fa-search fa-spinner fa-spin");
+	
 	$.ajax({
 		url: 'boletos_iv/lista_corridas.php',
 		data: $("#form_filtros").serialize()
-	}).done(
-	function(respuesta){
+	}).done(function(respuesta){
 		$("#lista_corridas").html(respuesta)
-		// $('.imprimir').on('click',imprimirTicket)
-		// $(".cancelar").click(confirmaCancelacion);
 		
+		}).always(function(){
+		
+		boton.prop("disabled", false);
+		icono.toggleClass("fa-search fa-spinner fa-spin");
 	});
 }
 
@@ -663,7 +672,7 @@ function buscarUnidad(event){
 				
 				$("#form_corridas #id_empresas").val(respuesta.unidad.id_empresas);
 				$("#form_corridas").submit();
-			
+				
 			}
 			else{
 				

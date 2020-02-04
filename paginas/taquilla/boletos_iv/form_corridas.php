@@ -30,27 +30,27 @@
 					
 					<div class="form-row">
 						<div class="form-group col-6">
-							<label for="fecha_abonogeneral">Taquilla:</label>
+							<label for="taquilla">Taquilla:</label>
 							<input class="form-control" name="taquilla" value="Indios Verdes" readonly>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label for="fecha_abonogeneral">Fecha:</label>
+							<label for="fecha_corridas">Fecha:</label>
 							<input type="date" class="form-control" value="<?php echo date("Y-m-d");?>" id="fecha_corridas" name="fecha_corridas" required readonly>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="fecha_abonogeneral">Hora:</label>
+							<label for="hora_corridas">Hora:</label>
 							<input type="time" class="form-control" value="<?php echo date("H:i:s");?>" id="hora_corridas" name="hora_corridas" required readonly>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label for="fecha_abonogeneral">Origen:</label>
+							<label for="origen">Origen:</label>
 							<input class="form-control" name="origen" value="Indios Verdes" readonly>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="fecha_abonogeneral">Destino:</label>
+							<label for="destino">Destino:</label>
 							<input class="form-control" name="destino" value="Sauces" readonly>
 						</div>
 					</div>			

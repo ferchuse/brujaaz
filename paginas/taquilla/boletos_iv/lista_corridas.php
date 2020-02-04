@@ -104,7 +104,10 @@
 		<thead>
 			<tr>
 				<th>Estatus</th>
-				<th>Estatus Pago</th>
+				<th>
+					Estatus Pago
+						<input type="checkbox" id="check_todos" >
+				</th>
 				<th>Folio</th>
 				<th>Num Eco</th>
 				<th>Fecha</th>
@@ -224,46 +227,46 @@
 					<td><?php echo $filas["nombre_empresas"]?></td>
 					<td><?php echo $filas["nombre_usuarios"]?></td>
 					
-					</tr>
-					
-					<?php
-						if($fila["estatus_corridas"] != "Cancelada"){
-							
-							$total_corrida+= $filas["importe_corridas"];
-						}
-						// $total_ingresos+= $ingresos;
-						// $total_cargos+= $filas["gasto_administracion"];
-						// $total_seguro+= $filas["seguro_derroteros"];
+				</tr>
+				
+				<?php
+					if($fila["estatus_corridas"] != "Cancelada"){
 						
+						$total_corrida+= $filas["importe_corridas"];
 					}
-					?>
+					// $total_ingresos+= $ingresos;
+					// $total_cargos+= $filas["gasto_administracion"];
+					// $total_seguro+= $filas["seguro_derroteros"];
 					
-					<tr hidden>
-					<td colspan="4"> TOTALES</td>
-					<td><?php echo number_format($total_saldo_unidades);?></td>
-					<td><?php echo number_format($total_ingresos);?></td>
-					<td><?php echo number_format($total_cargos);?></td>
-					<td><?php echo number_format($ingresos)?></td>
-					
-					</tr>
-					</tbody>
-					<tfoot>
-					<tr class="bg-secondary text-white">
-					<td colspan="6">TOTAL</td>
-					<td class="text-right"><?= number_format($total_corrida,0)?></td>
-					<td></td>
-					</tr>
-					</tfoot>
-					</table>
-					
-					<?php
-						
-					}
-					
-					else {
-						echo "Error en ".$consulta.mysqli_Error($link);
-						
-					}
-					
-					
-					?>						
+				}
+			?>
+			
+			<tr hidden>
+				<td colspan="4"> TOTALES</td>
+				<td><?php echo number_format($total_saldo_unidades);?></td>
+				<td><?php echo number_format($total_ingresos);?></td>
+				<td><?php echo number_format($total_cargos);?></td>
+				<td><?php echo number_format($ingresos)?></td>
+				
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr class="bg-secondary text-white">
+				<td colspan="6">TOTAL</td>
+				<td class="text-right"><?= number_format($total_corrida,0)?></td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+	
+	<?php
+		
+	}
+	
+	else {
+		echo "Error en ".$consulta.mysqli_Error($link);
+		
+	}
+	
+	
+?>						
