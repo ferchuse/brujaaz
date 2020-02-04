@@ -2,6 +2,7 @@
 	include("../../paginas/login/login_check.php");
 	include('../../conexi.php');
 	include('../../funciones/generar_select.php');
+	
 	$link = Conectarse();
 	$nombre_pagina = "Venta de Boletos";
 	//include('control/select_general.php');
@@ -76,10 +77,14 @@
 									<div class="card">
 										<div class="card-header">
 											<h3 >Lista de Corridas
-												
+												<?php if(dame_permiso("venta_boletos.php", $link) == "Supervisor"){?>
 												<button disabled type="button" class="btn btn-primary float-right" id="btn_pagar">
-													<i class="fas fa-dollar-sign"></i> Pagar <span id="span_num_selected">0</span>
+													<i class="fas fa-dollar-sign"></i> Pagar 
+													<span id="span_num_selected">0</span>
 												</button>
+												<?php
+												}	
+												?>
 											</h3>
 										</div>
 										<div class="card-body" id="lista_corridas">
