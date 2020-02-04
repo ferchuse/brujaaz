@@ -11,11 +11,20 @@ function onLoad(){
 	listarCorridas();
 	// listaBoletos();
 	
-	$("#form_filtros select").on("change", listarCorridas);
+	$("#form_filtros").on("submit", filtrarRegistros);
 	
 	$("#btn_test").on("click", imprimirPrueba);
 	
 	$("#btn_pagar").on("click", quienRecibe);
+	
+	$("#form_corridas input[name='num_eco']").on("keydown", buscarUnidad);
+	// $("#form_corridas select[name='id_empresas']").on("keydown", function(event){
+		
+		// if(event.key == "Enter"){
+			// $(this).closest("form").submit();
+			
+		// }
+	// });
 	
 	
 	
@@ -59,6 +68,13 @@ function onLoad(){
 	
 }
 
+function filtrarRegistros(evt){
+	console.log("filtrarRegistros()")
+	evt.preventDefault();
+	
+	listarCorridas();
+	
+}
 function quienRecibe(evt){
 	console.log("quienRecibe()")
 	
@@ -625,6 +641,40 @@ function imprimirPago(id_pagos){
 		icono.toggleClass("fa-print fa-spinner fa-spin");
 		
 	});
+}
+
+
+function buscarUnidad(event){
+	console.log("buscarUnidad()");
+	console.log("eventkey()", event.key);
+	
+	let num_eco = $(event.target).val();
+	$(event.target).addClass("buscando");
+	if(event.key == "Enter"){
+		console.log("enter()");
+		$.ajax({
+			url: "../catalogos/unidades/consultas/buscar_unidad.php" ,
+			dataType: "JSON" ,
+			data:{
+				num_eco : num_eco
+			}
+			}).done(function (respuesta){
+			if(respuesta.existe == "SI"){
+				
+				$("#form_corridas #id_empresas").val(respuesta.unidad.id_empresas);
+				$("#form_corridas").submit();
+			
+			}
+			else{
+				
+				alertify.error("Unidad no encontrada");
+				$("#form_corridas input[name='num_eco']").focus();
+			}
+			
+			}).always(function(){
+			$(event.target).removeClass("buscando");
+		});
+	}
 }
 
 
