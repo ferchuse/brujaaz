@@ -73,12 +73,10 @@
 		
 	}
 	if($_GET["id_empresas"] != ""){
-		$consulta.="
-		
-		AND corridas.id_empresas = '{$_GET["id_empresas"]}'
-		
-		";
-		
+		$consulta.="AND corridas.id_empresas = '{$_GET["id_empresas"]}'";
+	}	
+	if($_GET["num_eco"] != ""){
+		$consulta.="AND corridas.num_eco = '{$_GET["num_eco"]}'";
 	}
 	
 	$consulta.="
@@ -106,7 +104,7 @@
 				<th>Estatus</th>
 				<th>
 					Estatus Pago
-						<input type="checkbox" id="check_todos" >
+					<input type="checkbox" id="check_todos" >
 				</th>
 				<th>Folio</th>
 				<th>Num Eco</th>
@@ -147,8 +145,10 @@
 								
 								echo "<span class='badge badge-warning'>".$filas["estatus_corridas"]."</span>";
 								
+								// if(dame_permiso(""))
 							?>
-							<button hidden class="btn btn-info  btn-sm imprimir " title="Imprimir" data-id_registro='<?php echo $filas["id_corridas"]?>'>
+							
+							<button  class="btn btn-info  btn-sm imprimir " title="Imprimir" data-id_registro='<?php echo $filas["id_corridas"]?>'>
 								<i class="fas fa-print"></i> Imprimir Guía
 							</button>	
 							
