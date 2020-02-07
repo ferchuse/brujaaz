@@ -65,12 +65,7 @@
 	
 	
 	if($_GET["id_usuarios"] != ""){
-		$consulta.="
-		
-		AND corridas.id_usuarios = '{$_GET["id_usuarios"]}'
-		
-		";
-		
+		$consulta.="AND corridas.id_usuarios = '{$_GET["id_usuarios"]}'";
 	}
 	if($_GET["id_empresas"] != ""){
 		$consulta.="AND corridas.id_empresas = '{$_GET["id_empresas"]}'";

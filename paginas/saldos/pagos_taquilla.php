@@ -39,6 +39,7 @@
 					</ol>
 					
 					<form class="form-inline d-print-none" id="form_filtros">
+						
 						<div class="form-group mx-sm-3 mb-2">
 							<label for="" class="col-sm col-form-label">Desde:</label>
 							<input type="date" class="form-control" value="<?php echo date("Y-m-d");?>" name="fecha_inicial" id="fecha_inicial">
@@ -46,14 +47,20 @@
 						<div class="form-group mx-sm-3 mb-2">
 							<label for="" class="col-sm col-form-label">Hasta:</label>
 							<input type="date" class="form-control" value="<?php echo $date_final;?>" name="fecha_final" id="fecha_final">
-							<button type="submit"  title="Buscar" class="btn btn-primary">
-								<i class="fas fa-search"></i>
-							</button>
+							
 						</div>
+						<div class="form-group mx-sm-3 mb-2">
+							<label>Usuario: </label>
+							<?php echo generar_select($link, "usuarios", "id_usuarios", "nombre_usuarios", true, false, false, $_COOKIE["id_usuarios"])?>
+						</div>
+						
 						<div class=" col-md-2" hidden>
 							<button type="button" id="btn_imprimir" title="Imprimir" class="btn btn-outline-primary mb-2"><i class="fas fa-print"></i></button>
 							<button type="button" id="btn_excel" title="Exportar a Excel" class="btn btn-outline-success mb-2"><i class="far fa-file-excel"></i></button>
 						</div>
+						<button type="submit"  title="Buscar" class="btn btn-primary">
+							<i class="fas fa-search"></i> Buscar
+						</button>
 					</form>
 					
 					<div class="card mb-3" id="tableCard">

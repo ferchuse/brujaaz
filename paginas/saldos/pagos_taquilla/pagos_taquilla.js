@@ -3,8 +3,8 @@ var printService = new WebSocketPrinter();
 
 $(document).ready(function(){
   
-
-		
+	
+	
 	$('#lista_pagos').on('click', '.imprimir', imprimirPago );
 	
 	$("#lista_pagos").on("click", ".cancelar", confirmaCancelarPagos);
@@ -20,12 +20,23 @@ $(document).ready(function(){
 function listarPagos(event){
 	event.preventDefault();
 	console.log("listaPagos()");
+	let boton = $(this).find(":submit");
+	let icono = boton.find(".fas");
+	
+	boton.prop("disabled", true);
+	icono.toggleClass("fa-search fa-spinner fa-spin");
+	
 	
 	$.ajax({
 		url: 'pagos_taquilla/lista_pagos.php',
 		data: $("#form_filtros").serialize()
 		}).done(function(respuesta){
 		$("#lista_pagos").html(respuesta);
+		}).fail().always(function(){
+		
+		boton.prop("disabled", false);
+		icono.toggleClass("fa-search fa-spinner fa-spin");
+		
 	});
 }
 

@@ -20,6 +20,11 @@
 	
 	
 	$consulta .=	" WHERE DATE(fecha_pagos) BETWEEN '{$_GET["fecha_inicial"]}' AND '{$_GET["fecha_final"]}'";
+	
+	
+	if($_GET["id_usuarios"] != ""){
+		$consulta.="AND pagos_taquilla.id_usuarios = '{$_GET["id_usuarios"]}'";
+	}
 	$consulta .=	" ORDER BY id_pagos ASC";
 	
 	
