@@ -19,4 +19,21 @@ echo ESC."a".chr(1); // Centered printing
 echo ESC."d".chr(1); // Blank line
 echo "987654321\n"; // Print number
 echo GS."V\x41".chr(3); // Cut
+echo "******************"; // Cut
+echo chr(1);
+echo chr(2);
+echo chr(3);
+echo chr(4);
+echo chr(5);
 exit(0);
+
+$test "
+
+@!3
+
+@@aHello World
+!aESC/POS Printer Test
+!aGoodbye World
+VA";
+
+
