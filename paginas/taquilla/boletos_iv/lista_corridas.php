@@ -105,7 +105,7 @@
 				<th>Num Eco</th>
 				<th>Fecha</th>
 				<th>Hora</th>
-				<th>Importe</th>
+				<th hidden>Importe</th>
 				<th>Total</th>
 				<th>Empresa</th>
 				<th>Usuario</th>
@@ -187,7 +187,7 @@
 							switch($filas["estatus_pago"]){
 								case "PENDIENTE":
 								if($filas["estatus_corridas"] == "Finalizada"){
-									echo "<label class='badge badge-warning'> <input type='checkbox' form='form_pagar_corridas' name='corridas[]' class='select' value='{$filas["id_corridas"]}' data-importe_corridas='{$filas["importe_corridas"]}'>";
+									echo "<label class='badge badge-warning'> <input type='checkbox' form='form_pagar_corridas' name='corridas[]' class='select' value='{$filas["id_corridas"]}' data-importe_corridas='{$filas["total_guia"]}'>";
 									echo $filas["estatus_pago"]."</label>";
 								}
 								
@@ -219,7 +219,7 @@
 					<td><?php echo $filas["fecha_corridas"]?></td>
 					<td><?php echo $filas["hora_corridas"]?></td>
 					
-					<td class="text-right">$ <?php echo number_format($filas["importe_corridas"], 0)?></td>
+					<td hidden class="text-right">$ <?php echo number_format($filas["importe_corridas"], 0)?></td>
 					<td class="text-right">$ <?php echo number_format($filas["total_guia"], 0)?></td>
 					<td><?php echo $filas["nombre_empresas"]?></td>
 					<td><?php echo $filas["nombre_usuarios"]?></td>
@@ -229,7 +229,7 @@
 				<?php
 					if($fila["estatus_corridas"] != "Cancelada"){
 						
-						$total_corrida+= $filas["importe_corridas"];
+						$total_corrida+= $filas["total_guia"];
 					}
 					// $total_ingresos+= $ingresos;
 					// $total_cargos+= $filas["gasto_administracion"];
