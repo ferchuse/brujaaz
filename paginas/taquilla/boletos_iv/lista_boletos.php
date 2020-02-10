@@ -9,6 +9,8 @@
 	$link = Conectarse();
 	$filas = array();
 	$respuesta = array();
+	$boletos_vendidos = 0;
+	$total_guia =0;
 	
 	
 	
@@ -87,7 +89,9 @@
 	
 	<div class="row">
 		<div class="col-6">
-			<h4 class="text-center">BOLETOS VENDIDOS</h4>
+			<h4 class="text-center">BOLETOS VENDIDOS 
+				<span class="badge badge-success"><?php echo mysqli_num_rows($result_boletos)?></span>
+				</h4>
 			<table class="table table-bordered table-condensed">
 				<thead>
 					<tr>
@@ -214,6 +218,7 @@
 					<button class="btn btn-info" id="imprimir_guia">
 						<i class="fas fa-print"></i> Imprimir y Finalizar 
 					</button>
+					
 				</div>
 			</div>
 			
@@ -227,4 +232,7 @@
 			}
 			
 			
-		?>										
+		?>			
+		
+			<input type="hidden" id="boletos_vendidos" value="<?php echo mysqli_num_rows($result_boletos)?>">
+			<input type="hidden" id="total_guia" value="<?php echo $total_guia?>">

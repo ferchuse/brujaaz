@@ -106,6 +106,7 @@
 				<th>Fecha</th>
 				<th>Hora</th>
 				<th>Importe</th>
+				<th>Total</th>
 				<th>Empresa</th>
 				<th>Usuario</th>
 				
@@ -217,8 +218,9 @@
 					<td><?php echo $filas["num_eco"]?></td>
 					<td><?php echo $filas["fecha_corridas"]?></td>
 					<td><?php echo $filas["hora_corridas"]?></td>
-					<td class="text-right">
-					$ <?php echo number_format($filas["importe_corridas"], 0)?></td>
+					
+					<td class="text-right">$ <?php echo number_format($filas["importe_corridas"], 0)?></td>
+					<td class="text-right">$ <?php echo number_format($filas["total_guia"], 0)?></td>
 					<td><?php echo $filas["nombre_empresas"]?></td>
 					<td><?php echo $filas["nombre_usuarios"]?></td>
 					

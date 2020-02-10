@@ -268,7 +268,9 @@ function finalizarCorrida(){
 		"url": "boletos_iv/finalizar_corrida.php",
 		"method": "post",
 		"data": {
-			"id_corridas": $("#id_corridas").val()
+			"id_corridas": $("#id_corridas").val(),
+			"boletos_vendidos": $("#boletos_vendidos").val(),
+			"total_guia": $("#total_guia").val()
 		}
 		}).done(function(){
 		
