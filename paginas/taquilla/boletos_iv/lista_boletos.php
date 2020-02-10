@@ -50,7 +50,7 @@
 	$consulta_boletos = "SELECT *, nombre_origenes as destino FROM boletos 
 	LEFT JOIN precios_boletos USING(id_precio)
 	LEFT JOIN origenes ON precios_boletos.id_destinos = origenes.id_origenes
-	WHERE id_corridas = {$_GET["id_corridas"]}
+	WHERE id_corridas = '{$_GET["id_corridas"]}'
 	ORDER BY id_boletos DESC
 	";
 	
@@ -59,7 +59,7 @@
 	FROM	boletos 
 	LEFT JOIN precios_boletos USING(id_precio)
 	LEFT JOIN origenes ON precios_boletos.id_destinos = origenes.id_origenes
-	WHERE id_corridas = {$_GET["id_corridas"]}
+	WHERE id_corridas = '{$_GET["id_corridas"]}'
 	GROUP BY id_precio
 	";
   
