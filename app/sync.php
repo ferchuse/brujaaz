@@ -5,29 +5,41 @@
 	$link = Conectarse();
 	$filas = array();
 	$respuesta = array();
+	$respuesta["post"] = $_POST;
 	
-	echo json_encode($respuesta);
 	
-	exit();
+	
 	
 	// INSERT 
-	foreach ($_POST["corridas"]){
+	foreach ($_POST["corridas"] AS $corrida){
 		
-		$consulta = "INSERT INTO corridas
+		$insert ="INSERT IGNORE INTO corridas SET 
+		id_corridas= '{$corrida['id_corridas']}',
+		fecha_corridas= '{$corrida['fecha_corridas']}',
+		total_guia= '{$corrida['total_guia']}',
+		id_taquillas = '{$corrida['id_taquillas']}',
+		id_usuarios = '{$corrida["id_usuarios"]}',
+		origen = '{$corrida["origen"]}',
+		destino = '{$corrida["destino"]}',
+		num_eco = '{$corrida["num_eco"]}',
+		id_empresas = '{$corrida["id_empresas"]}',
+		id_administrador = '2',
+		estatus_corridas = 'Finalizada'
 		";
 		
+		$result = 	mysqli_query($link,$insert);
 		
-		
-		$result = mysqli_query($link,$consulta);
 		if($result){
-			
-			if( mysqli_num_rows($result) == 0){
-				die("<div class='alert alert-danger'>No hay registros</div>");
-				
-			}
+			$respuesta["estatus"] = "success";
+			$respuesta["mensaje_insert"] = "Guardado Correctamente";
+			// $respuesta["insert"] = $insert;
 		}
+		else{
+			$respuesta["estatus_insert"] = "error";
+			$respuesta["mensaje_insert"] = "Error en insert: $insert  ".mysqli_error($link);		
+		}
+		
 	}
-	
 	
 	
 	
@@ -35,68 +47,25 @@
 	
 	////TAQUILLAS
 	
-	$consulta = "SELECT * FROM taquillas 	";
-	
-	$result = mysqli_query($link,$consulta);
-	if($result){
-		
-		if( mysqli_num_rows($result) == 0){
-			die("<div class='alert alert-danger'>No hay registros</div>");
-			
-		}
-		
-		$resultados = [];
-		
-		while($fila = mysqli_fetch_assoc($result)){
-			$resultados[] = $fila ;
-		}
-		
-		foreach($resultados as $registro){
-		$respuesta["taquillas"][] = $registro;
-	}
-	}
-	else {
-		echo "<pre>Error en ".$consulta.mysqli_Error($link)."</pre>";
-		
-	}
-	
-	
-	////USUARIOS
-	
-	$consulta = "SELECT * FROM usuarios 
-	WHERE id_administrador = '$id_administrador'
-	AND estatus_usuarios = 'Alta'
-	ORDER BY nombre_usuarios
+	$update_folios = "UPDATE taquillas 
+	SET folio_corrida = '{$_POST["folio_corrida"]}',
+	folio_taquilla = '{$_POST["folio_taquilla"]}'
+	WHERE id_taquillas = '{$_POST["corridas"][0]["id_taquillas"]}'
 	";
+	$respuesta["update_folios"] = $update_folios;
 	
 	$result = mysqli_query($link,$consulta);
 	if($result){
-		
-		if( mysqli_num_rows($result) == 0){
-			die("<div class='alert alert-danger'>No hay registros</div>");
-			
-		}
-		
-		$resultados = [];
-		
-		while($fila = mysqli_fetch_assoc($result)){
-			$resultados[] = $fila ;
-		}
-		
-		foreach($resultados as $registro){
-			$respuesta["usuarios"][] = $registro;
-		}
+		$respuesta["estatus_folios"] = "success";
+		$respuesta["mensaje_folios"] = "Guardado Correctamente";
 	}
-	else {
-		echo "<pre>Error en ".$consulta.mysqli_Error($link)."</pre>";
-		
+	else{
+		$respuesta["estatus_folios"] = "error";
+		$respuesta["mensaje_folios"] = mysqli_error($link);		
 	}
 	
+	echo json_encode($respuesta);
 	
 	
 	
-
-echo json_encode($respuesta);
-
-
-?>
+?>			
