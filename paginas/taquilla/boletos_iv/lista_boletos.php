@@ -76,7 +76,7 @@
 	if($result_boletos){
 		
 		if( mysqli_num_rows($result_boletos) == 0){
-			die("<div class='alert alert-danger'>No hay boletos venidos</div>");
+			echo("<div class='alert alert-danger'>No hay boletos venidos</div>");
 			
 		}
 		
@@ -91,7 +91,7 @@
 		<div class="col-6">
 			<h4 class="text-center">BOLETOS VENDIDOS 
 				<span class="badge badge-success"><?php echo mysqli_num_rows($result_boletos)?></span>
-				</h4>
+			</h4>
 			<table class="table table-bordered table-condensed">
 				<thead>
 					<tr>
@@ -215,9 +215,6 @@
 						</tfoot>
 					</table>
 					
-					<button class="btn btn-info" id="imprimir_guia">
-						<i class="fas fa-print"></i> Imprimir y Finalizar 
-					</button>
 					
 				</div>
 			</div>
@@ -234,5 +231,10 @@
 			
 		?>			
 		
-			<input type="hidden" id="boletos_vendidos" value="<?php echo mysqli_num_rows($result_boletos)?>">
-			<input type="hidden" id="total_guia" value="<?php echo $total_guia?>">
+		<button class="btn btn-info float-right" id="imprimir_guia">
+			<i class="fas fa-print"></i> Imprimir y Finalizar 
+		</button>
+		
+		
+		<input type="hidden" id="boletos_vendidos" value="<?php echo mysqli_num_rows($result_boletos)?>">
+	<input type="hidden" id="total_guia" value="<?php echo $total_guia?>">	
