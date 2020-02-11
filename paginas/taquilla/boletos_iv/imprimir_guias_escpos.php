@@ -16,7 +16,9 @@
 	$consulta_guia = "SELECT *, nombre_origenes as destino,
 	COUNT(id_boletos) AS cantidad
 	FROM	boletos 
+	LEFT JOIN usuarios USING(id_usuarios)
 	LEFT JOIN corridas USING(id_corridas)
+	
 	LEFT JOIN precios_boletos USING(id_precio)
 	LEFT JOIN origenes ON precios_boletos.id_destinos = origenes.id_origenes
 	WHERE id_corridas = '{$_GET["id_corridas"]}' 
@@ -56,7 +58,11 @@
 		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
 		$respuesta.= "Fecha:". $guias[0]["fecha_corridas"];
 		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
-		$respuesta.= "Num Eco:". $guias[0]["num_eco"];;
+		
+		$respuesta.= "Taquillero:". $guias[0]["nombre_usuarios"];
+		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
+		
+		$respuesta.= "Num Eco:". $guias[0]["num_eco"];
 		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
 		
 		

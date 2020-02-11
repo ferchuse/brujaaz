@@ -5,7 +5,7 @@
 		
 		$host="localhost";
 		
-		if($_SERVER["SERVER_NAME"] == "localhost"  || $_SERVER["SERVER_NAME"] == "192.168.1.81"){
+		if($_SERVER["SERVER_NAME"] == "localhost"  || $_SERVER["SERVER_NAME"] == "192.168.1.88"){
 			$db="brujaaz";
 			$usuario="sistemas";
 			$pass="Glifom3dia";
@@ -36,12 +36,12 @@
 		}
 		
 		
-		
-		mysqli_query($link, "SET NAMES 'utf8'") or die("Error Cambiando charset").mysqli_error($link);
-		
-		
-		mysqli_query($link, "SET CHARACTER SET utf8") or die("Error en charset UTF8".mysqli_error($link));
-		
+		if($_SERVER["SERVER_NAME"] != "localhost") {
+			mysqli_query($link, "SET NAMES 'utf8'") or die("Error Cambiando charset").mysqli_error($link);
+			
+			
+			mysqli_query($link, "SET CHARACTER SET utf8") or die("Error en charset UTF8".mysqli_error($link));
+		}
 		
 		
 		return $link;
