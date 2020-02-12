@@ -55,14 +55,14 @@
 	";
 	$respuesta["update_folios"] = $update_folios;
 	
-	$result = mysqli_query($link,$consulta);
+	$result = mysqli_query($link,$update_folios);
 	if($result){
 		$respuesta["estatus_folios"] = "success";
-		$respuesta["mensaje_insert"] = "Guardado Correctamente";
+		$respuesta["mensaje_folios"] = "Guardado Correctamente";
 	}
 	else{
 		$respuesta["estatus_folios"] = "error";
-		$respuesta["mensaje_insert"] = mysqli_error($link);		
+		$respuesta["mensaje_folios"] = mysqli_error($link);		
 	}
 	
 	echo json_encode($respuesta);
