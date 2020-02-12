@@ -32,7 +32,7 @@
 		
 		if($result){
 			$respuesta["estatus"] = "success";
-			$respuesta["mensaje_insert"] = "Guardado Correctamente";
+			// $respuesta["mensaje_insert"] = "Guardado Correctamente";
 			// $respuesta["insert"] = $insert;
 		}
 		else{
@@ -58,11 +58,11 @@
 	$result = mysqli_query($link,$consulta);
 	if($result){
 		$respuesta["estatus_folios"] = "success";
-		$respuesta["mensaje_folios"] = "Guardado Correctamente";
+		$respuesta["mensaje_insert"] = "Guardado Correctamente";
 	}
 	else{
 		$respuesta["estatus_folios"] = "error";
-		$respuesta["mensaje_folios"] = mysqli_error($link);		
+		$respuesta["mensaje_insert"] = mysqli_error($link);		
 	}
 	
 	echo json_encode($respuesta);
