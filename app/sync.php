@@ -32,8 +32,8 @@
 		
 		if($result){
 			$respuesta["estatus"] = "success";
-			// $respuesta["mensaje_insert"] = "Guardado Correctamente";
-			// $respuesta["insert"] = $insert;
+			$respuesta["mensaje_insert"] = "Guardado Correctamente";
+			$respuesta["insert"] = $insert;
 		}
 		else{
 			$respuesta["estatus_insert"] = "error";
