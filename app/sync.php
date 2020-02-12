@@ -51,7 +51,7 @@
 	$update_folios = "UPDATE taquillas 
 	SET folio_corrida = '{$_POST["folio_corrida"]}',
 	folio_taquilla = '{$_POST["folio_taquilla"]}'
-	WHERE id_taquillas = '{$_POST["corridas"][0]["id_taquillas"]}'
+	WHERE id_taquilla = '{$_POST["corridas"][0]["id_taquillas"]}'
 	";
 	$respuesta["update_folios"] = $update_folios;
 	
