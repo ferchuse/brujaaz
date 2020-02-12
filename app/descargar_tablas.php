@@ -122,6 +122,32 @@
 		
 	}
 	
+		$consulta = "SELECT * FROM empresas 
+	";
+		
+	$result = mysqli_query($link,$consulta);
+	if($result){
+		
+		if( mysqli_num_rows($result) == 0){
+			die("<div class='alert alert-danger'>No hay registros</div>");
+			
+		}
+		
+		$resultados = [];
+		
+		while($fila = mysqli_fetch_assoc($result)){
+			$resultados[] = $fila ;
+		}
+		
+		foreach($resultados as $registro){
+				$respuesta["empresas"][] = $registro;
+		}
+	}
+	else {
+		echo "<pre>Error en ".$consulta.mysqli_Error($link)."</pre>";
+		
+	}
+	
 	
 	
 	

@@ -16,6 +16,7 @@
 		$insert ="INSERT IGNORE INTO corridas SET 
 		id_corridas= '{$corrida['id_corridas']}',
 		fecha_corridas= '{$corrida['fecha_corridas']}',
+		hora_corridas= '{$corrida['hora_corridas']}',
 		total_guia= '{$corrida['total_guia']}',
 		id_taquillas = '{$corrida['id_taquillas']}',
 		id_usuarios = '{$corrida["id_usuarios"]}',
