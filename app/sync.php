@@ -31,7 +31,7 @@
 		$result = 	mysqli_query($link,$insert);
 		
 		if($result){
-			$respuesta["estatus"] = "success";
+			$respuesta["estatus_insert"] = "success";
 			$respuesta["mensaje_insert"] = "Guardado Correctamente";
 			$respuesta["insert"] = $insert;
 		}
