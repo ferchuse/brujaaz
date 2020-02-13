@@ -140,7 +140,7 @@
 		}
 		
 		foreach($resultados as $registro){
-				$respuesta["empresas"][] = $registro;
+				$respuesta["empresas"][] = $registro["nombre_empresas"];
 		}
 	}
 	else {
