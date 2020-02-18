@@ -28,8 +28,8 @@ echo chr(5);
 exit(0);
 
 $test "
-
-@!3
+.@
+@!3§
 
 @@aHello World
 !aESC/POS Printer Test

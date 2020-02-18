@@ -67,7 +67,8 @@
 		
 		
 		$respuesta.= "\x1b"."d".chr(1). "\n"; // Blank line
-		$respuesta.= "VA"; // Cut
+		// $respuesta.= "VA"; // Cut
+		$respuesta.= chr(29).chr(86).chr(66).chr(0); // Cut
 		echo base64_encode ( $respuesta );
 		// echo  ( $respuesta );
 		
