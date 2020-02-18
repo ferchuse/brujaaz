@@ -9,6 +9,11 @@
 	$filas = array();
 	$respuesta = array();
 	
+	$respuesta["comandos"]["esc"] = chr(27);
+	$respuesta["comandos"]["init"] = chr(27)."@";
+	$respuesta["comandos"]["gs"] = chr(29);
+	// $respuesta["comandos"]["cut"] = chr(27);
+	
 	if(isset($_GET["id_administrador"])){
 		
 		$id_administrador = $_GET["id_administrador"];
