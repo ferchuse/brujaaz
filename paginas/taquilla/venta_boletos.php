@@ -28,7 +28,7 @@
 	</head>
 	<body id="page-top">
 		<?php include("../../navbar.php")?>
-		<div id="wrapper" class="d-print-none">
+		<div id="wrapper" class="">
 			<?php include("../../menu.php")?>	
 			<div id="content-wrapper">		
 				<div class="container-fluid">		
@@ -43,7 +43,7 @@
 					<div class="card card-primary">
 						<div class="card-body">
 							
-							<ul class="nav nav-pills nav-justified mb-4">
+							<ul class="nav nav-pills nav-justified mb-4 d-print-none">
 								<li class="nav-item">
 									<a class="nav-link active" id="pill_corridas" data-toggle="pill" href="#tab_corridas">Corridas</a>
 								</li>
@@ -57,9 +57,9 @@
 								
 								
 								<div class="tab-pane   active" id="tab_corridas">	
-									<div class="row">
+									<div class="row ">
 										<div class="col-12">
-											<button type="button" class="btn btn-success mb-2 nuevo">
+											<button type="button" class="btn btn-success mb-2 nuevo  d-print-none">
 												<i class="fas fa-plus"></i> Nueva
 											</button>
 											<form id="form_filtros" class="form-inline">
@@ -87,23 +87,26 @@
 													Usuario:
 												</label>
 												<?php echo generar_select($link, "usuarios", "id_usuarios", "nombre_usuarios", true, false, false, $_COOKIE["id_usuarios"])?>
-												<button type="submit"  title="Buscar" class="btn btn-primary">
+												<button type="submit"  title="Buscar" class="btn btn-primary  d-print-none">
 													<i class="fas fa-search"></i>
 												</button>
 											</form>
 										</div>
 									</div>
-									<div class="card">
+									<div class="card ">
 										<div class="card-header">
 											<h3 >Lista de Corridas
 												<?php if(dame_permiso("venta_boletos.php", $link) == "Supervisor"){?>
-													<button disabled type="button" class="btn btn-primary float-right" id="btn_pagar">
+													<button disabled type="button" class="btn btn-primary float-right d-print-none" id="btn_pagar">
 														<i class="fas fa-dollar-sign"></i> Pagar 
 														<span id="span_num_selected">0</span>
 													</button>
 													<?php
 													}	
 												?>
+													<button  type="button" onclick="window.print()" class="btn btn-info float-right d-print-none">
+														<i class="fas fa-print"></i> Imprimir 
+													</button>
 											</h3>
 										</div>
 										<div class="card-body" id="lista_corridas">
@@ -187,7 +190,7 @@
 		</div>
 		<!-- /#wrapper -->
 		<form id="form_pagar_corridas">
-			<input type="number" id="total_pago" name="total_pago">
+			<input type="hidden" id="total_pago" name="total_pago">
 		</form>
 		<!-- Scroll to Top Button-->
 		<a class="scroll-to-top rounded d-print-none" href="#page-top">

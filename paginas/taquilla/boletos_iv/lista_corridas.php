@@ -96,7 +96,7 @@
 	<table class="table table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>Estatus</th>
+				<th class=" d-print-none">Estatus</th>
 				<th>
 					Estatus Pago
 					<input type="checkbox" id="check_todos" >
@@ -124,7 +124,7 @@
 				<tr>
 					
 					
-					<td>
+					<td class=" d-print-none">
 						<?php
 							switch($filas["estatus_corridas"]){
 								case "Activa":
