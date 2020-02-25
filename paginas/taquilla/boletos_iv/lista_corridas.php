@@ -249,8 +249,8 @@
 		</tbody>
 		<tfoot>
 			<tr class="bg-secondary text-white">
-				<td colspan="6">TOTAL</td>
-				<td class="text-right"><?= number_format($total_corrida,0)?></td>
+				<td colspan="6"><?= mysqli_num_rows($result)?> Registros </td>
+				<td class="text-right">$<?= number_format($total_corrida,0)?></td>
 				<td></td>
 			</tr>
 		</tfoot>
