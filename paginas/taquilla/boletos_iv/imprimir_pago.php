@@ -32,9 +32,9 @@
 			
 		}
 		
+		$respuesta = file_get_contents('logo_brujaz.tmb');
 		
-		
-		$respuesta ="";
+		// $respuesta ="";
 		
 		$empresa = "";
 		
@@ -43,10 +43,10 @@
 		$respuesta.= "!"; //Font BIG
 		$respuesta.=   "$empresa \n";
 		$respuesta.=   "PAGO DE TAQUILLA \n";
-		
-			$respuesta.= "\x1b"."d".chr(3); // 4 Blank lines	
+		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines	
 		$respuesta.=  "\x1b"."E".chr(0); // Not Bold
 		$respuesta.= "!\x11"; //font size
+		// $respuesta.=   "\x1b"."@";
 		$respuesta.= "Folio: ". $filas[0]["id_pagos"];
 		$respuesta.= "\x1b"."d".chr(1); 
 		$respuesta.= "Fecha:". date("Y-m-d", strtotime($filas[0]["fecha_pagos"]));
@@ -58,7 +58,7 @@
 		$respuesta.= "Total: $". $filas[0]["total_pagos"];;
 		$respuesta.= "\x1b"."d".chr(2); // 4 Blank lines
 		
-			$respuesta.= "Recibe: ". $filas[0]["recibe"];;
+		$respuesta.= "Recibe: ". $filas[0]["recibe"];;
 		$respuesta.= "\x1b"."d".chr(1); // 4 Blank lines
 		
 		
