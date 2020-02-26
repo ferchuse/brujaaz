@@ -502,7 +502,7 @@ function imprimirTicket(event){
 		}).done(function (respuesta){
 		
 		
-		if($("#silent_print").val() == "SI"){
+		if($("#silent_print").val() == "SI" && url == "imprimir_mutualidad_esc.php" ){
 			
 			printService.submit({
 				'type': 'LABEL',
