@@ -16,7 +16,8 @@
 	nombre_usuarios,
 	id_recaudaciones, 
 	id_administrador, 
-	'recaudacion' AS tipo_usuario 
+	'recaudacion' AS tipo_usuario ,
+	silent_print
 	FROM usuarios
 	WHERE nombre_usuarios='$myusername' 
 	AND pass_usuarios='$mypassword'
@@ -28,7 +29,8 @@
 	nombre_propietarios AS nombre_usuarios,
 	1 AS id_recaudaciones,
 	id_administrador,
-	'propietario' AS tipo_usuario 
+	'propietario' AS tipo_usuario ,
+	'0' as silent_print
 	FROM
 	propietarios
 	WHERE usuario_propietarios='$myusername' 
@@ -58,13 +60,14 @@
 		$_SESSION["tipo_usuario"] = $row["tipo_usuario"];
 		$response["login"] = "valid"; 
 		
-			
+		
 		setcookie("id_usuarios", $id_usuarios,  0, "/");
 		setcookie("nombre_usuarios", $nombre_usuarios,  0, "/");
 		setcookie("permiso_usuarios", $row["permiso_usuarios"],  0, "/");
 		setcookie("id_recaudaciones",  $row["id_recaudaciones"],  0, "/");
 		setcookie("id_administrador",  $row["id_administrador"],  0, "/");
 		setcookie("tipo_usuario",  $row["tipo_usuario"],  0, "/");
+		setcookie("silent_print",  $row["silent_print"],  0, "/");
 		
 	}
 	else{

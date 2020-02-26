@@ -1,6 +1,9 @@
+var printService = new WebSocketPrinter();
+
+
 $(document).ready(function(){
 	
-
+	
 	
 	$('#fecha_tarjetas').on('change', buscarFecha);
 	$('#imprimir_tarjeta').on('click', imprimirTicket);
@@ -299,7 +302,15 @@ function guardarMutualidad(){
 		$("#monto_mutualidad").prop("disabled", true); 
 		$("#imprimir_mutualidad").prop("hidden", false);
 		$("#imprimir_mutualidad").data("id_registro", respuesta.nuevo_id);
-		$("#imprimir_mutualidad").data("url", "imprimir_mutualidad.php");
+		if($("#silent_print").val() == "SI" ){
+			$("#imprimir_mutualidad").data("url", "imprimir_mutualidad_esc.php");
+			
+		}
+		else{
+			
+			$("#imprimir_mutualidad").data("url", "imprimir_mutualidad.php");
+			
+		}
 		$("#loader_mutualidad").prop("hidden", true);
 		$("#imprimir_mutualidad").click();
 		
@@ -490,8 +501,19 @@ function imprimirTicket(event){
 		}
 		}).done(function (respuesta){
 		
-		$("#ticket").html(respuesta); 
-		window.print();
+		
+		if($("#silent_print").val() == "SI"){
+			
+			printService.submit({
+				'type': 'LABEL',
+				'raw_content': respuesta
+			});
+		}
+		else{
+			$("#ticket").html(respuesta); 
+			window.print();
+		}
+		
 		}).always(function(){
 		
 		boton.prop("disabled", false);

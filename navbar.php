@@ -70,8 +70,12 @@
 					<?php echo "<b>Permiso</b>: ". dame_permiso(basename($_SERVER['PHP_SELF']), $link);?>
 				</a>	
 				<a class="dropdown-item" href="#">
-					<?php echo "<b>Empresa: </b>: ". $_SESSION["id_administrador"];?>
+					<?php echo "<b>Empresa: </b>". $_SESSION["id_administrador"];?>
 					<input type="hidden" id="session_id_administrador" value="<?php echo $_SESSION["id_administrador"];?>" >
+				</a>	
+				<a class="dropdown-item" href="#">
+					<b>Impresión Autom: </b>
+					<input type="" id="silent_print" value="<?php echo $_COOKIE["silent_print"];?>" >
 				</a>
 				<a hidden class="dropdown-item" href="#">Configuración</a>
 				<a hidden class="dropdown-item" href="#">Historial</a>

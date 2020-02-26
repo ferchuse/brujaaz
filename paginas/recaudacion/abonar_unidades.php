@@ -86,6 +86,7 @@
 			include("forms/form_tarjetas.php");
 			include("../../scripts.php")
 		?>
-		<script src="js/abonar_unidades.js"></script>
+		<script src="../../plugins/pos_print/websocket-printer.js" > </script>
+		<script src="js/abonar_unidades.js?v=<?= date("d-m-Y-H-i-s")?>"></script>
 	</body>
 </html>
