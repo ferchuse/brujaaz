@@ -30,9 +30,11 @@
 	
 	foreach($_POST["corridas"] as $i => $id_corridas){
 		
+		$folio = explode(",",$id_corridas);
 		$update ="UPDATE corridas  SET 
 		estatus_pago= 'PAGADA'
-		WHERE id_corridas = '$id_corridas'
+		WHERE id_corridas = '{$folio[0]}'
+		AND hora_corridas = '{$folio[1]}'
 		";
 		
 		$result = 	mysqli_query($link,$update);

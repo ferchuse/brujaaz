@@ -187,7 +187,7 @@
 							switch($filas["estatus_pago"]){
 								case "PENDIENTE":
 								if($filas["estatus_corridas"] == "Finalizada"){
-									echo "<label class='badge badge-warning'> <input type='checkbox' form='form_pagar_corridas' name='corridas[]' class='select' value='{$filas["id_corridas"]}' data-importe_corridas='{$filas["total_guia"]}'>";
+									echo "<label class='badge badge-warning'> <input type='checkbox' form='form_pagar_corridas' name='corridas[]' class='select' value='{$filas["id_corridas"]},{$filas["hora_corridas"]}' data-importe_corridas='{$filas["total_guia"]}'>";
 									echo $filas["estatus_pago"]."</label>";
 								}
 								
