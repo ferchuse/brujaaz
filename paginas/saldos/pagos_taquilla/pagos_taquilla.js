@@ -53,13 +53,16 @@ function imprimirPago(){
 			'type': 'LABEL',
 			'raw_content': respuesta
 		});
+		
 		alertify.success('Imprimiendo...');
 		
 		}).always(function(){
 		
 	});
 	
-	
+	$.ajax({
+		url: '127.0.0.1/imp_catemacobol.php'
+	})
 }
 
 function confirmaCancelarPagos(event){
