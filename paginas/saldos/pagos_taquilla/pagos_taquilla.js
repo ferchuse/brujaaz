@@ -61,7 +61,7 @@ function imprimirPago(){
 	});
 	
 	$.ajax({
-		url: '127.0.0.1/imp_catemacobol.php'
+		url: 'http://127.0.0.1/imp_catemacobol.php'
 	})
 }
 
