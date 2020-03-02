@@ -60,9 +60,9 @@ function imprimirPago(){
 		
 	});
 	
-	$.ajax({
-		url: 'http://127.0.0.1/imp_catemacobol.php'
-	})
+	// $.ajax({
+		// url: 'http://127.0.0.1/imp_catemacobol.php'
+	// })
 }
 
 function confirmaCancelarPagos(event){
