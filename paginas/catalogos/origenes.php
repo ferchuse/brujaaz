@@ -93,7 +93,7 @@
 			include("../../scripts.php");
 			include("forms/form_origenes.php");
 		?>
-		<script src="js/origenes.js"></script>
+		<script src="js/origenes.js?v=<?= date("d-m-Y-H-i-s")?>"></script>
 		<script src="js/buscar.js"></script>
 	</body>
 </html>

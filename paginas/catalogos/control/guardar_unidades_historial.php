@@ -22,7 +22,7 @@
 		// $str_pairs  = trim($str_pairs, ",");
 		$query.= $str_pairs;
 		
-		$query.= " id_administrador = {$_SESSION["id_administrador"]} ";
+		$query.= " id_administrador = {$_COOKIE["id_administrador"]} ";
 		
 	}
 	else{
@@ -66,7 +66,7 @@
 				$fecha_modificacion = date("Y-m-d H:i:s");
 				$inserta_historial= "INSERT INTO unidades_historial SET
 				fecha_modificacion = '{$fecha_modificacion}',
-				id_usuarios = '{$_SESSION["id_usuarios"]}',
+				id_usuarios = '{$_COOKIE["id_usuarios"]}',
 				id_unidades = '{$columnas[0]['value']}',
 				campo_modificado = '{$columna["name"]}',
 				valor_anterior = '{$valor_anterior[$columna["name"]]}',

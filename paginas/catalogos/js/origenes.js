@@ -117,13 +117,13 @@ function listarRegistros() {
 
                 function eliminar() {
                     $.ajax({
-                        url: '../../funciones/eliminar.php',
+                        url: '../../funciones/fila_delete.php',
                         method: 'POST',
                         dataType: 'JSON',
                         data: {
                             tabla: 'origenes',
                             id_campo: 'id_origenes',
-                            campo: id_origenes
+                            id_valor: id_origenes
                         }
                     }).done(function (respuesta) {
                         if (respuesta.estatus == 'success') {
