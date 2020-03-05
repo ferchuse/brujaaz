@@ -2,6 +2,7 @@
 	session_start();
 	include('../../../conexi.php');
 	include('../../../funciones/generar_select.php');
+	include('../../../funciones/dame_permiso.php');
 	include('../../../funciones/console_log.php');
 	$link = Conectarse();
 	$filas = array();
@@ -58,7 +59,15 @@
 	id_usuarios
 	) AS t_suma_mutualidad USING (id_usuarios)
 	WHERE usuarios.id_administrador = '{$_SESSION["id_administrador"]}'
+	
+	
 	";
+	
+	if(dame_permiso("importes_usuario.php", $link) == "Lectura" || dame_permiso("importes_usuario.php", $link) == "Escritura")
+	{
+		
+		$consulta.=" AND id_usuarios = {$_COOKIE["id_usuarios"]}";
+		}
 	
   
 	
