@@ -1,3 +1,6 @@
+var printService = new WebSocketPrinter();
+
+
 $(document).ready(function(){
 	console.log("onLoad")
 	listarRegistros();
@@ -95,15 +98,38 @@ function imprimirTicket(event){
 	boton.prop("disabled", true);
 	icono.toggleClass("fa-print fa-spinner fa-spin");
 	
+	if($("#silent_print").val() == "SI" ){
+		url =  "imprimir_tarjeta_esc.php";
+		
+	}
+	else{
+		
+		url =  "imprimir_tarjeta.php";
+		
+	}
+	
+	
 	$.ajax({
-		url: "impresion/imprimir_tarjeta.php",
+		url: "impresion/"+url,
 		data:{
 			id_registro : id_registro 
 		}
 		}).done(function (respuesta){
 		
-		$("#ticket").html(respuesta);
-		window.print();
+		if($("#silent_print").val() == "SI" && url == "imprimir_tarjeta_esc.php" ){
+			
+			printService.submit({
+				'type': 'LABEL',
+				'raw_content': respuesta
+			});
+		}
+		else{
+			$("#ticket").html(respuesta); 
+			window.print();
+		}
+		
+		
+		
 		}).always(function(){
 		
 		boton.prop("disabled", false);
