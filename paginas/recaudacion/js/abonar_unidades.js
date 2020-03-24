@@ -85,6 +85,7 @@ $(document).ready(function(){
 			
 		};
 	}
+	
 	$('#tarjeta').on('keyup',function(event){
 		event.preventDefault();
 		
@@ -98,6 +99,14 @@ $(document).ready(function(){
 			
 			buscarTarjeta(tarjeta);
 		}
+	});
+	
+	$('#tarjeta').on('blur',function(event){
+		
+		var tarjeta = $(this).val();
+		
+		buscarTarjeta(tarjeta);
+		
 	});
 	
 	
@@ -450,7 +459,7 @@ function buscarFecha(){
 	
 }
 function buscarTarjeta(tarjeta){
-	
+	console.log("buscarTarjeta" , tarjeta)
 	$("#tarjeta").toggleClass("cargando"); 
 	return $.ajax({
 		url: 'control/buscar_tarjeta.php',
