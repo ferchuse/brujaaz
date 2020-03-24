@@ -94,8 +94,8 @@
 		
 		$print.=chr(10).chr(10).chr(13).chr(29).chr(86).chr(66).chr(0);
 		
-		echo ($print);
-		// echo base64_encode($print);
+		// echo ($print);
+		echo base64_encode($print);
 		
 	}
 	else {
