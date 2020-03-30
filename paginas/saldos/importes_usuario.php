@@ -42,7 +42,13 @@
 						<div class="form-group mx-sm-3 mb-2">
 							<label for="">Fecha Final:</label>
 							<input type="date" class="form-control" value="<?php echo date("Y-m-d");?>" name="fecha_final" id="fecha_final">
-							<button type="submit" id="btn_fechas" title="Buscar por Fecha" class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
+						
+						</div>
+						<div class="form-group mx-sm-3 mb-2">
+							<label for="">Empresa:</label>
+							
+							<?= generar_select($link, "empresas", "id_empresas", "nombre_empresas", true)?>
+								<button type="submit" id="btn_fechas" title="Buscar por Fecha" class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
 						</div>
 						<div class=" col-md-2 d-print-none">
 							<button type="button" id="btn_imprimir" onclick="window.print();" title="Imprimir" class="btn btn-outline-primary mb-2"><i class="fas fa-print"></i></button>

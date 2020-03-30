@@ -20,28 +20,44 @@
 	usuarios
 	LEFT JOIN (
 	SELECT
-	id_usuarios,
+	abonos_unidades.id_usuarios,
 	SUM(abono_unidad) AS suma_abonos_unidades
 	FROM
 	abonos_unidades
+	LEFT JOIN tarjetas USING(tarjeta)
 	WHERE
 	estatus_abonos <> 'Cancelado'
 	AND date(fecha_abonos) BETWEEN '{$_GET["fecha_inicial"]}'
 	AND '{$_GET["fecha_final"]}'
-	GROUP BY
+	";
+	
+	if($_GET["id_empresas"] != ""){
+		$consulta.= " AND id_empresas = '{$_GET["id_empresas"]}'";
+	}
+	
+	$consulta.= " GROUP BY
 	id_usuarios
 	) AS t_suma_abonos_unidades USING (id_usuarios)
+	
+	
 	LEFT JOIN (
 	SELECT
 	id_usuarios,
 	SUM(monto_abonogeneral) AS suma_abonos_general
 	FROM
 	abono_general
+	LEFT JOIN unidades USING(id_unidades)
 	WHERE
 	estatus_abono <> 'Cancelado'
 	AND date(fecha_abonogeneral) BETWEEN '{$_GET["fecha_inicial"]}'
-	AND '{$_GET["fecha_final"]}'
-	GROUP BY
+	AND '{$_GET["fecha_final"]}'";
+	
+	if($_GET["id_empresas"] != ""){
+		$consulta.= " AND id_empresas = '{$_GET["id_empresas"]}'";
+	}
+	
+	
+	$consulta.=" GROUP BY
 	id_usuarios
 	) AS t_suma_abonos_general USING (id_usuarios)
 	LEFT JOIN (
@@ -53,9 +69,13 @@
 	WHERE
 	estatus_mutualidad <> 'Cancelado'
 	AND DATE(fecha_mutualidad) BETWEEN '{$_GET["fecha_inicial"]}'
-	AND '{$_GET["fecha_final"]}'
+	AND '{$_GET["fecha_final"]}'";
 	
-	GROUP BY
+	if($_GET["id_empresas"] != ""){
+		$consulta.= " AND id_empresas = '{$_GET["id_empresas"]}'";
+	}
+	
+	$consulta.= " GROUP BY
 	id_usuarios
 	) AS t_suma_mutualidad USING (id_usuarios)
 	WHERE usuarios.id_administrador = '{$_COOKIE["id_administrador"]}'
@@ -67,7 +87,7 @@
 	{
 		
 		$consulta.=" AND id_usuarios = {$_COOKIE["id_usuarios"]}";
-		}
+	}
 	
   
 	
@@ -191,4 +211,4 @@
 			}
 			
 			
-		?>																							
+		?>																											
