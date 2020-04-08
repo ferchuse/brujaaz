@@ -26,7 +26,7 @@ function listarRegistros(){
 	let icono = boton.find('.fas');
 	
 	boton.prop('disabled',true);
-	icono.toggleClass('fa-save fa-spinner fa-pulse ');
+	icono.toggleClass('fa-search fa-spinner fa-pulse ');
 	
 	return $.ajax({
 		url: 'control/lista_tarjetas.php',
@@ -42,7 +42,7 @@ function listarRegistros(){
 		}).always(function(){
 		
 		boton.prop('disabled',false);
-		icono.toggleClass('fa-search fa-spinner fa-pulse fa-fw');
+		icono.toggleClass('fa-search fa-spinner fa-pulse ');
 		
 	});
 	

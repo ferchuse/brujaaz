@@ -5,6 +5,7 @@
 	}
 	include('../../../conexi.php');
 	include('../../../funciones/generar_select.php');
+	include('../../../funciones/dame_permiso.php');
 	$link = Conectarse();
 	$filas = array();
 	$respuesta = array();
