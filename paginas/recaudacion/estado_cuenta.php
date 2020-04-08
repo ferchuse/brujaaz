@@ -49,23 +49,29 @@
 								
 							</div>
 						</div>
-						<div class="row mb-2">
+						<div class="row mb-1">
 							<div class="col-sm-1">
-								<label for="nombre_condonaciones">Fecha Inicial:</label>
+								<label for="fecha_inicial">Fecha Inicial:</label>
 							</div>
 							<div class="col-sm-2">			
 								<input class="form-control" type="date" name="fecha_inicial" id="fecha_inicial" value="<?php echo date("Y-m-01");?>">
 							</div>  
 							<div class="col-sm-1">
-								<label for="nombre_condonaciones">Fecha Final:</label>
+								<label for="fecha_final">Fecha Final:</label>
 							</div>	
 							<div class="col-sm-2">			
 								<input class="form-control" type="date" name="fecha_final" id="fecha_final" value="<?php echo date("Y-m-d");?>">
 							</div> 
+							<div class="col-1">
+								<label >Empresa:</label>
+							</div>	
+							<div class="col-3">			
+								<?php echo generar_select($link, "empresas", "id_empresas", "nombre_empresas", true)?>
+							</div> 
 						</div>
-						<div class="row mb-2"> 
+						<div class="row mb-1"> 
 							<div class="col-sm-1">
-								<label for="">No. Economico:</label>
+								<label for="">Num Eco:</label>
 							</div>	
 							<div class="col-sm-2">			
 								<input class="form-control" type="text" name="num_eco" id="num_eco" >

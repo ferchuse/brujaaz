@@ -116,6 +116,9 @@
 		$consulta.=  " AND estatus_unidades  = '{$_GET["estatus_unidades"]}' ";
 	}
 	
+	if($_GET["id_empresas"] != ''){
+		$consulta.=  " AND unidades.id_empresas  = '{$_GET["id_empresas"]}' ";
+	}
 	
 	$consulta.= 
 	" GROUP BY 
