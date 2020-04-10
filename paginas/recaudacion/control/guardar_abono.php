@@ -9,7 +9,7 @@
 	
 	
 	$insert_abono  ="INSERT INTO abonos_unidades SET 
-	fecha_abonos = CURTIME(),
+	fecha_abonos = NOW(),
 	tarjeta = {$_POST['tarjeta']},
 	id_abonos_unidades = '{$_POST["id_abonos_unidades"]}',
 	id_recaudaciones = '{$_POST["id_recaudaciones"]}',

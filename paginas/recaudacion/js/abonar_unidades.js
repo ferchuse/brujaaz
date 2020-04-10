@@ -311,15 +311,11 @@ function guardarMutualidad(){
 		$("#monto_mutualidad").prop("disabled", true); 
 		$("#imprimir_mutualidad").prop("hidden", false);
 		$("#imprimir_mutualidad").data("id_registro", respuesta.nuevo_id);
-		if($("#silent_print").val() == "SI" ){
-			$("#imprimir_mutualidad").data("url", "imprimir_mutualidad_esc.php");
-			
-		}
-		else{
-			
-			$("#imprimir_mutualidad").data("url", "imprimir_mutualidad.php");
-			
-		}
+		
+		
+		$("#imprimir_mutualidad").data("url", "imprimir_mutualidad.php");
+		
+		
 		$("#loader_mutualidad").prop("hidden", true);
 		$("#imprimir_mutualidad").click();
 		
@@ -511,7 +507,7 @@ function imprimirTicket(event){
 		}).done(function (respuesta){
 		
 		
-		if($("#silent_print").val() == "SI" && url == "imprimir_mutualidad_esc.php" ){
+		if($("#silent_print").val() == "SI" ){
 			
 			printService.submit({
 				'type': 'LABEL',
@@ -519,8 +515,14 @@ function imprimirTicket(event){
 			});
 		}
 		else{
+			
 			$("#ticket").html(respuesta); 
-			window.print();
+			setTimeout(function(){
+				window.print();
+			},
+			500
+			)
+			
 		}
 		
 		}).always(function(){

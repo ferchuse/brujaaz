@@ -98,15 +98,7 @@ function imprimirTicket(event){
 	boton.prop("disabled", true);
 	icono.toggleClass("fa-print fa-spinner fa-spin");
 	
-	if($("#silent_print").val() == "SI" ){
-		url =  "imprimir_tarjeta_esc.php";
-		
-	}
-	else{
-		
-		url =  "imprimir_tarjeta.php";
-		
-	}
+	
 	
 	
 	$.ajax({
@@ -125,7 +117,12 @@ function imprimirTicket(event){
 		}
 		else{
 			$("#ticket").html(respuesta); 
-			window.print();
+			setTimeout(function(){
+				window.print();
+			},
+			500
+			)
+			
 		}
 		
 		

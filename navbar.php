@@ -74,14 +74,18 @@
 					<input type="hidden" id="session_id_administrador" value="<?php echo $_SESSION["id_administrador"];?>" >
 				</a>	
 				<a class="dropdown-item" href="#">
-					<b>Impresión Autom: </b>
-					<input type="" id="silent_print" value="<?php echo $_COOKIE["silent_print"];?>" >
-				</a>
-				<a hidden class="dropdown-item" href="#">Configuración</a>
-				<a hidden class="dropdown-item" href="#">Historial</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Salir</a>
-			</div>
-		</li>
-	</ul>
-</nav>
+					<b>AutoImprimir: </b>
+					<select id="silent_print" >
+						<option <?= $_COOKIE["silent_print"] == "SI" ? "selected" :  ""?>>SI</option>
+						<option <?= $_COOKIE["silent_print"] == "NO" ? "selected" :  ""?>>NO</option>
+					</select >
+				</a >
+				<a class="dropdown-item" href="#">
+					<a hidden class="dropdown-item" href="#">Configuración</a>
+					<a hidden class="dropdown-item" href="#">Historial</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Salir</a>
+				</div>
+			</li>
+		</ul>
+	</nav>
