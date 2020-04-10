@@ -102,13 +102,13 @@ function imprimirTicket(event){
 	
 	
 	$.ajax({
-		url: "impresion/"+url,
+		url: "impresion/imprimir_tarjeta.php",
 		data:{
 			id_registro : id_registro 
 		}
 		}).done(function (respuesta){
 		
-		if($("#silent_print").val() == "SI" && url == "imprimir_tarjeta_esc.php" ){
+		if($("#silent_print").val() == "SI" ){
 			
 			printService.submit({
 				'type': 'LABEL',
