@@ -42,6 +42,29 @@
 		
 	}
 	
+	$result["post_zitlalli"] = post_zitlalli($_POST);
+	
+		function post_zitlalli($corridas){
+		$url = 'http://zitlalli.com/app/sync.php';
+		
+		$ch = curl_init(); //ajax
+		curl_setopt($ch, CURLOPT_URL, $url); //url
+		curl_setopt($ch, CURLOPT_POST, true); // method
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // 
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($corridas)) ; // data
+		
+		$result = curl_exec($ch);
+		if($result === FALSE){
+			$respuesta["curl_estatus"] = "error";
+			$respuesta["curl_mensaje"] = 'Curl failed: '. curl_error($ch);
+		}
+		else{
+			
+		}
+		curl_close($ch);
+		return $result;
+	}		
+	
 	
 	
 	
