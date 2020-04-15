@@ -42,7 +42,7 @@
 		
 	}
 	
-	$result["post_zitlalli"] = post_zitlalli($_POST);
+	$respuesta["post_zitlalli"] = post_zitlalli($_POST);
 	
 		function post_zitlalli($corridas){
 		$url = 'http://zitlalli.com/app/sync.php';
