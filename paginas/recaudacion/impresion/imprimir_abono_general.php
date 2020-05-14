@@ -31,7 +31,7 @@
 			
 			
 		}
-		if($_SESSION["id_usuarios"] == 24 or $_SESSION["id_usuarios"] == 8){ ?>
+		if($_COOKIE["silent_print"] == "SI"){ ?>
 		
 		
 		
@@ -54,7 +54,7 @@
 				
 				Depositante:	<?php echo $filas["depositante"];?><br>
 				
-				Impreso por: <?php echo $_SESSION["nombre_usuarios"];?><br>
+				Impreso por: <?php echo $_COOKIE["nombre_usuarios"];?><br>
 				Fecha Impresión: <?php echo date("Y-m-d h:i:s");?><br>
 				<br>
 				Creado por: <?php echo $filas["nombre_usuarios"];?><br>
@@ -85,7 +85,7 @@
 				
 				Depositante:	<?php echo $filas["depositante"];?><br>
 				
-				Impreso por: <?php echo $_SESSION["nombre_usuarios"];?><br>
+				Impreso por: <?php echo $_COOKIE["nombre_usuarios"];?><br>
 				Fecha Impresión: <?php echo date("Y-m-d h:i:s");?><br> 
 				<br>
 				Creado por: <?php echo $filas["nombre_usuarios"];?><br>
@@ -146,7 +146,7 @@
 			<br>
 			<div class="row">
 				<div class="col-6 border-top">
-					Impreso por: <?php echo $_SESSION["nombre_usuarios"];?><br>
+					Impreso por: <?php echo $_COOKIE["nombre_usuarios"];?><br>
 					Fecha Impresión: <?php echo date("Y-m-d h:i:s");?>
 				</div>
 				<div class="col-6 text-right">
@@ -217,7 +217,7 @@
 			
 			<div class="row">
 				<div class="col-6 border-top">
-					Impreso por: <?php echo $_SESSION["nombre_usuarios"];?><br>
+					Impreso por: <?php echo $_COOKIE["nombre_usuarios"];?><br>
 					Fecha Impresión: <?php echo date("Y-m-d h:i:s");?>
 				</div>
 				<div class="col-6 text-right">

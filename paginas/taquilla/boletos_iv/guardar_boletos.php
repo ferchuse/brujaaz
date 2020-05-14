@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	if(count($_SESSION) == 0){
+	if(count($_COOKIE) == 0){
 		die("<div class='alert alert-danger'>Tu Sesión ha caducado, recarga la página.</div>");
 	}
 	include('../../../conexi.php');
@@ -16,7 +16,7 @@
 		tipo_boleto = '{$_POST["tipo_boleto"]}',
 		id_precio = '{$_POST["id_precio"]}',
 		precio_boletos = '{$_POST["precio"]}',
-		id_usuarios = '{$_SESSION["id_usuarios"]}',
+		id_usuarios = '{$_COOKIE["id_usuarios"]}',
 		fecha_boletos = NOW()
 		";
 		$result_detalle = 	mysqli_query($link,$insert);

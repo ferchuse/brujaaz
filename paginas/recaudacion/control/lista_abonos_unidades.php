@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	if(count($_SESSION) == 0){
+	if(count($_COOKIE) == 0){
 		die("<div class='alert alert-danger'>Tu Sesión ha caducado, recarga la página.</div>");
 	}
 	include('../../../conexi.php');
@@ -21,7 +21,7 @@
 	LEFT JOIN unidades USING(id_unidades)
 	LEFT JOIN usuarios ON abonos_unidades.id_usuarios = usuarios.id_usuarios 
 	LEFT JOIN empresas ON empresas.id_empresas = unidades.id_empresas
-	WHERE abonos_unidades.id_administrador = {$_SESSION["id_administrador"]}
+	WHERE abonos_unidades.id_administrador = {$_COOKIE["id_administrador"]}
 	
 	AND  DATE(fecha_abonos) BETWEEN '{$_GET['fecha_inicial']}' AND '{$_GET['fecha_final']}'
 	";
@@ -58,7 +58,7 @@
 	?>
 	
 	<pre hidden>
-		Id_empresas <?php echo $_SESSION["id_empresas"]?>
+		Id_empresas <?php echo $_COOKIE["id_empresas"]?>
 		Session Id <?php echo session_id()?>
 		Sesiion Estatus <?php echo session_status()?>
 		Consulta <?php echo $consulta?>

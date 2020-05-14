@@ -7,8 +7,8 @@
 		</div>	 
 		<div class="col-4">			
 			<?php
-				echo generar_select($link, "recaudaciones", "id_recaudaciones", "nombre_recaudaciones", false, true, false, $_SESSION["id_recaudaciones"]);
-				// echo "recaudacion usuario". $_SESSION["id_recaudaciones"];
+				echo generar_select($link, "recaudaciones", "id_recaudaciones", "nombre_recaudaciones", false, true, false, $_COOKIE["id_recaudaciones"]);
+				// echo "recaudacion usuario". $_COOKIE["id_recaudaciones"];
 			?>
 			
 		</div>

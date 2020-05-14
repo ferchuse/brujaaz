@@ -24,7 +24,7 @@
 	devolucion = '{$_POST["devolucion"]}',
 	total_recaudado = '{$_POST["total_recaudado"]}',
 	id_usuarios = '{$_POST["id_usuarios"]}',
-	id_administrador = '{$_SESSION["id_administrador"]}'
+	id_administrador = '{$_COOKIE["id_administrador"]}'
 	";
 	
 	$result_insert = 	mysqli_query($link,$insert_abono);

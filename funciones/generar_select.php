@@ -5,7 +5,7 @@
 	// $link = Conectarse();
 	 
 	function generar_select($link, $tabla, $llave_primaria, $campo_etiqueta ,$filtro = false, $disabled = false ,$required = false , $id_selected = 0, $data_indice = 0, $name = "", $id = ''  ){
-		$consulta = "SELECT * FROM $tabla WHERE $tabla.id_administrador = {$_SESSION["id_administrador"]} ORDER BY $campo_etiqueta";
+		$consulta = "SELECT * FROM $tabla WHERE $tabla.id_administrador = {$_COOKIE["id_administrador"]} ORDER BY $campo_etiqueta";
 		
 		if($name == ""){
 			$name = $llave_primaria;

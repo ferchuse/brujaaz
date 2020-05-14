@@ -15,7 +15,7 @@
 	LEFT JOIN 
 	usuarios
 	USING (id_usuarios)
-	WHERE usuarios.id_administrador = '{$_SESSION["id_administrador"]}'
+	WHERE usuarios.id_administrador = '{$_COOKIE["id_administrador"]}'
 	AND DATE(fecha_desglose) BETWEEN '{$_GET["fecha_inicial"]}'
 	AND '{$_GET["fecha_final"]}'
 	";

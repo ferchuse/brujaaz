@@ -12,7 +12,7 @@
 	$consulta = "SELECT SUM(saldo_unidades) AS saldo_empresa FROM unidades
 	LEFT JOIN empresas USING(id_empresas) 
 	
-	WHERE unidades.id_empresas = {$_SESSION["id_empresas"]}
+	WHERE unidades.id_empresas = {$_COOKIE["id_empresas"]}
 	";
 	
 	

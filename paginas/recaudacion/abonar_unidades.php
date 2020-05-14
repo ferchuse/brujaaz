@@ -7,7 +7,7 @@
 	include("../../funciones/generar_select.php");
 	include("../../paginas/login/login_check.php");
 	$link = Conectarse();
-	$_SESSION["id_recaudaciones"];
+	$_COOKIE["id_recaudaciones"];
 	
 ?>
 

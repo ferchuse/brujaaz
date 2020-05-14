@@ -15,7 +15,7 @@
 					<input type="text" hidden class="form-control" id="id_reciboSalidas" name="id_reciboSalidas">
 					<div class="form-group">
 						<label for="id_empresas">EMPRESA</label>
-						<?php echo generar_select($link, "empresas", "id_empresas", "nombre_empresas", false, false, true, $_SESSION["id_empresas"]); ?>
+						<?php echo generar_select($link, "empresas", "id_empresas", "nombre_empresas", false, false, true, $_COOKIE["id_empresas"]); ?>
 					</div>
 					<div class="form-group">
 						<label for="id_beneficiarios">BENEFICIARIO</label>

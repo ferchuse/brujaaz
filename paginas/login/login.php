@@ -53,11 +53,11 @@
     
 		$id_usuarios = $row["id_usuarios"];
 		$nombre_usuarios= $row["nombre_usuarios"];
-		$_SESSION["id_usuarios"] = $id_usuarios or die("Error al asignar id usuarios");
-		$_SESSION["nombre_usuarios"] = $nombre_usuarios or die("Error al iniciar nombre usuarios");
-		$_SESSION["id_recaudaciones"] = $row["id_recaudaciones"] or die("Error al iniciar recaudaciones");
-		$_SESSION["id_administrador"] = $row["id_administrador"] or die("Error al iniciar administrador");
-		$_SESSION["tipo_usuario"] = $row["tipo_usuario"];
+		$_COOKIE["id_usuarios"] = $id_usuarios or die("Error al asignar id usuarios");
+		$_COOKIE["nombre_usuarios"] = $nombre_usuarios or die("Error al iniciar nombre usuarios");
+		$_COOKIE["id_recaudaciones"] = $row["id_recaudaciones"] or die("Error al iniciar recaudaciones");
+		$_COOKIE["id_administrador"] = $row["id_administrador"] or die("Error al iniciar administrador");
+		$_COOKIE["tipo_usuario"] = $row["tipo_usuario"];
 		$response["login"] = "valid"; 
 		
 		

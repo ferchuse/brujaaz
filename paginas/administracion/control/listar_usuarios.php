@@ -3,7 +3,7 @@
 	include('../../../conexi.php');
 	$link = Conectarse();
 	
-	$consulta = "SELECT * FROM usuarios WHERE usuarios.id_administrador = '{$_SESSION["id_administrador"]}'
+	$consulta = "SELECT * FROM usuarios WHERE usuarios.id_administrador = '{$_COOKIE["id_administrador"]}'
 	
 	"; 
 	 

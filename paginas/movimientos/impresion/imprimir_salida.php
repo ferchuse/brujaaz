@@ -92,7 +92,7 @@
 		<br>
 		<div class="row">
 			<div class="col-6 border-top">
-				Impreso por: <?php echo $_SESSION["nombre_usuarios"];?><br>
+				Impreso por: <?php echo $_COOKIE["nombre_usuarios"];?><br>
 				Fecha Impresión: <?php echo date("Y-m-d h:i:s");?>
 			</div>
 			<div class="col-6 text-right">
@@ -164,7 +164,7 @@
 		
 		<div class="row">
 			<div class="col-6 border-top">
-				Impreso por: <?php echo $_SESSION["nombre_usuarios"];?><br>
+				Impreso por: <?php echo $_COOKIE["nombre_usuarios"];?><br>
 				Fecha Impresión: <?php echo date("Y-m-d h:i:s");?>
 			</div>
 			<div class="col-6 text-right">

@@ -10,10 +10,10 @@
 	// }
 	
 	
-	if(!isset($_SESSION["tipo_usuario"])){
-		$_SESSION["tipo_usuario"] = "recaudacion";
+	if(!isset($_COOKIE["tipo_usuario"])){
+		$_COOKIE["tipo_usuario"] = "recaudacion";
 	}
-	if($_SESSION["tipo_usuario"] == "propietario"){ 
+	if($_COOKIE["tipo_usuario"] == "propietario"){ 
 		$oculto = "hidden";
 	}
 	else{
@@ -57,21 +57,21 @@
 				<i class="fas fa-user-circle fa-fw"></i>
 			</a>
 			<div class="dropdown-menu dropdown-menu-right" >
-				<input hidden value="<?php echo $_SESSION["id_usuarios"]?>" id="id_usuarios">
-				<input hidden value="<?php echo $_SESSION["id_recaudaciones"]?>" id="sesion_id_recaudaciones">
-				<input hidden value="<?php echo $_SESSION["id_usuarios"]?>" id="sesion_id_usuarios">
-				<input hidden value="<?php echo $_SESSION["id_empresas"]?>" id="sesion_id_empresas">
-				<input hidden value="<?php echo $_SESSION["id_administrador"]?>" id="sesion_id_administrador">
+				<input hidden value="<?php echo $_COOKIE["id_usuarios"]?>" id="id_usuarios">
+				<input hidden value="<?php echo $_COOKIE["id_recaudaciones"]?>" id="sesion_id_recaudaciones">
+				<input hidden value="<?php echo $_COOKIE["id_usuarios"]?>" id="sesion_id_usuarios">
+				<input hidden value="<?php echo $_COOKIE["id_empresas"]?>" id="sesion_id_empresas">
+				<input hidden value="<?php echo $_COOKIE["id_administrador"]?>" id="sesion_id_administrador">
 				<input hidden id="permiso" value="<?php echo dame_permiso(basename($_SERVER['PHP_SELF']), $link);?>">
 				<a class="dropdown-item" href="#">
-					<?php echo "<b>Usuario</b>: <span id='sesion_nombre_usuarios'>". $_SESSION["nombre_usuarios"]."</span>"?>
+					<?php echo "<b>Usuario</b>: <span id='sesion_nombre_usuarios'>". $_COOKIE["nombre_usuarios"]."</span>"?>
 				</a>	
 				<a class="dropdown-item" href="#">
 					<?php echo "<b>Permiso</b>: ". dame_permiso(basename($_SERVER['PHP_SELF']), $link);?>
 				</a>	
 				<a class="dropdown-item" href="#">
-					<?php echo "<b>Empresa: </b>". $_SESSION["id_administrador"];?>
-					<input type="hidden" id="session_id_administrador" value="<?php echo $_SESSION["id_administrador"];?>" >
+					<?php echo "<b>Empresa: </b>". $_COOKIE["id_administrador"];?>
+					<input type="hidden" id="session_id_administrador" value="<?php echo $_COOKIE["id_administrador"];?>" >
 				</a>	
 				<a class="dropdown-item" href="#">
 					<b>AutoImprimir: </b>

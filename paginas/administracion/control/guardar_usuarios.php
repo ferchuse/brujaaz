@@ -13,7 +13,7 @@
 		nombre_usuarios = '{$_POST['nombre_usuarios']}' , 
 		nombre_completo_usuarios = '{$_POST['nombre_completo_usuarios']}' , 
 		pass_usuarios ='{$_POST['pass_usuarios']}',
-		id_administrador ='{$_SESSION['id_administrador']}'
+		id_administrador ='{$_COOKIE['id_administrador']}'
 		
 		";	
 		

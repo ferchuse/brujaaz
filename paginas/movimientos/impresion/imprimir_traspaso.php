@@ -39,7 +39,7 @@
 		<div class="row">
 			<div class="col-12 text-center" >
 				<img  hidden 
-				src="../../img/<?php// echo $_SESSION["logo"]?>" class="img-fluid">
+				src="../../img/<?php// echo $_COOKIE["logo"]?>" class="img-fluid">
 			</div>
 			<div class="col-12 text-center">
 				<h4><?php// echo $filas["nombre_empresas"]?></h4>
@@ -114,7 +114,7 @@
 		<div class="row">
 			<div class="col-12 text-center" >
 				<img  hidden 
-				src="../../img/<?php// echo $_SESSION["logo"]?>" class="img-fluid">
+				src="../../img/<?php// echo $_COOKIE["logo"]?>" class="img-fluid">
 			</div>
 			<div class="col-12 text-center">
 				<h4><?php// echo $filas["nombre_empresas"]?></h4>

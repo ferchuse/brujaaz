@@ -15,8 +15,8 @@
 	monto_condonaciones = {$_POST['monto_condonaciones']},
 	saldo_restante = {$_POST['saldo_unidades']},
 	observaciones_condonaciones = '{$_POST['observaciones_condonaciones']}',
-	id_usuarios = '{$_SESSION['id_usuarios']}',
-	id_administrador = '{$_SESSION['id_administrador']}'
+	id_usuarios = '{$_COOKIE['id_usuarios']}',
+	id_administrador = '{$_COOKIE['id_administrador']}'
 	
 	";
 	

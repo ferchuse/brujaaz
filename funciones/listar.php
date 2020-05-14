@@ -11,11 +11,11 @@
         $campo = $_POST['campo'];
         $id_campo = $_POST['id_campo'];
         $consulta = "SELECT * FROM $tabla WHERE $campo=$id_campo";
-				$consulta.= " AND $tabla.id_administrador = {$_SESSION["id_administrador"]}";
+				$consulta.= " AND $tabla.id_administrador = {$_COOKIE["id_administrador"]}";
     }elseif(isset($_POST['subconsulta'])){
         $subconsulta = $_POST['subconsulta'];
         $consulta = "SELECT * FROM $tabla $subconsulta";
-				$consulta.= " WHERE $tabla.id_administrador = {$_SESSION["id_administrador"]}";
+				$consulta.= " WHERE $tabla.id_administrador = {$_COOKIE["id_administrador"]}";
     }
 		// elseif(isset($_POST['id_campo']) && isset($_POST['subconsulta'])){
         // $campo = $_POST['campo'];
@@ -25,7 +25,7 @@
     // }
 		else{
         $consulta = "SELECT * FROM $tabla";
-				$consulta.= " WHERE $tabla.id_administrador = {$_SESSION["id_administrador"]}";
+				$consulta.= " WHERE $tabla.id_administrador = {$_COOKIE["id_administrador"]}";
     }
 
 		

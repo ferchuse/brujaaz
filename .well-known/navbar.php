@@ -38,9 +38,9 @@
 				<i class="fas fa-user-circle fa-fw"></i>
 			</a>
 			<div class="dropdown-menu dropdown-menu-right" >
-				<input hidden value="<?php echo $_SESSION["id_usuarios"]?>" id="id_usuarios">
-				<input hidden value="<?php echo $_SESSION["id_recaudaciones"]?>" id="sesion_id_recaudaciones">
-				<a class="dropdown-item" href="#"><?php echo "Usuario: ". $_SESSION["nombre_usuarios"]?></a>
+				<input hidden value="<?php echo $_COOKIE["id_usuarios"]?>" id="id_usuarios">
+				<input hidden value="<?php echo $_COOKIE["id_recaudaciones"]?>" id="sesion_id_recaudaciones">
+				<a class="dropdown-item" href="#"><?php echo "Usuario: ". $_COOKIE["nombre_usuarios"]?></a>
 				<a class="dropdown-item" href="#">Configuración</a>
 				<a class="dropdown-item" href="#">Historial</a>
 				<div class="dropdown-divider"></div>

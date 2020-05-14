@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	
-	if(count($_SESSION) == 0) {
+	if(count($_COOKIE) == 0) {
 		die("Sesión caducada, recargue para accesar");
 		
 	}
@@ -53,7 +53,7 @@
 	tipo_cargo = 'seguro'
 	AND EXTRACT(YEAR_MONTH FROM fecha_cargos) =  '{$_GET['mes_cargos']}'
 	) AS t_seguro USING (id_unidades)
-	WHERE unidades.id_administrador ='{$_SESSION["id_administrador"]}'
+	WHERE unidades.id_administrador ='{$_COOKIE["id_administrador"]}'
 	
 	
 	";
@@ -73,14 +73,14 @@
 ?>
 <pre hidden>
 	fecha <?php echo $fecha_from_mes;?>
-	id_administrador <?php echo $_SESSION["id_administrador"];?>
+	id_administrador <?php echo $_COOKIE["id_administrador"];?>
 	Session Id <?php echo session_id();?><br>
 	Sesiion Estatus <?php echo (session_status());?><br>
-	is  null <?php print_r (is_null($_SESSION));?><br>
-	is  set <?php print_r (isset($_SESSION));?><br>
-	empty<?php print_r(empty($_SESSION));?><br>
-	count<?php print_r(count($_SESSION));?><br>
-	size<?php print_r(sizeof($_SESSION));?><br>
+	is  null <?php print_r (is_null($_COOKIE));?><br>
+	is  set <?php print_r (isset($_COOKIE));?><br>
+	empty<?php print_r(empty($_COOKIE));?><br>
+	count<?php print_r(count($_COOKIE));?><br>
+	size<?php print_r(sizeof($_COOKIE));?><br>
 	Consulta <?php echo $consulta;?>
 </pre>
 <?php
@@ -102,7 +102,7 @@
 	?>
 	
 	<pre hidden >
-		Id_empresas <?php echo $_SESSION?>
+		Id_empresas <?php echo $_COOKIE?>
 		Session Id <?php echo session_id()?>
 		Sesiion Estatus <?php echo session_status()?>
 		Consulta <?php echo $consulta?>

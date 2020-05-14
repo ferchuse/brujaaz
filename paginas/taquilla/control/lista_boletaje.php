@@ -12,7 +12,7 @@
 	$consulta = "SELECT * FROM boletaje 
 	LEFT JOIN unidades USING(id_unidades) 
 	LEFT JOIN usuarios USING(id_usuarios)
-	WHERE unidades.id_administrador = {$_SESSION["id_administrador"]}
+	WHERE unidades.id_administrador = {$_COOKIE["id_administrador"]}
 	";
   
 	

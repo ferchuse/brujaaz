@@ -1,8 +1,8 @@
 <?php 
-	if(!isset($_SESSION["tipo_usuario"])){
-		$_SESSION["tipo_usuario"] = "recaudacion";
+	if(!isset($_COOKIE["tipo_usuario"])){
+		$_COOKIE["tipo_usuario"] = "recaudacion";
 	}
-	if($_SESSION["tipo_usuario"] == "propietario"){?>
+	if($_COOKIE["tipo_usuario"] == "propietario"){?>
 	
 	<ul class="sidebar navbar-nav d-print-none">
 		<li class="nav-item active"> 
@@ -52,7 +52,7 @@
 				?> 
 			</div>
 		</li> 
-		<?php if($_SESSION["id_administrador"] != 4){?>
+		<?php if($_COOKIE["id_administrador"] != 4){?>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown" >
 					<i class="fas fa-fw fa-dollar-sign"></i> 
@@ -72,7 +72,7 @@
 			<?php
 			}
 		?>
-		<?php if($_SESSION["id_administrador"] != 4){?>
+		<?php if($_COOKIE["id_administrador"] != 4){?>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown" >
 					<i class="fas fa-fw fa-exchange-alt"></i>

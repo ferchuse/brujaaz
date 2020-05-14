@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	if(count($_SESSION) == 0){
+	if(count($_COOKIE) == 0){
 		die("<div class='alert alert-danger'>Tu Sesión ha caducado, recarga la página.</div>");
 	}
 	include('../../../conexi.php');
@@ -14,7 +14,7 @@
 	
 	$consulta = "SELECT * FROM precios_boletos 
 	
-	WHERE id_administrador= '{$_SESSION["id_administrador"]}'
+	WHERE id_administrador= '{$_COOKIE["id_administrador"]}'
 	";
   
 	

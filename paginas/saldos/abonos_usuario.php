@@ -20,7 +20,7 @@
 	LEFT JOIN empresas ON empresas.id_empresas = tarjetas.id_empresas
 	WHERE abonos_unidades.id_usuarios = {$_GET["id_usuarios"]}
 	AND estatus_abonos <> 'Cancelado'
-	AND abonos_unidades.id_administrador = '{$_SESSION["id_administrador"]}'
+	AND abonos_unidades.id_administrador = '{$_COOKIE["id_administrador"]}'
 	";
 	
   

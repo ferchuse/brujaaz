@@ -7,7 +7,7 @@
 	LEFT JOIN empresas USING(id_empresas) 
 	LEFT JOIN  propietarios  USING (id_propietarios)
 	LEFT JOIN  derroteros  USING (id_derroteros)
-	WHERE unidades.id_administrador = '{$_SESSION["id_administrador"]}'
+	WHERE unidades.id_administrador = '{$_COOKIE["id_administrador"]}'
 	";
 	
 	if($_GET["num_eco"] != ''){

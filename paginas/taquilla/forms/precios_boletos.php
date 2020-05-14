@@ -18,11 +18,11 @@
 						
 						<div class="form-group col-md-6">
 							<label >Origen:</label>
-								<?php echo generar_select($link, "origenes", "id_origenes", "nombre_origenes", false, false, true, $_SESSION["id_recaudaciones"], 0, "id_origenes")?>
+								<?php echo generar_select($link, "origenes", "id_origenes", "nombre_origenes", false, false, true, $_COOKIE["id_recaudaciones"], 0, "id_origenes")?>
 						</div>
 						<div class="form-group col-md-6">
 							<label >Destino:</label>
-								<?php echo generar_select($link, "origenes", "id_origenes", "nombre_origenes", false, false, true, $_SESSION["id_recaudaciones"],0, "id_destinos", "id_destinos")?>
+								<?php echo generar_select($link, "origenes", "id_origenes", "nombre_origenes", false, false, true, $_COOKIE["id_recaudaciones"],0, "id_destinos", "id_destinos")?>
 						</div>
 						<div class="form-group col-md-6">
 							<label >Tipo de Boleto:</label>

@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-		if(count($_SESSION) == 0){
+		if(count($_COOKIE) == 0){
 		die("<div class='alert alert-danger'>Tu Sesión ha caducado, recarga la página.</div>");
 	}
 	include('../../../conexi.php');
@@ -21,7 +21,7 @@
 	FROM origenes ) AS t_destinos 
 	USING(id_destinos)
 	LEFT JOIN usuarios USING(id_usuarios)
-	WHERE corridas.id_administrador = {$_SESSION["id_administrador"]}
+	WHERE corridas.id_administrador = {$_COOKIE["id_administrador"]}
 	";
   
 	

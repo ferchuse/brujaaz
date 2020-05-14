@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	if(count($_SESSION) == 0){
+	if(count($_COOKIE) == 0){
 		die("<div class='alert alert-danger'>Tu Sesión ha caducado, recarga la página.</div>");
 	}
 	include('../../../conexi.php');
@@ -16,7 +16,7 @@
 		nombre_origenes AS nombre_destinos
 		FROM origenes) t_destinos
 		USING(id_destinos)
-	WHERE precios_boletos.id_administrador = {$_SESSION["id_administrador"]}
+	WHERE precios_boletos.id_administrador = {$_COOKIE["id_administrador"]}
 	";
 	
 	$result = mysqli_query($link,$consulta);

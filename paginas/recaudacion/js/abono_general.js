@@ -1,5 +1,9 @@
+var printService = new WebSocketPrinter();
+
+
+
 $(document).ready(function(){
-	//=================CARGAR LA TABLA AL INICIO===================
+	
 	listarRegistros();
 	
 	$('#form_filtro').on('submit', function filtrar(event){
@@ -9,9 +13,6 @@ $(document).ready(function(){
 		
 	});
 	
-	// console.log("hoy", hoy)
-	
-	//===============OPEN MODAL===========
 	$(".nuevo").click(function(){ 
 		$("#form_modal")[0].reset();
 		$(".modal-title").text("Nuevo Abono General");
@@ -22,7 +23,6 @@ $(document).ready(function(){
 		console.log(id_usua);
 	});
 	
-	//=====Imprimir tabla=================
 	$("#btn_imprimir").on('click',function(){
 		let formato = '';
 		formato += `
@@ -63,6 +63,8 @@ $(document).ready(function(){
 				alertify.success('Se ha agregado correctamente');
 				$('#modal_modal').modal('hide');
 				listarRegistros();
+				
+				imprimirTicket(respuesta.folio)
 				}else{
 				alertify.error('Ocurrio un error');
 			}
@@ -80,70 +82,9 @@ $(document).ready(function(){
 	});
 	
 	
-	$('#num_eco').blur(function(){
-		
-		
-	}); 
+	$('#id_eco').blur(buscarUnidad); 
 	
-	$('#id_eco').keyup(function(){
-		//let input = $(this); 
-		let numero_unidad = $(this).val();
-		
-		if(numero_unidad.length <= 4){
-			//input.prop('disabled',true); 
-			//input.toggleClass('ui-autocomplete-loading');
-			let subconsulta ='LEFT JOIN empresas USING (id_empresas)';
-			let group = 'num_eco';
-			console.log("numero_unidad" + " "+numero_unidad);
-			$('#id_eco').addClass("cargando");
-			
-			
-			$.ajax({
-				url: '../movimientos/control/listar_orden.php',
-				method: 'POST',
-				dataType: 'JSON',
-				data: {
-					tabla: 'unidades',
-					subconsulta: subconsulta,
-					campo: 'num_eco',
-					id_campo: numero_unidad,
-					group: group
-				}
-				}).done(function(respuesta){
-				$('#id_eco').removeClass("cargando");
-				
-				if(respuesta.estatus == "success"){
-					let n = '';
-					if(respuesta.num_rows > 0){
-						$.each(respuesta.mensaje,function(index,element){
-							n += `
-							<div class="form-group col-md-6">
-							<label for="">EMPRESA</label>
-							<input type="text" class="form-control" value="${element.nombre_empresas}" readOnly>
-							</div>
-							<div class="form-group col-md-6">
-							<label for="">Saldo Actual</label>
-							<input type="text" class="form-control" id="saldo_anterior" value="${element.saldo_unidades}" readOnly>
-							</div>
-							<input type="text" name="id_unidades" class="form-control" value="${element.id_unidades}" hidden>
-							
-							`;
-						});
-						}else{
-						n += `
-						<input type="text" name="id_unidades" class="form-control" value="Numero no encontrado" readOnly>
-						`;
-						console.log("numero de unidad no encontrado en la BD");
-					}
-					$('#result_unidad').html(n);
-					}else{
-					console.log("estatus error");
-				}
-			});
-			}else{
-			console.log("ningun numero digitalizado");
-		}
-	});
+	$('#id_eco').keyup();
 	
 	//=============BUSCAR DENTRO DE LA TABLA===========================
 	$('#buscar_unidad').keyup(function filtro_buscar(){
@@ -226,6 +167,64 @@ $(document).ready(function(){
 });
 
 
+function buscarUnidad(evnt){
+	
+	
+	let numero_unidad = $(this).val();
+	
+	
+	
+	let subconsulta ='LEFT JOIN empresas USING (id_empresas)';
+	let group = 'num_eco';
+	console.log("numero_unidad" + " "+numero_unidad);
+	$('#id_eco').addClass("cargando");
+	
+	
+	$.ajax({
+		url: '../movimientos/control/listar_orden.php',
+		method: 'POST',
+		dataType: 'JSON',
+		data: {
+			tabla: 'unidades',
+			subconsulta: subconsulta,
+			campo: 'num_eco',
+			id_campo: numero_unidad,
+			group: group
+		}
+		}).done(function(respuesta){
+		$('#id_eco').removeClass("cargando");
+		
+		if(respuesta.estatus == "success"){
+			let n = '';
+			if(respuesta.num_rows > 0){
+				$.each(respuesta.mensaje,function(index,element){
+					n += `
+					<div class="form-group col-md-6">
+					<label for="">EMPRESA</label>
+					<input type="text" class="form-control" value="${element.nombre_empresas}" readOnly>
+					</div>
+					<div class="form-group col-md-6">
+					<label for="">Saldo Actual</label>
+					<input type="text" class="form-control" id="saldo_anterior" value="${element.saldo_unidades}" readOnly>
+					</div>
+					<input type="text" name="id_unidades" class="form-control" value="${element.id_unidades}" hidden>
+					
+					`;
+				});
+				}else{
+				n += `
+				<input type="text" name="id_unidades" class="form-control" value="Numero no encontrado" readOnly>
+				`;
+				console.log("numero de unidad no encontrado en la BD");
+			}
+			$('#result_unidad').html(n);
+			}else{
+			console.log("estatus error");
+		}
+	});
+	
+}
+
 function listarRegistros(){
 	console.log("listarRegistros()");
 	
@@ -234,7 +233,7 @@ function listarRegistros(){
 	let icono = boton.find('.fa');
 	
 	boton.prop('disabled',true);
-	icono.toggleClass('fa-save fa-spinner fa-pulse ');
+	icono.toggleClass('fa-search fa-spinner fa-pulse ');
 	
 	return $.ajax({
 		url: 'control/lista_abono_general.php',
@@ -243,43 +242,63 @@ function listarRegistros(){
 		
 		$("#tabla_registros").html(respuesta)
 		// $("#dataTable").dataTable();
-		$(".imprimir").click(imprimirTicket);
+		$(".imprimir").click(function(){
+			
+			let id_registro = $(this).data("id_registro");
+			
+			boton.prop('disabled',true);
+			icono.toggleClass('fa-print fa-spinner fa-spin ');
+			imprimirTicket(id_registro).always(function(){
+				
+				boton.prop('disabled',false);
+				icono.toggleClass('fa-print fa-spinner fa-spin');
+				
+			});
+		});
 		$(".cancelar").click(confirmaCancelacion);
 		
 		
 		}).always(function(){
-		
 		boton.prop('disabled',false);
-		icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');
+		icono.toggleClass('fa-search fa-spinner fa-spin ');
+		
 		
 	});
 }
 
 
+var printService = new WebSocketPrinter();
 
-function imprimirTicket(event){
+function imprimirTicket(id_registro){
 	console.log("imprimirTicket()");
-	var id_registro = $(this).data("id_registro");
-	var url = $(this).data("url");
-	var boton = $(this);
-	var icono = boton.find(".fas");
 	
-	boton.prop("disabled", true);
-	icono.toggleClass("fa-print fa-spinner fa-spin");
 	
-	$.ajax({
+	return $.ajax({
 		url: "impresion/imprimir_abono_general.php",
 		data:{
 			id_registro : id_registro
 		}
 		}).done(function (respuesta){
+		if($("#silent_print").val() == "SI" ){
+			
+			$.ajax({
+				url: "http://localhost/imprimir_zitlalli.php",
+				method: "POST",
+				data:{
+					"texto" : respuesta
+				}
+			});
+			
+			printService.submit({
+				'type': 'LABEL',
+				'raw_content': respuesta
+			});
+		}
+		else{
+			$("#ticket").html(respuesta); 
+			window.print();
+		}
 		
-		$("#carta").html(respuesta); 
-		window.print();
-		}).always(function(){
-		
-		boton.prop("disabled", false);
-		icono.toggleClass("fa-print fa-spinner fa-spin");
 		
 	});
 }
@@ -340,4 +359,4 @@ function confirmaCancelacion(event){
 			
 		});
 	}
-}		
+}				
