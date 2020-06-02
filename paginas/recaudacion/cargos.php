@@ -67,11 +67,18 @@
 							</div>
 							<div class="col-4">			
 								<select class="form-control" name="mes_cargos">
+									<option value="202012">2020-12 </option>
+									<option value="202011">2020-11 </option>
+									<option value="202010">2020-10 </option>
+									<option value="202009">2020-09 </option>
+									<option value="202008">2020-08 </option>
+									<option value="202007">2020-07 </option>
+									<option selected value="202006">2020-06 </option>
 									<option value="202005">2020-05 </option>
 									<option value="202004">2020-04 </option>
 									<option value="202003">2020-03 </option>
 									<option value="202002">2020-02 </option>
-									<option selected value="202001">2020-01 </option>
+									<option value="202001">2020-01 </option>
 									<option value="201912">2019-12 </option>
 									<option value="201911">2019-11 </option>
 									<option value="201910">2019-10 </option>
