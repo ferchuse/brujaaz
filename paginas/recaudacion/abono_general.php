@@ -169,7 +169,9 @@
 		</a>
 		
 		
-		<div class="d-print-block p-2" hidden id="carta">
+		<div class="d-print-block p-2" id="ticket">
+		</div>
+		<div class="d-print-block p-2" id="carta">
 		</div>
 		
 		
