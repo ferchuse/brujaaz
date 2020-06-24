@@ -76,8 +76,8 @@
 							</div>	
 							<div class="col-4">			
 								<select class="form-control" name="estatus_mutualidad">
-									<option value=""> Todos</option>
-									<option selected>Activo</option>
+									<option selected value=""> Todos</option>
+									<option >Activo</option>
 									<option>Cancelado</option>
 								</select>
 							</div>  
@@ -154,7 +154,7 @@
     <?php 
 			include("../../scripts.php");
 		?>
-    <script src="js/mutualidad.js" ></script>
+    <script src="js/mutualidad.js?v=<?= date("d-m-Y-H-is")?>" ></script>
 		
 	</body>
 </html>

@@ -1,9 +1,10 @@
 <?php
-	session_start();
+	
 	if(count($_COOKIE) == 0){
 		die("<div class='alert alert-danger'>Tu Sesión ha caducado, recarga la página.</div>");
 	}
 	include('../../../conexi.php');
+	include("../../../funciones/dame_permiso.php");
 	include('../../../funciones/generar_select.php');
 	include('../../../funciones/console_log.php');
 	$link = Conectarse();
@@ -48,7 +49,7 @@
 		}
 		
 		while($fila = mysqli_fetch_assoc($result)){
-		
+			
 			$filas[] = $fila ;
 			
 		}
@@ -80,12 +81,27 @@
 					<td class="text-center"> 
 						<?php if($fila["estatus_mutualidad"] != "Cancelado"){
 							$totales+=$fila['monto_mutualidad'];
-							?>
-							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_mutualidad']?>'>
-								<i class="fas fa-print"></i>
+						?>
+						<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_mutualidad']?>'>
+							<i class="fas fa-print"></i>
+						</button>
+						<?php
+						
+							if(dame_permiso("mutualidad.php", $link) == 'Supervisor'){ ?>
+							<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_mutualidad']?>'>
+								<i class="fas fa-times"></i>
 							</button>
 							<?php
 							}
+							
+						}
+						else{
+							echo "<span class='badge badge-danger'>{$fila['estatus_mutualidad']}<br> {$fila['datos_cancelacion']}</span>";
+							
+							}
+						
+						
+						
 						?>
 					</td>
 					<td class="text-center"><?php echo $fila['id_mutualidad'];?></td>
@@ -93,11 +109,11 @@
 					<td class="text-center"><?php echo $fila['nombre_recaudaciones'];?></td>
 					<td class="text-center"><?php echo $fila['nombre_empresas'];?></td>
 					<td class="text-center"><?php echo $fila['num_eco'];?></td>
-							<td class="text-center"><?php echo $fila['nombre_conductores'];?></td>
-							<td class="text-center"><?php echo $fila['monto_mutualidad'];?></td>
-							<td class="text-center"><?php echo $fila['nombre_usuarios'];?></td>
-							<td class="text-center"><?php echo $fila['estatus_mutualidad'];?></td>
-							
+					<td class="text-center"><?php echo $fila['nombre_conductores'];?></td>
+					<td class="text-center"><?php echo $fila['monto_mutualidad'];?></td>
+					<td class="text-center"><?php echo $fila['nombre_usuarios'];?></td>
+					<td class="text-center"><?php echo $fila['estatus_mutualidad'];?></td>
+					
 				</tr> 
 				<?
 				}

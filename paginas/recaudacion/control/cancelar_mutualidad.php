@@ -4,21 +4,22 @@
 	
 	$respuesta = array();
 	
-	//Cancelar Abono
+	$fecha_cancelacion = date("Y-m-d H:i:s");
+	$consulta = "UPDATE mutualidad
 	
-	$cancelar = "UPDATE mutualidad
-	
-	SET estatus_mutualidad = 'Cancelado' 
+	SET estatus_mutualidad = 'Cancelado' ,
+	datos_cancelacion = 'Usuario: {$_COOKIE["nombre_usuarios"]} <br> Fecha: $fecha_cancelacion'
 	
 	WHERE id_mutualidad = {$_GET["id_registro"]}";
 	
-	$result = mysqli_query($link,$cancelar) ;
+	$result = mysqli_query($link,$consulta) ;
 	
 	if($result){
 		$respuesta["result"] = "success";
+		$respuesta["consulta"] = $consulta;
 	}
 	else{
-		$respuesta["result"] = "Error en $cancelar". mysqli_Error($link);
+		$respuesta["result"] = mysqli_Error($link);
 	}
 	
 	

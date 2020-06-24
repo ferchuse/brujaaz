@@ -88,7 +88,19 @@ function confirmaCancelacion(event){
 	var id_registro = $(this).data("id_registro");
 	var fila = boton.closest('tr');
 	
-	alertify.confirm('Confirmación', '¿Deseas Cancelar?', cancelarRegistro , function(){});
+	alertify.confirm()
+	.setting({
+		'reverseButtons': true,
+		'labels' :{ok:"SI", cancel:'NO'},
+		'title': "Confirmar" ,
+		'message': "¿Desea Cancelar?" ,
+		'onok':cancelarRegistro,
+		'oncancel': function(){
+			boton.prop('disabled', false);
+			
+		}
+	}).show();
+	
 	
 	
 	function cancelarRegistro(){
