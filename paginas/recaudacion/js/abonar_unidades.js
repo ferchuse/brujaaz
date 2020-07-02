@@ -65,16 +65,24 @@ $(document).ready(function(){
 				console.log("buscarUnidad", respuesta) 
 				if(respuesta.num_rows == 0){
 					alertify.error("No encontrado")
+					
+					
 				}
 				else{
-					$.each(respuesta.filas, function(name, value){
-						$("#form_edicion #"+name).val(value);
-						
-						if(name == 'cuenta_derroteros'){
-							console.log("cuenta", name)
-							$("#saldo_tarjetas").val(value);
-						}
-					})
+					
+					if(respuesta.filas.estatus_unidades == "Alta"){
+						$.each(respuesta.filas, function(name, value){
+							$("#form_edicion #"+name).val(value);
+							
+							if(name == 'cuenta_derroteros'){
+								console.log("cuenta", name)
+								$("#saldo_tarjetas").val(value);
+							}
+						})
+					}
+					else{
+						alertify.error("La Unidad se encuentra Inactiva");
+					}
 					
 					
 				}
