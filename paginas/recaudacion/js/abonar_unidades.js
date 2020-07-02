@@ -55,12 +55,6 @@ $(document).ready(function(){
 			return false;
 		}
 		
-		
-		console.log("Buscar code", event.keycode )
-		console.log("Buscar code", event.code )
-		console.log("Buscar which", event.which )
-		console.log("Buscar location", event.location )
-		
 		console.log("buscarUnidad()")
 		$("#num_eco").addClass("cargando");
 		$.ajax({
