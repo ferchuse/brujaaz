@@ -1,5 +1,5 @@
 <?php
-	$nombre_pagina = "Orden de trabajo";
+	$nombre_pagina = "Ordenes de trabajo";
 	
 ?>
 
@@ -19,11 +19,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Recaudación de <?php echo $nombre_pagina;?></title>
-        <?php include('../../styles.php')?>
+		<?php include('../../styles.php')?>
 	</head>
 	<body id="page-top">
     <?php include("../../navbar.php")?>
-    <div id="wrapper" class="">
+    <div id="wrapper" class="d-print-none">
 			<?php include("../../menu.php")?>	
 			<div id="content-wrapper">		
 				<div class="container-fluid">		
@@ -34,12 +34,36 @@
 						</li>
 						<li class="breadcrumb-item active"><?php echo $nombre_pagina;?></li>
 					</ol>
-					
-					<div class="form-inline d-print-none" id="form_buscador">
-                        <div class="form-group mx-sm-3 mb-2">
-							<label for="" class="col-sm col-form-label">No.Eco:</label>
-							<input type="number" class="form-control" value="" id="no_eco" min="0">
-							<button type="button" id="btn_buscar" title="Buscar No.Eco" class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
+					<div class="row ">
+						<div class="col-12">
+							<button type="button" class="btn btn-success mb-2 nuevo  d-print-none">
+								<i class="fas fa-plus"></i> Nueva
+							</button>
+							<form id="form_filtros" class="form-inline">
+								<div class="form-group">
+									<label>
+										Operador:
+									</label>
+									<?php echo generar_select($link, "conductores", "id_conductores", "nombre_conductores", true	);	?>
+								</div>
+								<div class="form-group mx-sm-3 mb-2">
+									<label for="num_eco" >Num Eco:</label>
+									<input type="number" class="form-control input-sm" name="num_eco" >
+								</div>
+								<div class="form-group mx-sm-3 mb-2">
+									<label for="" class="col-sm col-form-label">Desde:</label>
+									<input type="date" class="form-control" value="<?= date("Y-m-d");?>" name="fecha_inicial" id="fecha_inicial">
+								</div>
+								<div class="form-group mx-sm-3 mb-2">
+									<label for="" class="col-sm col-form-label">Hasta:</label>
+									<input type="date" class="form-control" value="<?= date("Y-m-d" , strtotime("+30 days"));?>" name="fecha_final" id="fecha_final">
+									
+								</div>
+								
+								<button type="submit"  title="Buscar" class="btn btn-primary  d-print-none">
+									<i class="fas fa-search"></i>
+								</button>
+							</form>
 						</div>
 					</div>
 					<div class="card mb-3 d-print-none" id="tableCard">
@@ -48,26 +72,8 @@
 							Lista de <?php echo $nombre_pagina;?>
 						</div>
 						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="tableData" width="100%" cellspacing="0">
-									<thead>
-										<tr>
-											<th class="text-center">No.Eco</th>
-											<th class="text-center">Operador</th>
-											<th class="text-center">VTO</th>
-											<th class="text-center">Num Licencia</th>
-											<th class="text-center">Vigencia Licencia</th>
-											<th class="text-center">RFC</th>
-											<th class="text-center">Dias de trabajo</th>
-											<th class="text-center d-print-none"></th>
-										</tr>
-									</thead>
-									<tbody id="tabla_DB">
-										<!--<tr>
-											<td colspan="8"><h3 class="text-center">Cargando...</h3></td>
-										</tr>-->
-									</tbody>
-								</table>
+							<div class="table-responsive"  id="lista_registros">
+								
 								<div class="mensaje"></div>
 							</div>
 						</div>
@@ -89,15 +95,19 @@
 		</div>
 		<!-- /#wrapper -->
 		
+		<div id="impresion" class="d-print-block d-none">
+		</div>
+		
+		
 		<!-- Scroll to Top Button-->
 		<a class="scroll-to-top rounded d-print-none" href="#page-top">
 			<i class="fas fa-angle-up"></i>
 		</a>
+		<?php include("forms/form_reporte.php");?>
 		
-		<div class="d-print-inline d-none p-2 carta" hidden id="imprimir">
-		</div>
+		<?php include("forms/form_orden.php");?>
     <?php include("../../scripts.php")?>
-    <script src="js/orden_trabajo.js"></script>
+    <script src="js/orden_trabajo.js?v=<?= date("d-m-Y-H-i-s")?>"></script>
     <script src="js/buscar.js"></script>
 	</body>
 </html>
