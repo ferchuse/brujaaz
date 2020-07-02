@@ -37,13 +37,19 @@ $(document).ready(function(){
 	
 	
 	
-	$('#num_eco').on('keyup',buscarUnidad );
-	// $('#num_eco').on('blur',buscarUnidad );
-	
-	function buscarUnidad(event){
-		event.preventDefault();
+	$('#num_eco').on('keyup',function(ev){
+		if(event.which == 13 || event.which == 0){
+			event.preventDefault();
+			
+			$('#num_eco').blur();
+		}
 		
-		var num_eco = $(this).val();
+	} );
+	$('#num_eco').on('blur',buscarUnidad );
+	
+	function buscarUnidad(){
+		
+		var num_eco = $("#num_eco").val();
 		if(num_eco == ''){
 			alertify.error("Ingrese un Num Eco");
 			return false;
@@ -54,48 +60,48 @@ $(document).ready(function(){
 		console.log("Buscar code", event.code )
 		console.log("Buscar which", event.which )
 		console.log("Buscar location", event.location )
-		if(event.which == 13 || event.which == 0){
+		
 		console.log("buscarUnidad()")
-			$("#num_eco").addClass("cargando");
-			$.ajax({
-				url: 'control/buscar_unidad.php',
-				method: 'GET',
-				dataType: 'JSON',
-				data: {num_eco: num_eco}
-				}).done(function(respuesta){
-				console.log("buscarUnidad", respuesta) 
-				if(respuesta.num_rows == 0){
-					alertify.error("No encontrado")
-					
-					
+		$("#num_eco").addClass("cargando");
+		$.ajax({
+			url: 'control/buscar_unidad.php',
+			method: 'GET',
+			dataType: 'JSON',
+			data: {num_eco: num_eco}
+			}).done(function(respuesta){
+			console.log("buscarUnidad", respuesta) 
+			if(respuesta.num_rows == 0){
+				alertify.error("No encontrado")
+				
+				$("#num_eco").focus();
+			}
+			else{
+				
+				if(respuesta.filas.estatus_unidades == "Alta"){
+					$.each(respuesta.filas, function(name, value){
+						console.log("name:", name)
+						console.log("value:", value)
+						$("#form_edicion #"+name).val(value);
+						
+						if(name == 'cuenta_derroteros'){
+							console.log("cuenta", name)
+							$("#saldo_tarjetas").val(value);
+						}
+					})
 				}
 				else{
-					
-					if(respuesta.filas.estatus_unidades == "Alta"){
-						$.each(respuesta.filas, function(name, value){
-							console.log("name:", name)
-							console.log("value:", value)
-							$("#form_edicion #"+name).val(value);
-							
-							if(name == 'cuenta_derroteros'){
-								console.log("cuenta", name)
-								$("#saldo_tarjetas").val(value);
-							}
-						})
-					}
-					else{
-						alertify.error("La Unidad se encuentra Inactiva");
-						$('#num_eco').focus();
-					}
-					
-					
+					alertify.error("La Unidad se encuentra Inactiva");
+					$('#num_eco').focus();
 				}
-				}).always(function(){
 				
-				$("#num_eco").removeClass("cargando");
-			});
+				
+			}
+			}).always(function(){
 			
-		};
+			$("#num_eco").removeClass("cargando");
+		});
+		
+		
 	}
 	
 	$('#tarjeta').on('keyup',function(event){
