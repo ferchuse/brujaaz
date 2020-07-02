@@ -4,6 +4,7 @@
 	$link = Conectarse();
 	
 	$consulta = "SELECT * FROM usuarios WHERE usuarios.id_administrador = '{$_COOKIE["id_administrador"]}'
+	AND estatus_usuarios = 'Alta'
 	
 	"; 
 	 
