@@ -12,6 +12,7 @@
 	unidades.id_derroteros ,
 	unidades.id_derroteros AS id_roles,
 	unidades.id_unidades,
+	unidades.estatus_unidades,
 	
 	IF (
 	ISNULL((

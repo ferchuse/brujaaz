@@ -38,7 +38,7 @@ $(document).ready(function(){
 	
 	
 	$('#num_eco').on('keyup',buscarUnidad );
-	$('#num_eco').on('blur',buscarUnidad );
+	// $('#num_eco').on('blur',buscarUnidad );
 	
 	function buscarUnidad(event){
 		event.preventDefault();
@@ -55,6 +55,7 @@ $(document).ready(function(){
 		console.log("Buscar which", event.which )
 		console.log("Buscar location", event.location )
 		if(event.which == 13 || event.which == 0){
+		console.log("buscarUnidad()")
 			$("#num_eco").addClass("cargando");
 			$.ajax({
 				url: 'control/buscar_unidad.php',
@@ -72,6 +73,8 @@ $(document).ready(function(){
 					
 					if(respuesta.filas.estatus_unidades == "Alta"){
 						$.each(respuesta.filas, function(name, value){
+							console.log("name:", name)
+							console.log("value:", value)
 							$("#form_edicion #"+name).val(value);
 							
 							if(name == 'cuenta_derroteros'){
@@ -82,6 +85,7 @@ $(document).ready(function(){
 					}
 					else{
 						alertify.error("La Unidad se encuentra Inactiva");
+						$('#num_eco').focus();
 					}
 					
 					
