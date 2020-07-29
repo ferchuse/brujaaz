@@ -45,6 +45,7 @@ $(document).ready(function(){
 		}
 		
 	} );
+	
 	$('#num_eco').on('blur',buscarUnidad );
 	
 	function buscarUnidad(){
@@ -90,10 +91,32 @@ $(document).ready(function(){
 				
 				
 			}
-			}).always(function(){
+			}).fail(function(jqXHR, textStatus, errorThrown){
+			if (jqXHR.status === 0) {
+				
+				alertify.error('Falló Internet, Verifique conexión.');
+				} else if (jqXHR.status == 404) {
+				alertify.error('Página No encontrada');
+				} else if (jqXHR.status == 500) {
+				alertify.error('Error Interno Codigo 500');
+				} else if (textStatus === 'parsererror') {
+				alertify.error('Error de JSON.');
+				} else if (textStatus === 'timeout') {
+				alertify.error('Tiempo de Espera Agotado. Vuelva a intentar');
+				} else if (textStatus === 'abort') {
+				alertify.error('Conexion Fallida, Vuelva a intentar.');
+				} else {
+				alertify.error('Error desconocido: ' + jqXHR.responseText);
+				
+			}
 			
+			
+			}).always(function(){
 			$("#num_eco").removeClass("cargando");
+			
 		});
+		
+		
 		
 		
 	}

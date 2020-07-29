@@ -10,22 +10,22 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Catálogo de Unidades</title>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Catálogo de Unidades</title>
 		<?php include('../../styles.php')?>
 	</head>
 	<body id="page-top">
-    <?php include("../../navbar.php")?>
-    <div id="wrapper">
+		<?php include("../../navbar.php")?>
+		<div id="wrapper">
 			<?php include("../../menu.php")?>	
 			<div id="content-wrapper">		
 				<div class="container-fluid">		
-          <!-- Breadcrumbs-->
+					<!-- Breadcrumbs-->
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
 							<a href="#">Catálogos</a>
@@ -266,6 +266,26 @@
 				$('.btn_editar').on('click', cargarRegistro);
 				$('.btn_historial').on('click', mostrarHistorial);
 				
+				}).fail(function(jqXHR, textStatus, errorThrown){
+				if (jqXHR.status === 0) {
+					
+					alertify.error('Falló Internet, Verifique conexión.');
+					} else if (jqXHR.status == 404) {
+					alertify.error('Página No encontrada');
+					} else if (jqXHR.status == 500) {
+					alertify.error('Error Interno Codigo 500');
+					} else if (textStatus === 'parsererror') {
+					alertify.error('Error de JSON.');
+					} else if (textStatus === 'timeout') {
+					alertify.error('Tiempo de Espera Agotado. Vuelva a intentar');
+					} else if (textStatus === 'abort') {
+					alertify.error('Conexion Fallida, Vuelva a intentar.');
+					} else {
+					alertify.error('Error desconocido: ' + jqXHR.responseText);
+					
+				}
+				
+				
 				}).always(function(){
 				
 				boton.prop('disabled',false);
@@ -322,12 +342,12 @@
 				console.log("imprime registros")
 				$boton.prop("disabled", false);
 				
-			
-					$("#modal_historial .modal-body").html(respuesta);
-			
+				
+				$("#modal_historial .modal-body").html(respuesta);
+				
 				
 				$("#modal_historial").modal("show");
-			
+				
 			});
 		}
 		
