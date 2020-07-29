@@ -113,13 +113,13 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#tarjeta').on('blur',function(event){
-		
-		var tarjeta = $(this).val();
-		
-		buscarTarjeta(tarjeta);
-		
-	});
+	// $('#tarjeta').on('blur',function(event){
+	
+	// var tarjeta = $(this).val();
+	
+	// buscarTarjeta(tarjeta);
+	
+	// });
 	
 	
 	// $('#form_abono').on('keypress',function(event){
@@ -468,7 +468,7 @@ function buscarFecha(){
 }
 function buscarTarjeta(tarjeta){
 	console.log("buscarTarjeta" , tarjeta)
-	$("#tarjeta").toggleClass("cargando"); 
+	$("#tarjeta").addClass("cargando"); 
 	return $.ajax({
 		url: 'control/buscar_tarjeta.php',
 		data: {
@@ -478,7 +478,7 @@ function buscarTarjeta(tarjeta){
 		$("#respuesta_tarjeta").html(respuesta);
 		
 		$("#boton_guardar_abono").prop("disabled", false); 
-		$("#tarjeta").toggleClass("cargando"); 
+		
 		$("#generar_mutualidad").click(guardarMutualidad); 
 		$('#imprimir_mutualidad').on('click', imprimirTicket);
 		$('#imprimir_tarjeta').data('id_registro', tarjeta);
@@ -490,6 +490,41 @@ function buscarTarjeta(tarjeta){
 		sumarImportes();
 		$("#imprimir_abonos").prop("hidden", true);
 		// $("#efectivo").focus();
+		}).fail(function(jqXHR, textStatus, errorThrown){
+		if (jqXHR.status === 0) {
+			
+			alertify.error('Falló Internet, Verifique conexión.');
+			
+			} else if (jqXHR.status == 404) {
+			
+			alertify.error('Página No encontrada');
+			
+			} else if (jqXHR.status == 500) {
+			
+			alertify.error('Error Interno Codigo 500');
+			
+			} else if (textStatus === 'parsererror') {
+			
+			alertify.error('Error de JSON.');
+			
+			} else if (textStatus === 'timeout') {
+			
+			alertify.error('Tiempo de Espera Agotado. Vuelva a intentar');
+			
+			} else if (textStatus === 'abort') {
+			
+			alertify.error('Conexion Fallida, Vuelva a intentar.');
+			
+			} else {
+			
+			alertify.error('Error desconocido: ' + jqXHR.responseText);
+			
+		}
+		
+		
+		}).always(function(){
+		
+		$("#tarjeta").removeClass("cargando"); 
 	});
 	
 }
