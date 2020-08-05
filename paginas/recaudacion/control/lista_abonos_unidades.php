@@ -36,7 +36,7 @@
 	if($_GET["id_usuarios"] != ''){
 		$consulta.= " AND abonos_unidades.id_usuarios = '{$_GET["id_usuarios"]}' ";
 	}
-  
+	
 	
 	$result = mysqli_query($link,$consulta);
 	if($result){
@@ -122,13 +122,13 @@
 								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_abonos_unidades']?>'>
 									<i class="fas fa-times"></i>
 								</button>
-								
+								<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_abonos_unidades']?>'>
+									<i class="fas fa-print"></i>
+								</button>
 								<?php
 								}
 							?>
-							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_abonos_unidades']?>'>
-								<i class="fas fa-print"></i>
-							</button>
+							
 							<?php
 							}
 							?>

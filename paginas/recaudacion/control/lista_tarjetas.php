@@ -78,13 +78,15 @@
 				<tr>
 					<td class="text-center"> 
 						<?php if($fila["estatus_tarjetas"] != 'Cancelado'){?>
-							<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['tarjeta']?>'>
-								<i class="fas fa-times"></i>
-							</button>
-							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['tarjeta']?>'>
-								<i class="fas fa-print"></i>
-							</button>
-							<?php
+							<?php if(dame_permiso("tarjetas.php", $link) == 'Supervisor'){?>
+								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['tarjeta']?>'>
+									<i class="fas fa-times"></i>
+								</button>
+								<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['tarjeta']?>'>
+									<i class="fas fa-print"></i>
+								</button>
+								<?php
+								}
 							}
 						?>
 					</td>

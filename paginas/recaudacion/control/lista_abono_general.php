@@ -72,13 +72,13 @@
 			<?php 
 				foreach($filas as $index=>$fila){
 					if($fila["estatus_abono"] != "Cancelado"){
-							$totales[0]+= $fila["monto_abonogeneral"];
-							$bg = '';
-							
-						}
-						else{
-							$bg = "bg-danger text-white";
-						}
+						$totales[0]+= $fila["monto_abonogeneral"];
+						$bg = '';
+						
+					}
+					else{
+						$bg = "bg-danger text-white";
+					}
 					
 					
 				?>
@@ -86,22 +86,24 @@
 					<td class="text-center"> 
 						<?php 
 							if($fila["estatus_abono"] != 'Cancelado'){
-							
+								
 								if(dame_permiso("abono_general.php", $link) == 'Supervisor'){ ?>
 								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_abonogeneral']?>'>
 									<i class="fas fa-times"></i>
 								</button>
+								
+								<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_abonogeneral']?>'>
+									<i class="fas fa-print"></i>
+								</button>
 								<?php
 								}
 							?>
-							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_abonogeneral']?>'>
-								<i class="fas fa-print"></i>
-							</button>
+							
 							<?php
 							}
 							else{
 								
-								}
+							}
 						?>
 					</td>
 					<td><?php echo $fila["id_abonogeneral"]?></td>

@@ -82,12 +82,14 @@
 						<?php if($fila["estatus_mutualidad"] != "Cancelado"){
 							$totales+=$fila['monto_mutualidad'];
 						?>
-						<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_mutualidad']?>'>
-							<i class="fas fa-print"></i>
-						</button>
-						<?php
 						
-							if(dame_permiso("mutualidad.php", $link) == 'Supervisor'){ ?>
+						<?php
+							
+							if(dame_permiso("mutualidad.php", $link) == 'Supervisor'){?>
+							
+							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_mutualidad']?>'>
+								<i class="fas fa-print"></i>
+							</button>
 							<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_mutualidad']?>'>
 								<i class="fas fa-times"></i>
 							</button>
@@ -98,7 +100,7 @@
 						else{
 							echo "<span class='badge badge-danger'>{$fila['estatus_mutualidad']}<br> {$fila['datos_cancelacion']}</span>";
 							
-							}
+						}
 						
 						
 						
