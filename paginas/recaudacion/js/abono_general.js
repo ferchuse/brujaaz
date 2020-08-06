@@ -93,7 +93,7 @@ $(document).ready(function(){
 		let indice = $(this).data("indice");
 		let valor_filtro = $(this).val();
 		let num_rows = buscar(valor_filtro,'tableData',indice);
-    
+		
 		if(num_rows == 0){
 			$('.mensaje').html(`
 				<div class="alert alert-dark text-center" role="alert">
@@ -108,7 +108,7 @@ $(document).ready(function(){
 		let indice = $(this).data("indice");
 		let valor_filtro = $(this).val();
 		let num_rows = buscar(valor_filtro,'tableData',indice);
-    
+		
 		if(num_rows == 0){
 			$('.mensaje').html(`
 				<div class="alert alert-dark text-center" role="alert">
@@ -123,7 +123,7 @@ $(document).ready(function(){
 		let indice = $(this).data("indice");
 		let valor_filtro = $(this).val();
 		let num_rows = buscar(valor_filtro,'tableData',indice);
-    
+		
 		if(num_rows == 0){
 			$('.mensaje').html(`
 				<div class="alert alert-dark text-center" role="alert">
@@ -138,7 +138,7 @@ $(document).ready(function(){
 		let indice = $(this).data("indice");
 		let valor_filtro = $(this).val();
 		let num_rows = buscar(valor_filtro,'tableData',indice);
-    
+		
 		if(num_rows == 0){
 			$('.mensaje').html(`
 				<div class="alert alert-dark text-center" role="alert">
@@ -153,7 +153,7 @@ $(document).ready(function(){
 		let indice = $(this).data("indice");
 		let valor_filtro = $(this).val();
 		let num_rows = buscar(valor_filtro,'tableData',indice);
-    
+		
 		if(num_rows == 0){
 			$('.mensaje').html(`
 				<div class="alert alert-dark text-center" role="alert">
@@ -283,17 +283,19 @@ function imprimirTicket(id_registro){
 		}).done(function (respuesta){
 		if($("#silent_print").val() == "SI" ){
 			
+			
+			
+			printService.submit({
+				'type': 'LABEL',
+				'raw_content': respuesta
+			});
+			
 			$.ajax({
 				url: "http://localhost/imprimir_zitlalli.php",
 				method: "POST",
 				data:{
 					"texto" : respuesta
 				}
-			});
-			
-			printService.submit({
-				'type': 'LABEL',
-				'raw_content': respuesta
 			});
 		}
 		else{
@@ -315,13 +317,13 @@ function confirmaCancelacion(event){
 	var fila = boton.closest('tr');
 	
 	alertify.prompt()
-  .setting({
-    'reverseButtons': true,
+	.setting({
+		'reverseButtons': true,
 		'labels' :{ok:"SI", cancel:'NO'},
 		'title': "Cancelar Abono" ,
-    'message': "Motivo de Cancelación" ,
-    'onok':cancelarRegistro,
-    'oncancel': function(){
+		'message': "Motivo de Cancelación" ,
+		'onok':cancelarRegistro,
+		'oncancel': function(){
 			boton.prop('disabled', false);
 			
 		}
