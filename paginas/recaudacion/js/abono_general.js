@@ -62,9 +62,11 @@ $(document).ready(function(){
 			if(respuesta.estatus == 'success'){
 				alertify.success('Se ha agregado correctamente');
 				$('#modal_modal').modal('hide');
-				listarRegistros();
+				
 				
 				imprimirTicket(respuesta.folio)
+				
+				listarRegistros();
 				}else{
 				alertify.error('Ocurrio un error');
 			}
