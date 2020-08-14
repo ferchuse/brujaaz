@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	 
+	
 	
 	// hoy = Date.today().toString('d-MMM-yyyy')
 	// console.log("hoy", hoy)
@@ -37,46 +37,64 @@ function listarRegistros(){
 		data: $("#form_filtro").serialize()
 		}).done(function(respuesta){
 		
-			$('#tabla_registros').html(respuesta);
+		$('#tabla_registros').html(respuesta);
+		
+		$(".imprimir").click(function(){
 			
-			$('.imprimir').on('click', imprimirTicket);
+			let id_registro = $(this).data("id_registro");
 			
-			$(".cancelar").click(confirmaCancelacion);
-			
-			 
-			
-	}).always(function(){
+			boton.prop('disabled',true);
+			icono.toggleClass('fa-print fa-spinner fa-spin ');
+			imprimirTicket(id_registro).always(function(){
+				
+				boton.prop('disabled',false);
+				icono.toggleClass('fa-print fa-spinner fa-spin');
+				
+			});
+		});
+		
+		$(".cancelar").click(confirmaCancelacion);
+		
+		
+		
+		}).always(function(){
 		
 		boton.prop('disabled',false);
 		icono.toggleClass('fa-search fa-spinner fa-pulse');
 		$("#dataTable").dataTable();
-			
+		
 	});
 }
 
 
-function imprimirTicket(event){
-	var id_registro = $(this).data("id_registro");
-	var boton = $(this);
-	var icono = boton.find("fas");
+function imprimirTicket(id_registro){
+	console.log("imprimirTicket()");
 	
-	boton.prop("disabled", true);
-	icono.toggleClass("fa-print fa-spinner fa-spin");
-	
-	$.ajax({
+	return $.ajax({
 		url: "impresion/imprimir_mutualidad.php",
 		data:{
 			id_registro : id_registro
 		}
 		}).done(function (respuesta){
-		
-		$("#ticket").html(respuesta);
-		window.print();
-		}).always(function(){
-		
-		boton.prop("disabled", false);
-		icono.toggleClass("fa-print fa-spinner fa-spin");
-		
+		if($("#silent_print").val() == "SI" ){
+			
+			printService.submit({
+				'type': 'LABEL',
+				'raw_content': respuesta
+			});
+			
+			// $.ajax({
+				// url: "http://localhost/imprimir_zitlalli.php",
+				// method: "POST",
+				// data:{
+					// "texto" : respuesta
+				// }
+			// });
+		}
+		else{
+			$("#ticket").html(respuesta); 
+			window.print();
+		}
 	});
 }
 
