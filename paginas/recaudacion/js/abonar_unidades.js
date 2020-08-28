@@ -136,13 +136,13 @@ $(document).ready(function(){
 		}
 	});
 	
-	// $('#tarjeta').on('blur',function(event){
-	
-	// var tarjeta = $(this).val();
-	
-	// buscarTarjeta(tarjeta);
-	
-	// });
+	$('#tarjeta').on('blur',function(event){
+		
+		var tarjeta = $(this).val();
+		
+		buscarTarjeta(tarjeta);
+		
+	});
 	
 	
 	// $('#form_abono').on('keypress',function(event){
@@ -582,6 +582,14 @@ function imprimirTicket(event){
 			printService.submit({
 				'type': 'LABEL',
 				'raw_content': respuesta
+			});
+			
+			$.ajax({
+				url: "http://localhost/imprimir_zitlalli.php",
+				method: "POST",
+				data:{
+					"texto" : respuesta
+				}
 			});
 		}
 		else{

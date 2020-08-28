@@ -274,7 +274,6 @@ var printService = new WebSocketPrinter();
 function imprimirTicket(id_registro){
 	console.log("imprimirTicket()");
 	
-	
 	return $.ajax({
 		url: "impresion/imprimir_abono_general.php",
 		data:{
@@ -282,8 +281,6 @@ function imprimirTicket(id_registro){
 		}
 		}).done(function (respuesta){
 		if($("#silent_print").val() == "SI" ){
-			
-			
 			
 			printService.submit({
 				'type': 'LABEL',
@@ -302,8 +299,6 @@ function imprimirTicket(id_registro){
 			$("#ticket").html(respuesta); 
 			window.print();
 		}
-		
-		
 	});
 }
 

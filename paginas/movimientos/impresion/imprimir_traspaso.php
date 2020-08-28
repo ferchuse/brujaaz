@@ -65,14 +65,14 @@
 		<legend>Unidades</legend>
 		<?php foreach($filas as $i => $item){ ?>
 			<div class="row text-center">
-				<div class="col-4">
+				<div class="col-2">
 					<?php echo $item["num_eco"]?>
 				</div>	
-				<div class="col-4">
+				<div class="col-6">
 					<?php echo $item["nombre_propietarios"]?>
 				</div>	
-				<div class="col-4">
-					<?php echo $item["monto"]?>
+				<div class="col-3 text-right">
+					$<?php echo number_format($item["monto"])?>
 				</div>	 
 			</div>
 			<?php 	
@@ -81,7 +81,7 @@
 		
 		<div class="row">
 			<div class="col-12 text-right">
-				<b>Monto:</b> $<?php echo $filas[0]["monto_traspaso"];?>
+				<b>Monto:</b> $<?php echo number_format($filas[0]["monto_traspaso"]);?>
 				<p>( <?php echo NumeroALetras::convertir($filas[0]["monto_traspaso"], 'PESOS', 'CENTAVOS')." 00/100 M.N."?></p><br>
 				<p>Concepto: <?php echo $filas[0]["concepto_traspaso"];?></p>
 			</div>	 
@@ -109,7 +109,7 @@
 		</div> 
 	</div> 
 	
-	<br>
+	
 	<div class="media_carta">
 		<div class="row">
 			<div class="col-12 text-center" >
@@ -140,14 +140,14 @@
 		<legend>Unidades</legend>
 		<?php foreach($filas as $i => $item){ ?>
 			<div class="row text-center">
-				<div class="col-4">
+				<div class="col-2">
 					<?php echo $item["num_eco"]?>
 				</div>	
-				<div class="col-4">
+				<div class="col-6">
 					<?php echo $item["nombre_propietarios"]?>
 				</div>	
-				<div class="col-4">
-					<?php echo $item["monto"]?>
+				<div class="col-3 text-right">
+					<?php echo number_format($item["monto"])?>
 				</div>	 
 			</div>
 			<?php 	
@@ -156,7 +156,7 @@
 		 
 		<div class="row">
 			<div class="col-12 text-right">
-				<b>Monto:</b> $<?php echo $filas[0]["monto_traspaso"];?>
+				<b>Monto:</b> $<?php echo number_format($filas[0]["monto_traspaso"]);?>
 				<p>( <?php echo NumeroALetras::convertir($filas[0]["monto_traspaso"], 'PESOS', 'CENTAVOS')." 00/100 M.N."?></p><br>
 				<p>Concepto: <?php echo $filas[0]["concepto_traspaso"];?></p>
 			</div>	 
