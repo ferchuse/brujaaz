@@ -10,6 +10,11 @@ $(document).ready(function(){
 			dataType: 'JSON', 
 			data: $("#form_login").serialize()
 			}).done(function(response){
+			
+			if(response.estatus_usuarios == "Baja"){
+				alert("Cuenta suspendida por falta de pago");
+			}
+			return false;
 			if(response.login == "valid"){
 				alertify.success("Acceso Correcto");
 				

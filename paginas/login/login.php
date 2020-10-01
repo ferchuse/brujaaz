@@ -59,7 +59,7 @@
 		$_COOKIE["id_administrador"] = $row["id_administrador"] or die("Error al iniciar administrador");
 		$_COOKIE["tipo_usuario"] = $row["tipo_usuario"];
 		$response["login"] = "valid"; 
-		
+		$response["estatus_usuarios"] = $row["estatus_usuarios"];
 		
 		setcookie("id_usuarios", $id_usuarios,  0, "/");
 		setcookie("nombre_usuarios", $nombre_usuarios,  0, "/");
