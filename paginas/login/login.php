@@ -17,7 +17,8 @@
 	id_recaudaciones, 
 	id_administrador, 
 	'recaudacion' AS tipo_usuario ,
-	silent_print
+	silent_print,
+	estatus_usuarios
 	FROM usuarios
 	WHERE nombre_usuarios='$myusername' 
 	AND pass_usuarios='$mypassword'
@@ -30,7 +31,8 @@
 	1 AS id_recaudaciones,
 	id_administrador,
 	'propietario' AS tipo_usuario ,
-	'0' as silent_print
+	'0' as silent_print,
+	estatus_usuarios
 	FROM
 	propietarios
 	WHERE usuario_propietarios='$myusername' 

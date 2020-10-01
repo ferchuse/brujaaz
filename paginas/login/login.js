@@ -13,8 +13,9 @@ $(document).ready(function(){
 			
 			if(response.estatus_usuarios == "Baja"){
 				alert("Cuenta suspendida por falta de pago");
+				return false;
 			}
-			return false;
+			
 			if(response.login == "valid"){
 				alertify.success("Acceso Correcto");
 				
