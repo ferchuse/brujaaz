@@ -32,7 +32,7 @@
 	id_administrador,
 	'propietario' AS tipo_usuario ,
 	'0' as silent_print,
-	estatus_usuarios
+	'Alta' AS estatus_usuarios
 	FROM
 	propietarios
 	WHERE usuario_propietarios='$myusername' 
