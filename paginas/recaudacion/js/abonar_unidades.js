@@ -256,13 +256,14 @@ $(document).ready(function(){
 				alertify.success('Tarjeta Generada correctamente');
 				$("#modal_edicion").modal("hide")
 				$("#tarjeta").val(respuesta.insert_id);
-				
-				buscarTarjeta(respuesta.insert_id).done(function(){
-					setTimeout(function(){
-						$("#imprimir_tarjeta").click();
-					}, 500);
-					
-				});
+				if(confirm ("Deseas Imprimir?")){
+					buscarTarjeta(respuesta.insert_id).done(function(){
+						setTimeout(function(){
+							$("#imprimir_tarjeta").click();
+						}, 500);
+						
+					});
+				}
 			}
 			else{
 				alertify.error('Ocurrio un error');
@@ -270,7 +271,7 @@ $(document).ready(function(){
 			}).always(function(){
 			boton.prop('disabled',false);
 			icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');
-		});
+			});
 	})
 	
 	
