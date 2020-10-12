@@ -48,15 +48,15 @@
 			$print.="\n\nVB";
 			
 			
-			$print.= "@";
-			$print.= "PAGO DE MUTUALIDAD COPIA".chr(10).chr(13);
-			$print.= "Fecha: ".$filas["fecha_mutualidad"].chr(10).chr(13);
-			$print.= "Usuario: ".$filas["nombre_usuarios"].chr(10).chr(13);
-			$print.= "Empresa: ".$filas["nombre_empresas"].chr(10).chr(13);
-			$print.= "Num Eco: ".$filas["num_eco"].chr(10).chr(13);
-			$print.= "Monto: ".$filas["monto_mutualidad"].chr(10).chr(13);
+			// $print.= "@";
+			// $print.= "PAGO DE MUTUALIDAD COPIA".chr(10).chr(13);
+			// $print.= "Fecha: ".$filas["fecha_mutualidad"].chr(10).chr(13);
+			// $print.= "Usuario: ".$filas["nombre_usuarios"].chr(10).chr(13);
+			// $print.= "Empresa: ".$filas["nombre_empresas"].chr(10).chr(13);
+			// $print.= "Num Eco: ".$filas["num_eco"].chr(10).chr(13);
+			// $print.= "Monto: ".$filas["monto_mutualidad"].chr(10).chr(13);
 			
-			$print.="\n\nVB";
+			// $print.="\n\nVB";
 			
 			echo base64_encode($print);
 			

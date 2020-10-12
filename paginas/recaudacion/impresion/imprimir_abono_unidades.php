@@ -36,7 +36,7 @@
 			
 			
 			$total = $filas["cuenta"] - $filas["monto_condonaciones"];
-			for($i = 0; $i < 2 ; $i++){
+			for($i = 0; $i < 1 ; $i++){
 				
 				$print.= "@";
 				$print.= "!".chr(16)."ABONO DE UNIDADES"."!".chr(0)."\n";
