@@ -58,8 +58,23 @@ function imprimirTicket(event){
 		}
 		}).done(function (respuesta){
 		
-		$("#ticket").html(respuesta); 
-		window.print();
+		if($("#silent_print").val() == "SI" ){
+			
+			printService.submit({
+				'type': 'LABEL',
+				'raw_content': respuesta
+			});
+		}
+		else{
+			$("#ticket").html(respuesta); 
+			setTimeout(function(){
+				window.print();
+			},
+			500
+			)
+			
+		}
+		
 		}).always(function(){
 		
 		boton.prop("disabled", false);
