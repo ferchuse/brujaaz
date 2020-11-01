@@ -1,3 +1,4 @@
+var printService = new WebSocketPrinter();
 
 
 $('#form_filtro').on('submit', function filtrar(event){
