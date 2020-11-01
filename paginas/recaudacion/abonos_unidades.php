@@ -148,6 +148,7 @@
 		
 		
 		<?php include("../../scripts.php")?>
+			<script src="../../plugins/pos_print/websocket-printer.js" > </script>
 		<script src="js/abonos_unidades.js?v=<?php echo date('Y-m-d-H:i:s'); ?>"></script>
 	</body>
 	
