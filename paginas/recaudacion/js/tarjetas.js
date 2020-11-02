@@ -109,11 +109,22 @@ function imprimirTicket(event){
 		}).done(function (respuesta){
 		
 		if($("#silent_print").val() == "SI" ){
-			
-			printService.submit({
-				'type': 'LABEL',
-				'raw_content': respuesta
-			});
+			//Impresion directa para el Usuario de Luis Manuel que recauda varias empresas
+			if($("#sesion_id_usuarios").val() == "57" || $("#sesion_id_usuarios").val() == "58"){
+				$.ajax({
+					url: "http://localhost/imprimir_zitlalli.php",
+					method: "POST",
+					data:{
+						"texto" : respuesta
+					}
+				});
+			}
+			else{
+				printService.submit({
+					'type': 'LABEL',
+					'raw_content': respuesta
+				});
+			}
 		}
 		else{
 			$("#ticket").html(respuesta); 
