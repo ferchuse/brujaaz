@@ -290,6 +290,18 @@ function imprimirTicket(id_registro){
 						"texto" : respuesta
 					}
 				});
+				
+				//Doble Impresion de Adolfo
+				if( $("#sesion_id_usuarios").val() == "59"){
+					$.ajax({
+						url: "http://localhost/imprimir_zitlalli.php",
+						method: "POST",
+						data:{
+							"texto" : respuesta
+						}
+					});
+					
+				}
 			}
 			else{
 				printService.submit({
