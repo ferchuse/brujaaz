@@ -580,7 +580,7 @@ function imprimirTicket(event){
 		
 		if($("#silent_print").val() == "SI" ){
 			//Impresion directa para el Usuario de Luis Manuel que recauda varias empresas
-			if($("#sesion_id_usuarios").val() == "57" || $("#sesion_id_usuarios").val() == "58"){
+			if($("#sesion_id_usuarios").val() == "57" || $("#sesion_id_usuarios").val() == "58" || $("#sesion_id_usuarios").val() == "59"){
 				$.ajax({
 					url: "http://localhost/imprimir_zitlalli.php",
 					method: "POST",
