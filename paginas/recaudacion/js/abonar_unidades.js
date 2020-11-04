@@ -590,7 +590,7 @@ function imprimirTicket(event){
 				});
 				
 				//Doble Impresion de Adolfo
-				if( $("#sesion_id_usuarios").val() == "59" && url != "imprimir_tarjeta.php"){
+				if( $("#sesion_id_usuarios").val() == "59" && url == "imprimir_abono_unidades.php"){
 					$.ajax({
 						url: "http://localhost/imprimir_zitlalli.php",
 						method: "POST",
