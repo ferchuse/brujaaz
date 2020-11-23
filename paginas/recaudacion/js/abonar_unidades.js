@@ -343,7 +343,8 @@ function guardarMutualidad(){
 		
 		// console.log(respuesta);
 		$boton.prop("disabled", false);
-		$boton.fadeOut(300); 
+		$boton.fadeOut(50); 
+		console.log("Boton Generar oculto")
 		$("#monto_mutualidad").prop("disabled", true); 
 		$("#imprimir_mutualidad").prop("hidden", false);
 		$("#imprimir_mutualidad").data("id_registro", respuesta.nuevo_id);
@@ -353,6 +354,7 @@ function guardarMutualidad(){
 		
 		
 		$("#loader_mutualidad").prop("hidden", true);
+		
 		$("#imprimir_mutualidad").click();
 		
 		//actualiza tarjeta mutualidad cobrada = 1
@@ -580,7 +582,7 @@ function imprimirTicket(event){
 		
 		if($("#silent_print").val() == "SI" ){
 			//Impresion directa para el Usuario de Luis Manuel que recauda varias empresas
-			if($("#sesion_id_usuarios").val() == "57" || $("#sesion_id_usuarios").val() == "58" || $("#sesion_id_usuarios").val() == "59"){
+			if($("#sesion_id_usuarios").val() == "56" || $("#sesion_id_usuarios").val() == "57" || $("#sesion_id_usuarios").val() == "58" || $("#sesion_id_usuarios").val() == "59"){
 				$.ajax({
 					url: "http://localhost/imprimir_zitlalli.php",
 					method: "POST",
@@ -591,6 +593,17 @@ function imprimirTicket(event){
 				
 				//Doble Impresion de Adolfo
 				if( $("#sesion_id_usuarios").val() == "59" && url == "imprimir_abono_unidades.php"){
+					$.ajax({
+						url: "http://localhost/imprimir_zitlalli.php",
+						method: "POST",
+						data:{
+							"texto" : respuesta
+						}
+					});
+					
+				}
+				//Doble Impresion de Adolfo
+				if( $("#sesion_id_usuarios").val() == "59" && url == "imprimir_mutualidad.php"){
 					$.ajax({
 						url: "http://localhost/imprimir_zitlalli.php",
 						method: "POST",
