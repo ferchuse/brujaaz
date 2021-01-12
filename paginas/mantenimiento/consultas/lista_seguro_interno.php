@@ -9,20 +9,19 @@
 	
 	
 	
-	$consulta = "SELECT * FROM recibosSalidas
+	$consulta = "SELECT * FROM seguro_interno
 	LEFT JOIN empresas USING(id_empresas) 
 	LEFT JOIN beneficiarios USING(id_beneficiarios) 
-	LEFT JOIN motivos_salida USING(id_motivosSalida)
 	LEFT JOIN usuarios USING(id_usuarios)
 	WHERE usuarios.id_administrador = {$_COOKIE["id_administrador"]}
 	";
 	
 	$consulta.=  " 
-	AND  DATE(fecha_reciboSalidas)
+	AND  DATE(fecha)
 	BETWEEN '{$_GET['fecha_inicial']}' 
 	AND '{$_GET['fecha_final']}'"; 
 	
-	$consulta.=  " ORDER BY id_reciboSalidas"; 
+	$consulta.=  " ORDER BY id_seguro_interno"; 
 	
 	
 	
@@ -53,7 +52,6 @@
 				<th>Folio</th>
 				<th>Fecha </th>
 				<th>Beneficiario</th>
-				<th>Motivo</th>
 				<th>Empresa</th>
 				<th>Monto</th>
 				<th>Observaciones</th>
@@ -66,32 +64,39 @@
 					?>
 					<tr>
 						<td class="text-center"> 
-							<?php if($fila["estatus_reciboSalidas"] != 'Cancelado'){?>
-								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_reciboSalidas']?>'>
+							<?php if($fila["estatus"] != 'Cancelado'){?>
+								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_seguro_interno']?>'>
 									<i class="fas fa-times"></i>
 								</button>
-								<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_reciboSalidas']?>'>
+								<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_seguro_interno']?>'>
 									<i class="fas fa-print"></i>
 								</button>
 								<?php
 								}
+								else{ ?>
+									<span class="badge badge-danger small">
+									
+										<?php echo $fila['estatus']?>
+										<?php echo $fila['datos_cancelacion']?>
+									</span>
+										<?php
+									}
 							?>
 						</td>
-						<td><?php echo $fila["id_reciboSalidas"]?></td>
-						<td><?php echo $fila["fecha_reciboSalidas"]?></td>
+						<td><?php echo $fila["id_seguro_interno"]?></td>
+						<td><?php echo $fila["fecha"]?></td>
 						<td><?php echo $fila["nombre_beneficiarios"]?></td>
-						<td><?php echo $fila["nombre_motivosSalida"]?></td>
 						<td><?php echo $fila["nombre_empresas"]?></td>
-						<td><?php echo $fila["monto_reciboSalidas"]?></td>
-						<td><?php echo $fila["observaciones_reciboSalidas"]?></td>
-						<td><?php echo $fila["estatus_reciboSalidas"]?></td>
+						<td class="text-right">$<?php echo number_format($fila["monto"])?></td>
+						<td><?php echo $fila["observaciones"]?></td>
+						<td><?php echo $fila["estatus"]?></td>
 						<td><?php echo $fila["nombre_usuarios"]?></td>
 						
 					</tr>
 					<?php
 						
-						if($fila["estatus_reciboSalidas"] != "Cancelado"){
-							$totales[0]+= $fila["monto_reciboSalidas"];
+						if($fila["estatus"] != "Cancelado"){
+							$totales[0]+= $fila["monto"];
 							
 						}
 					}
@@ -104,11 +109,10 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td></td>
 					<?php
 						foreach($totales as $i =>$total){
 						?>
-						<td class="h6"><?php echo number_format($total)?></td>
+						<td class="h6 text-right">$<?php echo number_format($total)?></td>
 						<?php	
 						}
 					?>
