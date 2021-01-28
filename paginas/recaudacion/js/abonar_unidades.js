@@ -616,6 +616,7 @@ function imprimirTicket(event){
 				
 			}
 			else{
+			console.log("Silent Print()")
 				printService.submit({
 					'type': 'LABEL',
 					'raw_content': respuesta
