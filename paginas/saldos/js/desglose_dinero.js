@@ -1,5 +1,5 @@
 
-var printService = new WebSocketPrinter();
+// var printService = new WebSocketPrinter();
 
 $(document).ready(function(){
 	
@@ -184,6 +184,12 @@ function imprimirTicket(event){
 			id_registro : id_registro
 		}
 		}).done(function (respuesta){
+		
+		$("#ticket").html(respuesta); 
+		window.print();
+		
+		return;
+		
 		if($("#silent_print").val() == "SI" ){
 			//Impresion LTP1 para el Usuario de Luis Manuel que recauda varias empresas
 			if($("#sesion_id_usuarios").val() == "56"  || $("#sesion_id_usuarios").val() == "59"){
@@ -203,8 +209,7 @@ function imprimirTicket(event){
 			}
 		}
 		else{
-			$("#ticket").html(respuesta); 
-			window.print();
+			
 		}
 		
 		}).always(function(){
