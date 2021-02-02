@@ -1,3 +1,6 @@
+
+var printService = new WebSocketPrinter();
+
 $(document).ready(function(){
 	
 	$('#form_filtros').on('submit', listarRegistros);
