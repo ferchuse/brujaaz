@@ -12,7 +12,7 @@
 	
 	LEFT JOIN usuarios USING(id_usuarios)
 	WHERE id_desglose= '{$_GET['id_registro']}'";
-  
+	
 	
 	$result = mysqli_query($link,$consulta);
 	if($result){
@@ -30,25 +30,59 @@
 			
 		}
 		
-	?> 
-	<div >
-		<legend>Desglose de Dinero </legend> 
-		<div class="row mb-2">
-			<div class="col-4">
-				<b >Fecha:</b>
-			</div>	 
-			<div class="col-8">			
-				<?php echo $filas["fecha_desglose"];?>
+		if($_COOKIE["silent_print"] == "SI"){
+			
+			
+			// $total = $filas["cuenta"] - $filas["monto_condonaciones"];
+			
+			
+			$print.= "@";
+			$print.= "!".chr(16)."Desglose de Dinero"."!".chr(0)."\n";
+			$print.= "Folio: ".$filas["id_desglose"]."\n";
+			$print.= "Usuario: ".$filas["nombre_usuarios"]."\n";
+			$print.= "Fecha: ".$filas["fecha_desglose"]."\n";
+			
+			$print.= "Denom    Cant    Importe\n";
+			
+			foreach($denominaciones as $i => $denominacion){
+				$print.= "$denominacion     " .number_format($filas[$denominacion]) ."    ". number_format($filas[$denominacion] * $denominacion). "\n";
+				
+			}
+			
+			$print.= "IMPORTE TOTAL: $".number_format($filas["importe_desglose"]) ."\n";
+			
+			
+			
+			$print.="\n\nVB";
+			
+			
+			echo base64_encode($print);
+			
+			
+			
+		}
+		else{
+			
+			
+		?> 
+		<div >
+			<legend>Desglose de Dinero </legend> 
+			<div class="row mb-2">
+				<div class="col-4">
+					<b >Fecha:</b>
+				</div>	 
+				<div class="col-8">			
+					<?php echo $filas["fecha_desglose"];?>
+				</div>
 			</div>
-		</div>
-		<div class="row mb-2">
-			<div class="col-4">
-				<b >Usuario:</b>
-			</div>	 
-			<div class="col-8">			
-				<?php echo $filas["nombre_usuarios"]?>
+			<div class="row mb-2">
+				<div class="col-4">
+					<b >Usuario:</b>
+				</div>	 
+				<div class="col-8">			
+					<?php echo $filas["nombre_usuarios"]?>
+				</div>
 			</div>
-		</div>
 			<div class="row mb-2">
 				<div class="col-4">
 					<b >Denom.</b> 
@@ -60,22 +94,22 @@
 					<b >Importe</b> 
 				</div>
 			</div>
-		<?php foreach($denominaciones as $i => $denominacion){?>
-			<div class="row mb-2">
-				<div class="col-4">
-					<b >$<?php echo $denominacion;?>:</b> 
-				</div>	 
-				<div class="col-4 text-right">			
-					<?php echo number_format($filas[$denominacion]);?>
+			<?php foreach($denominaciones as $i => $denominacion){?>
+				<div class="row mb-2">
+					<div class="col-4">
+						<b >$<?php echo $denominacion;?>:</b> 
+					</div>	 
+					<div class="col-4 text-right">			
+						<?php echo number_format($filas[$denominacion]);?>
+					</div>
+					<div class="col-4 text-right">			
+						<?php echo number_format($filas[$denominacion] * $denominacion);?>
+					</div>
 				</div>
-				<div class="col-4 text-right">			
-					<?php echo number_format($filas[$denominacion] * $denominacion);?>
-				</div>
-			</div>
-			<?php
-			}
-		?>
-		
+				<?php
+				}
+			?>
+			
 			<hr>
 			<div class="row mb-2">
 				<div class="col-4">
@@ -94,10 +128,11 @@
 			
 			
 		}
-		else {
-			echo "Error en ".$consulta.mysqli_Error($link);
-			
-		}
+	}
+	else {
+		echo "Error en ".$consulta.mysqli_Error($link);
 		
-		
-	?>	
+	}
+	
+	
+?>	

@@ -133,7 +133,7 @@
 		</div>
 		<?php include("../../scripts.php")?>
 		<?php include("forms/form_desglose.php");?>
-		<script src="js/desglose_dinero.js?v=1234"></script>
+		<script src="js/desglose_dinero.js?v=1111"></script>
 		<script src="js/buscar.js"></script>
 	</body>
 </html>	
