@@ -1,5 +1,5 @@
 
-// var printService = new WebSocketPrinter();
+var printService = new WebSocketPrinter();
 
 $(document).ready(function(){
 	
