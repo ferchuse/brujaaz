@@ -62,6 +62,7 @@ $(document).ready(function(){
 			url: 'control/buscar_unidad.php',
 			method: 'GET',
 			dataType: 'JSON',
+			 cache: false,
 			data: {num_eco: num_eco}
 			}).done(function(respuesta){
 			console.log("buscarUnidad", respuesta) 
