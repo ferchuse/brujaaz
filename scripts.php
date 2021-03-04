@@ -28,7 +28,7 @@
 
 <script src="../../vendor/jquery/tableExport.js"></script>
 <script src="../../vendor/jquery/jquery.base64.js"></script>
-
+<script>$.ajaxSetup({ cache: false });</script>
 <!--
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.0.5/css/tableexport.min.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.0.5/js/tableexport.min.js"></script>
