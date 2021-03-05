@@ -23,16 +23,19 @@
 	$consulta.=  " AND  DATE(fecha_mutualidad) BETWEEN '{$_GET['fecha_inicial']}'
 	AND '{$_GET['fecha_final']}'";
 	
-	foreach($_GET as $name=>$value){
-		$i++;
-		if($value != '' && $i > 2){ //Agrega filtros saltando fechas (2)
-			$consulta.= " AND  $name = '$value'";
-		}
-	}
+	// $consulta.=  " AND  mutualidad.id_usuarios = '{$_GET['fecha_inicial']}'
+	// AND '{$_GET['fecha_final']}'";
 	
-	// if($_GET["id_usuarios"] != ''){
-	// $consulta.= " AND id_usuarios = {$_GET["id_usuarios"]} ";
+	// foreach($_GET as $name=>$value){
+		// $i++;
+		// if($value != '' && $i > 2){ //Agrega filtros saltando fechas (2)
+			// $consulta.= " AND  $name = '$value'";
+		// }
 	// }
+	
+	if($_GET["id_usuarios"] != ''){
+		$consulta.= " AND mutualidad.id_usuarios = {$_GET["id_usuarios"]} ";
+	}
 	// if($_GET["id_empresas"] != ''){
 	$consulta.= " ORDER BY id_mutualidad DESC";
 	// }
