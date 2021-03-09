@@ -33,6 +33,9 @@
 		// }
 	// }
 	
+	if($_GET["num_eco"] != ''){
+		$consulta.= " AND num_eco = {$_GET["num_eco"]} ";
+	}
 	if($_GET["id_usuarios"] != ''){
 		$consulta.= " AND mutualidad.id_usuarios = {$_GET["id_usuarios"]} ";
 	}
