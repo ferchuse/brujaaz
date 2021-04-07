@@ -127,6 +127,7 @@ ORDER BY
 	num_eco) as t_saldo USING (id_unidades)
 	WHERE
 	unidades.num_eco = '{$_GET['num_eco']}'
+	AND unidades.id_administrador = '{$_COOKIE[id_administrador]}'
 	LIMIT 1
 	";
   
