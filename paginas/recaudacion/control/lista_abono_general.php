@@ -60,6 +60,7 @@
 				<th></th>
 				<th>Folio</th>
 				<th>Fecha Abono</th>
+				<th>Fecha Aplicacion</th>
 				<th>Empresa</th>
 				<th>Unidad</th>
 				<th>Motivo</th>
@@ -108,6 +109,7 @@
 					</td>
 					<td><?php echo $fila["id_abonogeneral"]?></td>
 					<td><?php echo $fila["fecha_abonogeneral"]?></td>
+					<td><?php echo $fila["fecha_aplicacion"]?></td>
 					<td><?php echo $fila["nombre_empresas"]?></td>
 					<td><?php echo $fila["num_eco"]?></td>
 					<td><?php echo $fila["nombre_motivosAbono"]?></td>

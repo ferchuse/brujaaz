@@ -37,6 +37,7 @@
 			$print.= "!".chr(16)."ABONO GENERAL"."!".chr(0)."\n";
 			$print.= "Folio: ".$filas["id_abonogeneral"]."\n";
 			$print.= "Fecha: ".$filas["fecha_abonogeneral"]."\n";
+			$print.= "Fecha Aplicacion: ".$filas["fecha_aplicacion"]."\n";
 			$print.= "Usuario: ".$filas["nombre_usuarios"]."\n";
 			$print.= "Num Eco: ".$filas["num_eco"]."\n";
 			$print.= "Motivo: ".$filas["nombre_motivosAbono"]."\n";
