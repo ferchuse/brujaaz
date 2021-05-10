@@ -19,7 +19,7 @@
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
 
- 
+
 <!-- Custom scripts for all pages-->
 <script src="../../js/sb-admin.min.js"></script>
 <script src="../../js/date.js"></script>
@@ -28,7 +28,10 @@
 
 <script src="../../vendor/jquery/tableExport.js"></script>
 <script src="../../vendor/jquery/jquery.base64.js"></script>
-<script>$.ajaxSetup({ cache: false });</script>
+<script> $.ajaxSetup({ cache: false });</script>
+
+<?php include("cobranza_modal.php")?>
+
 <!--
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.0.5/css/tableexport.min.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.0.5/js/tableexport.min.js"></script>
