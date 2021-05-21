@@ -1,7 +1,7 @@
 <?php 
 	
 	include('../../../conexi.php');
-	include('../../../funciones/generar_select.php');
+	include('../../../funciones/dame_permiso.php');
 	$link = Conectarse();
 	$filas = array();
 	$respuesta = array();
@@ -65,23 +65,31 @@
 					?>
 					<tr>
 						<td class="text-center"> 
-							<?php if($fila["estatus"] != 'Cancelado'){?>
-								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_seguro_interno']?>'>
+							<?php if($fila["estatus"] != 'Cancelado'){
+								if(dame_permiso("mantenimiento.php", $link) == 'Supervisor'){
+								?>
+								
+								
+								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_mantenimiento']?>'>
 									<i class="fas fa-times"></i>
 								</button>
-								<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_seguro_interno']?>'>
+								
+								
+								
+								<button class="btn btn-outline-info imprimir d-none" data-id_registro='<?php echo $fila['id_mantenimiento']?>'>
 									<i class="fas fa-print"></i>
 								</button>
 								<?php
 								}
-								else{ ?>
-								<span class="badge badge-danger small">
-									
-									<?php echo $fila['estatus']?>
-									<?php echo $fila['datos_cancelacion']?>
-								</span>
-								<?php
-								}
+							}
+							else{ ?>
+							<span class="badge badge-danger small">
+								
+								<?php echo $fila['estatus']?>
+								<?php echo $fila['datos_cancelacion']?>
+							</span>
+							<?php
+							}
 							?>
 						</td>
 						<td><?php echo $fila["id_mantenimiento"]?></td>
