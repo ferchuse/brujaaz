@@ -6,12 +6,13 @@
 	
 	
 	
-	$consulta  ="INSERT INTO seguro_interno SET 
+	$consulta  ="INSERT INTO mantenimiento SET 
 
-	id_empresas = '{$_POST['id_empresas']}',
-	id_beneficiarios = '{$_POST["id_beneficiarios"]}',
-	fecha= NOW(),
-	monto = '{$_POST["monto"]}',
+	fecha = '{$_POST['fecha']}',
+	kilometraje = '{$_POST['kilometraje']}',
+	fecha_proximo = '{$_POST['fecha_proximo']}',
+	id_tipo_mantenimiento = '{$_POST['id_tipo_mantenimiento']}',
+	id_unidades = '{$_POST["id_unidades"]}',
 	observaciones = '{$_POST["observaciones"]}',
 	id_usuarios = '{$_COOKIE["id_usuarios"]}',
 	id_administrador = '{$_COOKIE["id_administrador"]}'

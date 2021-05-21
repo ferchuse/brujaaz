@@ -109,6 +109,23 @@
 				
 			</div>
 		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown" >
+				<i class="fas fa-fw fa-cog"></i> 
+				<span>Mantenimiento</span>
+			</a>
+			<div class="dropdown-menu" > 
+				<?php 
+					$q_catalogos = "SELECT * FROM paginas WHERE categoria_paginas = 'Mantenimiento'";	
+					$result_catalogos = mysqli_query($link, $q_catalogos);
+					while($fila = mysqli_fetch_assoc($result_catalogos)){
+						echo "<a class='dropdown-item' href='../../paginas/mantenimiento/{$fila["url_paginas"]}' ";
+						echo dame_permiso($fila["url_paginas"], $link).">-{$fila['nombre_paginas']}</a>";
+					}
+				?> 
+				
+			</div>
+		</li>
 		
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown" >

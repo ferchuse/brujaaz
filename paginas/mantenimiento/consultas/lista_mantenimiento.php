@@ -9,9 +9,10 @@
 	
 	
 	
-	$consulta = "SELECT * FROM seguro_interno
-	LEFT JOIN empresas USING(id_empresas) 
-	LEFT JOIN beneficiarios USING(id_beneficiarios) 
+	$consulta = "SELECT * FROM mantenimiento
+	
+	LEFT JOIN cat_tipo_mantenimiento USING(id_tipo_mantenimiento) 
+	LEFT JOIN unidades USING(id_unidades)
 	LEFT JOIN usuarios USING(id_usuarios)
 	WHERE usuarios.id_administrador = {$_COOKIE["id_administrador"]}
 	";
@@ -21,7 +22,7 @@
 	BETWEEN '{$_GET['fecha_inicial']}' 
 	AND '{$_GET['fecha_final']}'"; 
 	
-	$consulta.=  " ORDER BY id_seguro_interno"; 
+	$consulta.=  " ORDER BY id_mantenimiento"; 
 	
 	
 	
@@ -48,15 +49,15 @@
 	<table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
 		<thead>
 			<tr>
-				<th></th>
-				<th>Folio</th>
-				<th>Fecha </th>
-				<th>Beneficiario</th>
-				<th>Empresa</th>
-				<th>Monto</th>
-				<th>Observaciones</th>
-				<th>Estatus</th>
-				<th>Usuario</th>
+				<th class="text-center"></th>
+				<th class="text-center">Folio</th>
+				<th class="text-center">Fecha</th>
+				<th class="text-center">Num Eco</th>
+				<th class="text-center">Tipo de Servicio</th>
+				<th class="text-center">Kilometraje</th>
+				<th class="text-center">Proximo Servicio</th>
+				<th class="text-center">Observaciones</th>
+				<th class="text-center">Usuario</th>
 			</thead>
 			<tbody id="tabla_DB">
 				<?php 
@@ -74,22 +75,22 @@
 								<?php
 								}
 								else{ ?>
-									<span class="badge badge-danger small">
+								<span class="badge badge-danger small">
 									
-										<?php echo $fila['estatus']?>
-										<?php echo $fila['datos_cancelacion']?>
-									</span>
-										<?php
-									}
+									<?php echo $fila['estatus']?>
+									<?php echo $fila['datos_cancelacion']?>
+								</span>
+								<?php
+								}
 							?>
 						</td>
-						<td><?php echo $fila["id_seguro_interno"]?></td>
+						<td><?php echo $fila["id_mantenimiento"]?></td>
 						<td><?php echo $fila["fecha"]?></td>
-						<td><?php echo $fila["nombre_beneficiarios"]?></td>
-						<td><?php echo $fila["nombre_empresas"]?></td>
-						<td class="text-right">$<?php echo number_format($fila["monto"])?></td>
+						<td><?php echo $fila["num_eco"]?></td>
+						<td><?php echo $fila["tipo_mantenimiento"]?></td>
+						<td><?php echo $fila["kilometraje"]?></td>
+						<td><?php echo $fila["fecha_proximo"]?></td>
 						<td><?php echo $fila["observaciones"]?></td>
-						<td><?php echo $fila["estatus"]?></td>
 						<td><?php echo $fila["nombre_usuarios"]?></td>
 						
 					</tr>
@@ -104,18 +105,12 @@
 			</tbody>
 			<tfoot>
 				<tr>
+					<td><?php echo count($filas); ?> Registros</td>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
-					<?php
-						foreach($totales as $i =>$total){
-						?>
-						<td class="h6 text-right">$<?php echo number_format($total)?></td>
-						<?php	
-						}
-					?>
 					<td></td>
 					<td></td>
 					<td></td>
