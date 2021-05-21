@@ -9,22 +9,22 @@
 
 <!DOCTYPE html>
 <html lang="es_mx">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title><?php echo $nombre_pagina;?></title>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title><?php echo $nombre_pagina;?></title>
 		<?php include('../../styles.php')?>
 	</head>
 	<body id="page-top">
-    <?php include("../../navbar.php")?>
-    <div id="wrapper" class="d-print-none">
+		<?php include("../../navbar.php")?>
+		<div id="wrapper" class="d-print-none">
 			<?php include("../../menu.php")?>	
 			<div id="content-wrapper">		
 				<div class="container-fluid">		
-          <!-- Breadcrumbs-->
+					<!-- Breadcrumbs-->
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
 							<a href="#">Movimientos</a> 
@@ -56,12 +56,15 @@
 								<label for="fecha_inicial">Fecha Inicial:</label>
 								<input class="form-control" type="date" name="fecha_inicial" id="fecha_inicial" value="<?php echo date("Y-m-01");?>">
 							</div>
-							 
+							
 							<div class="col-sm-3">
 								<label for="nombre_condonaciones">Fecha Final:</label>
 								<input class="form-control" type="date" name="fecha_final" id="fecha_final" value="<?php echo date("Y-m-d");?>">
 							</div>
-							
+							<div class="form-group">
+						<label for="id_unidades">Num Eco: </label>
+						<?php echo generar_select($link, "unidades", "id_unidades", "num_eco", true, false, false); ?>
+					</div>
 						</div>
 						
 					</form>
@@ -105,7 +108,7 @@
 				</div>
 				<!-- /.container-fluid -->
 				
-		    <!-- Sticky Footer -->
+				<!-- Sticky Footer -->
 				<footer class="sticky-footer">
 					<div class="container my-auto">
 						<div class="copyright text-center my-auto">
@@ -127,10 +130,20 @@
 			
 		</div>
 		
-    <?php 
+		<?php 
 			include("../../scripts.php");
 			include('forms/form_seguro_interno.php');
 		?>
-    <script src="js/seguro_interno.js?v=<?= date("Y-d-i")?>"></script>
+		
+		
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+		<script >
+			$('#id_beneficiarios').select2({
+				width: '100%' // need to override the changed default
+			});
+			
+		</script>
+		<script src="js/seguro_interno.js?v=<?= date("Y-d-i")?>"></script>
 	</body>
 </html>

@@ -13,6 +13,7 @@
 	fecha= NOW(),
 	monto = '{$_POST["monto"]}',
 	observaciones = '{$_POST["observaciones"]}',
+	id_unidades = '{$_POST["id_unidades"]}',
 	id_usuarios = '{$_COOKIE["id_usuarios"]}',
 	id_administrador = '{$_COOKIE["id_administrador"]}'
 	";

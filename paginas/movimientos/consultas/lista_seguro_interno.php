@@ -13,6 +13,7 @@
 	LEFT JOIN empresas USING(id_empresas) 
 	LEFT JOIN beneficiarios USING(id_beneficiarios) 
 	LEFT JOIN usuarios USING(id_usuarios)
+	LEFT JOIN unidades USING(id_unidades)
 	WHERE usuarios.id_administrador = {$_COOKIE["id_administrador"]}
 	";
 	
@@ -21,6 +22,10 @@
 	BETWEEN '{$_GET['fecha_inicial']}' 
 	AND '{$_GET['fecha_final']}'"; 
 	
+	
+	if($_GET["id_unidades"] != ""){
+		$consulta.=  " AND id_unidades = '{$_GET['id_unidades']}' ";
+	}
 	$consulta.=  " ORDER BY id_seguro_interno"; 
 	
 	
@@ -52,6 +57,7 @@
 				<th>Folio</th>
 				<th>Fecha </th>
 				<th>Beneficiario</th>
+				<th>Num Eco</th>
 				<th>Empresa</th>
 				<th>Monto</th>
 				<th>Observaciones</th>
@@ -86,6 +92,7 @@
 						<td><?php echo $fila["id_seguro_interno"]?></td>
 						<td><?php echo $fila["fecha"]?></td>
 						<td><?php echo $fila["nombre_beneficiarios"]?></td>
+						<td><?php echo $fila["num_eco"]?></td>
 						<td><?php echo $fila["nombre_empresas"]?></td>
 						<td class="text-right">$<?php echo number_format($fila["monto"])?></td>
 						<td><?php echo $fila["observaciones"]?></td>
@@ -104,6 +111,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>

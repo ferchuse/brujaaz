@@ -18,7 +18,12 @@
 						<?php echo generar_select($link, "empresas", "id_empresas", "nombre_empresas", false, false, true, $_COOKIE["id_empresas"]); ?>
 					</div>
 					<div class="form-group">
+						<label for="id_unidades">Num Eco: </label>
+						<?php echo generar_select($link, "unidades", "id_unidades", "num_eco", false, false, false); ?>
+					</div>
+					<div class="form-group">
 						<label for="id_beneficiarios">BENEFICIARIO</label>
+						<br>
 						<?php echo generar_select($link, "beneficiarios", "id_beneficiarios", "nombre_beneficiarios",  false, false, true); ?>
 					</div> 
 					<div class="form-group">
