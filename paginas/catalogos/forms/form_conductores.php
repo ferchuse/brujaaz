@@ -14,6 +14,10 @@
 				<div class="modal-body">
 					<input type="text" hidden class="form-control" id="id_conductores" name="id_conductores">
 					<div class="form-group">
+						<label for="fechaAlta_conductores">FECHA DE INGRESO</label>
+						<input type="date" class="form-control" id="fechaAlta_conductores" name="fechaAlta_conductores" value="<?= date("Y-m-d")?>">
+					</div> 
+					<div class="form-group">
 						<label for="nombre_conductores">NOMBRE CONDUCTOR</label>
 						<input type="text" class="form-control" id="nombre_conductores" name="nombre_conductores" placeholder="Nombre del conductor" required>
 					</div>
