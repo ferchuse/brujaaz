@@ -54,12 +54,12 @@
 			
 			
 			foreach($denominaciones as $i => $denominacion){
-				$print.= str_pad($denominacion, 10)." ". str_pad(number_format($filas[$denominacion]), 10, " ", STR_PAD_BOTH ). "  $" .str_pad(number_format($filas[$denominacion] * $denominacion),8," ", STR_PAD_LEFT )."\n" ;
+				$print.= "$".str_pad($denominacion, 10)." ". str_pad(number_format($filas[$denominacion]), 10, " ", STR_PAD_BOTH ). "  $" .str_pad(number_format($filas[$denominacion] * $denominacion),8," ", STR_PAD_LEFT )."\n" ;
 				
 				
 			}
 			
-			$print.= "IMPORTE TOTAL:            $".number_format($filas["importe_desglose"]) ."\n";
+			$print.= "\nIMPORTE TOTAL:            $".number_format($filas["importe_desglose"]) ."\n";
 			
 			
 			
