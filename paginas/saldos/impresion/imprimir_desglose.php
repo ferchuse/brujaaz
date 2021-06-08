@@ -32,7 +32,14 @@
 		
 		if($_COOKIE["silent_print"] == "SI"){
 			
-			
+			/*
+				Hex       $1D $4C nL nH
+				
+				ASCII     GL  L   nL nH
+				
+				Decimal   27  76  nL nH
+				
+			*/
 			// $total = $filas["cuenta"] - $filas["monto_condonaciones"];
 			
 			
@@ -42,14 +49,17 @@
 			$print.= "Usuario: ".$filas["nombre_usuarios"]."\n";
 			$print.= "Fecha: ".$filas["fecha_desglose"]."\n";
 			
-			$print.= "Denom    Cant    Importe\n";
+			$print.="Denom    Cantidad       Importe \n";
+			
+			
 			
 			foreach($denominaciones as $i => $denominacion){
-				$print.= "$denominacion     " .number_format($filas[$denominacion]) ."    ". number_format($filas[$denominacion] * $denominacion). "\n";
+				$print.= str_pad($denominacion, 10)." ". str_pad(number_format($filas[$denominacion]), 10, " ", STR_PAD_BOTH ). "  $" .str_pad(number_format($filas[$denominacion] * $denominacion),8," ", STR_PAD_LEFT )."\n" ;
+				
 				
 			}
 			
-			$print.= "IMPORTE TOTAL: $".number_format($filas["importe_desglose"]) ."\n";
+			$print.= "IMPORTE TOTAL:            $".number_format($filas["importe_desglose"]) ."\n";
 			
 			
 			
