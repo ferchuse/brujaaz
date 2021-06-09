@@ -57,64 +57,64 @@
 		
 		if($filas["estatus_tarjetas"] == 'Recaudada'){
 			
-			die("<div class='alert alert-danger col-6'>Tarjeta Ya recaudada</div>");
+			die("<div class='alert alert-danger col-sm-6'>Tarjeta Ya recaudada</div>");
 			
 		}
 		
 	?>
 	
 	<div class="row mb-2">
-		<div class="col-2">
+		<div class="col-sm-2">
 			<label >Fecha:</label>
 		</div>	 
-		<div class="col-5">			
+		<div class="col-sm-5">			
 			<input class="form-control" readonly type="date" id="fecha_tarjetas" value="<?php echo $filas["fecha_tarjetas"];?>">
 		</div>
 	</div>
 	<div class="row mb-2">
-		<div class="col-2">
+		<div class="col-sm-2">
 			<label >Empresa:</label> 
 		</div>	 
-		<div class="col-5">			
+		<div class="col-sm-5">			
 			<?php echo generar_select($link, "empresas", "id_empresas", "nombre_empresas", false, true, false, $filas["id_empresas"])?>
 		</div>
 	</div>
 	
 	<div class="row mb-2">
-		<div class="col-2">
+		<div class="col-sm-2">
 			<label >No.Eco:</label>
 		</div>	 
-		<div class="col-5">			
+		<div class="col-sm-5">			
 			<input class="form-control" type="text"  readonly value="<?php echo $filas["num_eco"]?>">
 			<input hidden type="text"  id="id_unidades" value="<?php echo $filas["id_unidades"]?>">
 		</div>
 	</div>
 	<div class="row mb-2">
-		<div class="col-2">
+		<div class="col-sm-2">
 			<label >Conductor:</label>
 		</div>	 
-		<div class="col-5">			
+		<div class="col-sm-5">			
 			<?php echo generar_select($link, "conductores", "id_conductores", "nombre_conductores" ,false, true, false, $filas["id_conductores"])?>
 		</div>
 	</div>
 	<div class="row mb-2" hidden>
-		<div class="col-2">
+		<div class="col-sm-2">
 			<label >Saldo Unidad:</label>
 		</div>	 
-		<div class="col-5">			
+		<div class="col-sm-5">			
 			<input class="form-control" type="number" readonly name="saldo_anterior" id="saldo_anterior" value="<?php echo $filas["saldo_unidades"];?>">
 		</div>
 	</div>
 	<?php 
 		if($filas["mutualidad_cobrada"] == 0){?>
 		<div class="row mb-2">
-			<div class="col-2">
+			<div class="col-sm-2">
 				<label >Mutualidad:</label>
 			</div>	 
-			<div class="col-3">			
+			<div class="col-sm-3">			
 				<input class="form-control" type="number"  id="monto_mutualidad" value="<?php echo  $filas["mutualidad"]?>">
 			</div> 
-			<div class="col-2">			
+			<div class="col-sm-2">			
 				<button type="button" id="generar_mutualidad" class="btn  btn-primary">
 					<i class="fas fa-arrow-right"></i> Generar 
 					<i class="fas fa-spinner fa-spin" hidden id="loader_mutualidad"></i>
@@ -128,52 +128,52 @@
 		}
 	?>
 	<div class="row mb-2">
-		<div class="col-2">
+		<div class="col-sm-2">
 			<label >Derrotero:</label>
 		</div>	 
-		<div class="col-5">			
+		<div class="col-sm-5">			
 			<?php echo generar_select($link, "derroteros", "id_derroteros", "nombre_derroteros" ,false, true, false, $filas["id_derroteros"])	?>
 		</div>
 	</div>
 	<div class="row mb-2">
-		<div class="col-2">
+		<div class="col-sm-2">
 			<label >Cuenta:</label>
 		</div>	 
-		<div class="col-2">			
+		<div class="col-sm-2">			
 			<input class="form-control" readonly type="number"  value="<?php echo $filas["cuenta_derroteros"]?>"> 
 		</div>
 	</div>
 	
 	<div class="row mb-2">
-		<div class="col-2">
+		<div class="col-sm-2">
 			<label >Condonacion:</label>
 		</div>	  
-		<div class="col-2">			
+		<div class="col-sm-2">			
 			<input class="form-control" readonly type="number"  id="condonacion_abonar" value="<?php echo $filas["condonacion"]?>">
 		</div>
 		
 	</div>
 	<div class="row mb-2">
-		<div class="col-2"> 
+		<div class="col-sm-2"> 
 			<label >Total:</label>
 		</div>	 
-		<div class="col-2">			
+		<div class="col-sm-2">			
 			<input class="form-control" readonly type="number"  id="saldo_tarjetas" value="<?php echo $filas["cuenta_derroteros"] - $filas["condonacion"]?>">
 		</div>
 	</div>
 	<div class="row mb-2">
-		<div class="col-2">
+		<div class="col-sm-2">
 			<label >Boletos Térmicos:</label>
 		</div>	
-		<div class="col-10">
+		<div class="col-sm-10">
 			<div class="row">
-				<div class="col-2">
+				<div class="col-sm-2">
 					<label >Folio:</label>
 				</div>
-				<div class="col-2 ">
+				<div class="col-sm-2 ">
 					<label >Cantidad:</label>
 				</div>
-				<div class="col-2 ">
+				<div class="col-sm-2 ">
 					<label >Importe:</label>
 				</div>
 			</div>
@@ -191,13 +191,13 @@
 					?>
 					
 					<div class="row mb-1 ">
-						<div class="col-2 ">
+						<div class="col-sm-2 ">
 							<input class="form-control" type="number" readonly value="<?php echo $guia["id_boletaje"]?>">
 						</div>
-						<div class="col-2 ">
+						<div class="col-sm-2 ">
 							<input class="form-control" type="number"  readonly value="<?php echo $guia["cantidad_boletos"]?>">
 						</div>
-						<div class="col-2">
+						<div class="col-sm-2">
 							<div class="input-group">
 								<div class="input-group-prepend" >
 									<span class="input-group-text">$</span>
@@ -211,13 +211,13 @@
 				?>
 				
 				<div class="row mb-1 ">
-					<div class="col-2 ">
+					<div class="col-sm-2 ">
 						<b> Totales: </b> 
 					</div>
-					<div class="col-2 ">
+					<div class="col-sm-2 ">
 						<input class="form-control" type="number" name="bol_termicos_cantidad"  readonly value="<?php echo $total_boletos?>">
 					</div>
-					<div class="col-2">
+					<div class="col-sm-2">
 						<div class="input-group">
 							<div class="input-group-prepend" >
 								<span class="input-group-text">$</span>

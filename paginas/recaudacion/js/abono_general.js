@@ -280,7 +280,13 @@ function imprimirTicket(id_registro){
 			id_registro : id_registro
 		}
 		}).done(function (respuesta){
+		if(window.AppInventor){
+			window.AppInventor.setWebViewString(atob(respuesta));
+		}
+		
 		if($("#silent_print").val() == "SI" ){
+			
+			
 			//Impresion LTP1 para el Usuario de Luis Manuel que recauda varias empresas
 			if($("#sesion_id_usuarios").val() == "56"  || $("#sesion_id_usuarios").val() == "59" || $("#sesion_id_usuarios").val() == "61"){
 				$.ajax({

@@ -108,6 +108,10 @@ function imprimirTicket(event){
 		}
 		}).done(function (respuesta){
 		
+		if(window.AppInventor){
+			window.AppInventor.setWebViewString(atob(respuesta));
+		}
+		
 		if($("#silent_print").val() == "SI" ){
 			//Impresion directa para el Usuario de Luis Manuel que recauda varias empresas
 			if($("#sesion_id_usuarios").val() == "59" || $("#sesion_id_usuarios").val() == "48"){

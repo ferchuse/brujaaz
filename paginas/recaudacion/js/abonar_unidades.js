@@ -122,6 +122,12 @@ $(document).ready(function(){
 		
 	}
 	
+	$('#btn_buscar').on('click',function(event){
+		
+		var tarjeta = $('#tarjeta').val();
+		buscarTarjeta(tarjeta);
+	});
+	
 	$('#tarjeta').on('keyup',function(event){
 		event.preventDefault();
 		
@@ -580,7 +586,9 @@ function imprimirTicket(event){
 		}
 		}).done(function (respuesta){
 		
-		
+		if(window.AppInventor){
+			window.AppInventor.setWebViewString(atob(respuesta));
+		}
 		if($("#silent_print").val() == "SI" ){
 			//Impresion directa para el Usuario de Luis Manuel que recauda varias empresas
 			if($("#sesion_id_usuarios").val() == "56"  || $("#sesion_id_usuarios").val() == "59" || $("#sesion_id_usuarios").val() == "61" ){
